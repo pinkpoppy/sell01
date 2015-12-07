@@ -5,11 +5,21 @@ var stylus = require('gulp-stylus');
 // var uglify = require('gulp-uglify');
 // var concat = require('gulp-concat');
 
+// gulp.task('styles', function () {
+//   gulp.src('test.styl')
+//       .pipe(stylus())
+//       .pipe(gulp.dest('build/'));
+// });
+
 gulp.task('styles', function () {
-  gulp.src('/app/styl/main.styl')
+  gulp.src('app/styl/main.styl')
       .pipe(stylus())
-      .pipe(gulp.dest('build/main.css'));
+      .pipe(gulp.dest('build/'));
 });
 
-//var watcher = gulp.watch('/app/stylus/main.styl',['default']);
+
+// gulp.task('watch:styles',function(){
+// 	gulp.watch('**/*.styl',['styles']);
+// });
+
 
