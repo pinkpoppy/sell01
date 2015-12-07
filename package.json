@@ -1,0 +1,25 @@
+{
+  "name": "sell",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pinkpoppy/sell01.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pinkpoppy/sell01/issues"
+  },
+  "homepage": "https://github.com/pinkpoppy/sell01",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-stylus": "^2.1.1",
+    "gulp-uglify": "^1.5.1"
+  }
+}
