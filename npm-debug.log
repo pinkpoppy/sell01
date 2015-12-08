@@ -1,0 +1,73 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save-dev',
+1 verbose cli   'gulp-liveload' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json sell@1.0.0 No description
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'gulp-liveload', null ]
+7 verbose cache add name=undefined spec="gulp-liveload" args=["gulp-liveload",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'gulp-liveload',
+8 verbose parsed url   path: 'gulp-liveload',
+8 verbose parsed url   href: 'gulp-liveload' }
+9 silly lockFile 59eb6bdb-gulp-liveload gulp-liveload
+10 verbose lock gulp-liveload /Users/sszhu/.npm/59eb6bdb-gulp-liveload.lock
+11 silly lockFile 59eb6bdb-gulp-liveload gulp-liveload
+12 silly lockFile 59eb6bdb-gulp-liveload gulp-liveload
+13 verbose addNamed [ 'gulp-liveload', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile de753eb9-gulp-liveload gulp-liveload@
+16 verbose lock gulp-liveload@ /Users/sszhu/.npm/de753eb9-gulp-liveload.lock
+17 silly addNameRange { name: 'gulp-liveload', range: '*', hasData: false }
+18 verbose request where is /gulp-liveload
+19 verbose request registry https://registry.npm.taobao.org/
+20 verbose request id 86e3a285642e65d4
+21 verbose url raw /gulp-liveload
+22 verbose url resolving [ 'https://registry.npm.taobao.org/', './gulp-liveload' ]
+23 verbose url resolved https://registry.npm.taobao.org/gulp-liveload
+24 verbose request where is https://registry.npm.taobao.org/gulp-liveload
+25 info trying registry request attempt 1 at 15:53:42
+26 http GET https://registry.npm.taobao.org/gulp-liveload
+27 http 404 https://registry.npm.taobao.org/gulp-liveload
+28 silly registry.get cb [ 404,
+28 silly registry.get   { 'content-type': 'application/json',
+28 silly registry.get     'cache-control': 'max-age=0',
+28 silly registry.get     'content-length': '2',
+28 silly registry.get     'accept-ranges': 'bytes',
+28 silly registry.get     date: 'Tue, 08 Dec 2015 07:53:46 GMT',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     age: '0',
+28 silly registry.get     connection: 'keep-alive',
+28 silly registry.get     'x-served-by': 'cache-lhr6324-LHR',
+28 silly registry.get     'x-cache': 'MISS',
+28 silly registry.get     'x-cache-hits': '0',
+28 silly registry.get     'x-timer': 'S1449561225.404341,VS0,VE647' } ]
+29 silly lockFile de753eb9-gulp-liveload gulp-liveload@
+30 silly lockFile de753eb9-gulp-liveload gulp-liveload@
+31 error 404 Not Found
+31 error 404
+31 error 404 'gulp-liveload' is not in the npm registry.
+31 error 404 You should bug the author to publish it
+31 error 404 It was specified as a dependency of 'sell'
+31 error 404
+31 error 404 Note that you can also install from a
+31 error 404 tarball, folder, or http url, or git url.
+32 error System Darwin 14.0.0
+33 error command "node" "/usr/local/bin/npm" "install" "--save-dev" "gulp-liveload"
+34 error cwd /Users/sszhu/Sites/gitwork/sell01
+35 error node -v v0.10.33
+36 error npm -v 1.4.28
+37 error code E404
+38 verbose exit [ 1, true ]
