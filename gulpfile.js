@@ -18,8 +18,8 @@ gulp.task('styles', function () {
 gulp.task('scripts',function(){
   gulp.src(['app/*.js','vendor/*.js'])
       .pipe(concat('main.js'))
-      .pipe(uglify())
-      .pipe(minify())
+      // .pipe(uglify())
+      // .pipe(minify())
       .pipe(gulp.dest('build/'));
 });
 
