@@ -1,0 +1,33 @@
+http://example.com/sample.php?m=1
+参数说明: m => moduleName
+数据返回格式:
+{
+  moduleWineData:[
+    {
+      '0'                           id 
+      '酒款图片地址'                  imgLink
+      '满200包邮'                    mailInfo
+      '10'                         goodsCnt. ps:无需传输"剩余",客户端拼接                 
+      '我是副标题副标题...'           subtitle
+      '酒款描述酒款描述酒款描述...'     headline
+      '280'                        originalPrice 原始价格
+      '320'                        currentPrice
+      '限量20瓶'                    restrictCnt 
+    },
+
+    {
+      '1'        
+      '酒款图片地址'                 
+      '满200包邮' 
+      '10' 
+      '我是副标题副标题...'
+      '酒款描述酒款描述酒款描述...' 
+      '280' 
+      '320' 
+      '限量20瓶'
+    }
+    ...
+  ],
+  total:50
+}
+
