@@ -176,6 +176,9 @@ td,
 th {
   padding: 0;
 }
+.wrap {
+  position: relative;
+}
 .header {
   height: 50px;
   background: #f00;
@@ -266,6 +269,27 @@ th {
 }
 .module-item .module-list-wrap ul li .wine-wrap .div-up .wine-img {
   display: block;
+}
+.bottom {
+  height: 30px;
+  background: #f00;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.bottom a {
+  display: inline-block;
+  text-decoration: none;
+}
+.bottom a:nth-child(1) {
+  width: 33%;
+}
+.bottom a:nth-child(2) {
+  width: 34%;
+}
+.bottom a:nth-child(3) {
+  width: 31%;
 }
 /**
  *   Here's where everything gets included. You don't need

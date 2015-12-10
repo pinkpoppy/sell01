@@ -2,10 +2,10 @@
 
 var app = (function(){
   var configUrlMap = {
-    //homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
-    //homeModule:'http://www.yaerku.com/pjms/tmHome.php'
-    homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
-    homeModule:'http://192.168.1.4:7784/tmHome.php'
+    homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
+    homeModule:'http://www.yaerku.com/pjms/tmHome.php'
+    // homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
+    // homeModule:'http://192.168.1.4:7784/tmHome.php'
   }
 
   function calScreenWidth(){
