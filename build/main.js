@@ -2,8 +2,14 @@
 
 var app = (function(){
   var configUrlMap = {
-    homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
-    homeModule:'http://www.yaerku.com/pjms/tmHome.php'
+    //homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
+    //homeModule:'http://www.yaerku.com/pjms/tmHome.php'
+    homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
+    homeModule:'http://192.168.1.4:7784/tmHome.php'
+  }
+
+  function calScreenWidth(){
+    return screen.width
   }
   var loadDefaultData = function(path,des,ajaxCallback,data){
     $.ajax({
@@ -24,8 +30,11 @@ var app = (function(){
   }
   return {
     urls:configUrlMap,
-    get:loadDefaultData
-  };
+    get:loadDefaultData,
+    screenSize:calScreenWidth
+  }
+
+  // 432 / 720 = 0.6
 })();
 /**
  * Created by sszhu on 15/12/8.
@@ -53,8 +62,17 @@ jQuery(document).ready(function($){
   });
 
   app.get(app.urls.homeModule,"请求特卖首页特卖模块",function(data){
+    var totalWine = 0,
+        screenWidth = app.screenSize(),
+        imgWidth = liWidth = screenWidth * 0.425,
+        ratio = 0.6,
+        imgHeight = imgWidth / 0.75,
+        bottomHeight = 50,
+        liHeight = imgHeight + bottomHeight;
+        console.log("screenWidth: " + screenWidth + " imgWidth: " + imgWidth)
+
     var moduleArr = data.specialSellModule,
-        parent = $('.home-special-sell-wrap');
+        parent = $('.home-special-sell-wrap') //特卖模块包裹层
         for (var i = 0; i < moduleArr.length; i++) {
 
           var currentModule = moduleArr[i],
@@ -65,58 +83,102 @@ jQuery(document).ready(function($){
               $a = $("<a data-moduleId ='"+currentModule['id']+"'></a>"),
               $img = $("<img src='"+currentModule['modulImgLink']+"'>"),
               $moduleName = $("<span>"+currentModule['moduleName']+"</span>"),
-              $checkOut = $("<span>查看全部</span>");
+              $checkOut = $("<span>查看全部 >></span>");
 
           $a.append($img)
           $a.append($moduleName)
           $a.append($checkOut)
           $moduleBar.append($a)
-          $moduleItem.append($moduleBar)
-
-          parent.append($moduleItem)
+          
+          
           var $moduleListWrap = $("<div class='module-list-wrap'></div>")
-          parent.append($moduleListWrap)
+
+          $ul = $("<ul></ul>")
 
           for (var j = 0; j < wineArr.length; j++) {
             var currentWine = wineArr[j];
-                $ul = $("<ul></ul>")
+                ++ totalWine
+
                 $li = $("<li></li>")
 
-                $wineWrap = $("<div></div>") //包住酒款
+                $wineWrap = $("<div class='wine-wrap'></div>") //包住酒款
+                $wineWrap.css('width', liWidth);
 
-                $divUp = $("<div></div>") //酒款上部
-                $divBottom = $("<div></div>") //酒款下部
+                $divUp = $("<div class='div-up'></div>") //酒款上部
+                $divBottom = $("<div class='div-bottom'></div>") //酒款下部
 
-                $spanMailInfo = $("<span>"+currentWine['mailInfo']+"</span>") //满200包邮 => 酒款上部
-                $spanCntInfo = $("<span>"+currentWine['goodsCnt']+"</span>") //仅剩6 => 酒款上部
-                $img = $("<img src='"+currentWine['img']+"'>") //酒款图片 => 酒款上部
-                $spanSubtitle = $("<span>"+currentWine['subtitle']+"</span>") //副标题 => 酒款上部
+                $awinePic = $("<a class='wine-detail'></a>")
+                $spanMailInfo = $("<span class='mail-info'>"+currentWine['mailInfo']+"</span>") //满200包邮 => 酒款上部
+                $spanCntInfo = $("<span class='cnt-info'>"+currentWine['goodsCnt']+"</span>") //仅剩6 => 酒款上部
+                $img = $("<img class='wine-img' src='"+currentWine['img']+"'>") //酒款图片 => 酒款上部
+
+                $img.css({
+                  width: imgWidth,
+                  height:imgHeight
+                });
+
+                $spanSubtitle = $("<span class='subtitle'>"+currentWine['subtitle']+"</span>") //副标题 => 酒款上部
 
                 $divHeadline = $("<div>"+currentWine['headline']+"</div>") //主描述 => 酒款下部
                 $spanCurrentPrice = $("<span>"+currentWine['currentPrice']+"</span>")//现价 => 酒款下部
                 $spanOriginalPrice = $("<del>"+currentWine['originalPrice']+"</del>")//原价 or 其他标注 => 酒款下部
                 $spanRecom = $("<span>"+currentWine['restrictCnt']+"</span>")//主描述 => 提示
 
-                $divUp.append($img)
+                $awinePic.append($img)
+                $divUp.append($awinePic)
                 $divUp.append($spanMailInfo)
                 $divUp.append($spanCntInfo)
                 $divUp.append($spanSubtitle)
+            
 
                 $divBottom.append($divHeadline)
                 $divBottom.append($spanCurrentPrice)
                 $divBottom.append($spanOriginalPrice)
                 $divBottom.append($spanRecom)
 
+                // 设置 divUp 以及 divBottom 的高度
+                $divUp.css('height', imgHeight)
+                $divBottom.css('height', bottomHeight)
+                $awinePic.css('height', imgHeight)
+
                 $wineWrap.append($divUp)
                 $wineWrap.append($divBottom)
                 $li.append($wineWrap)
 
                 $ul.append($li)
-                $moduleListWrap.append($ul)
+
+               // var y = (parseInt(j / 2) * 100 * 4 / 3)
+               var y = parseInt(j / 2) * liHeight
+                if (j % 2 ==0) {
+                  
+                  $li.css({
+                    left: '5%',
+                    top:y 
+                  });
+                } else if (j % 2 == 1) {
+                  $li.css({
+                    left: '52.5%',
+                    top: y
+                  });
+                }
+                $wineWrap.css('wid', liWidth);
+                //$li.css('width', liWidth);
           }
+          $moduleListWrap.append($ul)
+
+          var itemTop = 0
+          if (i > 0) {
+            var itemTop = i * 30 + Math.ceil(totalWine / 2 ) * liHeight
+            console.log("itemTop: " + itemTop + " i: " + i)
+          }
+          
+          $moduleItem.css({
+            top: itemTop,
+            left: 0
+          });
+          $moduleItem.append($moduleBar)
           $moduleItem.append($moduleListWrap)
+          parent.append($moduleItem)
         }
-
-
   });  
 });
