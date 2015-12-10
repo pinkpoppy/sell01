@@ -1,3 +1,6 @@
+.wrap
+  position relative
+
 .header
   height $bar-height
   background $bar-color
@@ -6,6 +9,7 @@
   display visible
   img
     width 100%
+
 .home-special-sell-wrap
   margin-top 300px
   padding 0 5%
@@ -69,5 +73,24 @@
               width 100%
               color #fff
             .wine-img
-              display block              
+              display block   
+.bottom
+  height $bottom-height
+  background $bar-color 
+  position fixed
+  left 0
+  bottom 0
+  width 100%   
+  a
+    display inline-block
+    text-decoration none
+  & a:nth-child(1) 
+    width 33%
+  & a:nth-child(2) 
+    width 34%
+  & a:nth-child(3) 
+    width 31%
+    
+
+
 
