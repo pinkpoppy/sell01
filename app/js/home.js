@@ -109,7 +109,7 @@ jQuery(document).ready(function($){
 
                 $ul.append($li)
 
-               // var y = (parseInt(j / 2) * 100 * 4 / 3)
+             
                var y = parseInt(j / 2) * liHeight
                 if (j % 2 ==0) {
                   
@@ -124,7 +124,13 @@ jQuery(document).ready(function($){
                   });
                 }
                 $wineWrap.css('wid', liWidth);
-                //$li.css('width', liWidth);
+
+                // if i === 最后一行 && j === 最后一行 添加 margin
+                if (i == moduleArr.length - 1 && 
+                    (j == wineArr.length - 1) || 
+                    (j == wineArr.length - 2)) {
+                  $li.addClass('last-wine-item')
+                }
           }
           $moduleListWrap.append($ul)
 
