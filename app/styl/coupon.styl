@@ -3,22 +3,31 @@
   background $bar-color
 
 .coupon-wrap
+  hr
+    margin 0
   >ul
     list-style none
     -webkit-margin-before: 0em;
     -webkit-margin-after: 0em;
     -webkit-padding-start: 0px;
   li
-    padding 10px 5%
+    padding 10px 1%
   div
     display inline-block
 
+
 .coupon-item
+  position relative
   height $coupon-height
+
   .coupon-option-wrap
+    position absolute
+    background yellow
     width 10%
     margin 0
-    padding auto
+    left 1%
+    top 0
+    height 100%
     .outer-circle
       width 50%
       padding 3px
@@ -27,8 +36,20 @@
       padding 0
 
   .coupon-img-wrap
-    width 40%
+    position absolute
+    background blue
+    width 41%
+    height 100%
+    left 10%
+    top 0
     img
       width 100%
+      margin-top 15px
+
   .coupon-des-wrap
-    width 50%
+    position absolute
+    background purple
+    height 100%
+    width 51%
+    left 50%
+    top 0
