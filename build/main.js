@@ -2,10 +2,11 @@
 
 var app = (function(){
   var configUrlMap = {
-    homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
-    homeModule:'http://www.yaerku.com/pjms/tmHome.php'
-    // homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
-    // homeModule:'http://192.168.1.4:7784/tmHome.php'
+    // homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
+    // homeModule:'http://www.yaerku.com/pjms/tmHome.php'
+    homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
+    homeModule:'http://192.168.1.4:7784/tmHome.php'
+    list:'http://192.168.1.4:7784/tmTag.php?id=1&page=2'
   }
 
   function calScreenWidth(){
@@ -36,6 +37,7 @@ var app = (function(){
 
   // 432 / 720 = 0.6
 })();
+
 /**
  * Created by sszhu on 15/12/8.
  */
@@ -147,7 +149,7 @@ jQuery(document).ready(function($){
 
                 $ul.append($li)
 
-               // var y = (parseInt(j / 2) * 100 * 4 / 3)
+             
                var y = parseInt(j / 2) * liHeight
                 if (j % 2 ==0) {
                   
@@ -162,7 +164,13 @@ jQuery(document).ready(function($){
                   });
                 }
                 $wineWrap.css('wid', liWidth);
-                //$li.css('width', liWidth);
+
+                // if i === 最后一行 && j === 最后一行 添加 margin
+                if (i == moduleArr.length - 1 && 
+                    (j == wineArr.length - 1) || 
+                    (j == wineArr.length - 2)) {
+                  $li.addClass('last-wine-item')
+                }
           }
           $moduleListWrap.append($ul)
 
