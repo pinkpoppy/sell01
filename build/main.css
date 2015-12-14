@@ -176,6 +176,24 @@ td,
 th {
   padding: 0;
 }
+.address-table {
+  width: 100%;
+}
+.address-table table {
+  width: 100%;
+}
+.address-table tr {
+  width: 100%;
+}
+.address-table tr>td {
+  width: 80px;
+}
+.address-table .cont {
+  width: auto;
+}
+.address-table input {
+  width: 100%;
+}
 .coupon-header {
   heigth: 50px;
   background: #f00;
@@ -209,32 +227,34 @@ th {
   height: 100%;
 }
 .coupon-item .coupon-option-wrap .outer-circle {
-  width: 50%;
-  padding: 3px;
+  width: 10%;
+  height: 10%;
+  margin: 40% auto;
+  background: #aeefff;
+  border-radius: 50%;
 }
 .coupon-item .coupon-option-wrap .inner-circle {
-  background: #008000;
+  background: #19aedc;
+  width: 50%;
+  margin: auto;
   padding: 0;
 }
 .coupon-item .coupon-img-wrap {
-  position: absolute;
-  background: #00f;
-  width: 41%;
-  height: 100%;
-  left: 10%;
-  top: 0;
+  width: 30%;
+  height: 100px;
 }
 .coupon-item .coupon-img-wrap img {
   width: 100%;
   margin-top: 15px;
 }
 .coupon-item .coupon-des-wrap {
-  position: absolute;
-  background: #800080;
   height: 100%;
-  width: 51%;
-  left: 50%;
-  top: 0;
+  background: #00f;
+}
+.coupon-item .coupon-des-wrap dl dd {
+  -webkit-margin-start: 0px;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
 }
 .wrap {
   position: relative;
