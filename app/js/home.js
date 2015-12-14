@@ -42,6 +42,7 @@
           $a.append($moduleName)
           $a.append($checkOut)
           $moduleBar.append($a)
+          $moduleItem.append($moduleBar)
           
       var $moduleListWrap = $("<div class='module-list-wrap'></div>")
 
@@ -68,7 +69,7 @@
           top: itemTop,
           left: 0
         });
-        $moduleItem.append($moduleBar)
+        
         $moduleItem.append($moduleListWrap)
         parent.append($moduleItem)
       }

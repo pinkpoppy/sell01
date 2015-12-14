@@ -1,12 +1,12 @@
 
 var app = (function(){
   var configUrlMap = {
-    // homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
-    // homeModule:'http://www.yaerku.com/pjms/tmHome.php'
-    homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
-    homeModule:'http://192.168.1.4:7784/tmHome.php',
-    list:'http://192.168.1.4:7784/tmTag.php?id=1&page=2',
-    detail:'http://192.168.1.4:7784/tmGoods.php?id=9'
+    homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
+    homeModule:'http://www.yaerku.com/pjms/tmHome.php'
+    // homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
+    // homeModule:'http://192.168.1.4:7784/tmHome.php',
+    // list:'http://192.168.1.4:7784/tmTag.php?id=1&page=2',
+    // detail:'http://192.168.1.4:7784/tmGoods.php?id=9'
   }
 
   var moduleId = 1,//起始酒款模块 id, 默认值1
@@ -51,7 +51,9 @@ var app = (function(){
     }
   }
 
-  function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength) {
+  function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength) 
+  {
+    console.log("arguments.length = " + arguments.length)
     if (arguments.length==4) {
       currentWine = arguments[0],
       wrap = arguments[1],
