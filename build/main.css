@@ -374,6 +374,36 @@ th {
 .bottom a:nth-child(3) {
   width: 31%;
 }
+.module-list-wrap .wine-list-ul {
+  width: 100%;
+}
+.login-section table {
+  width: 100%;
+}
+.login-section input {
+  outline: none;
+  border: none;
+}
+.login-section .validate-code-wrap {
+  position: relative;
+}
+.login-section #get-verification-code {
+  width: 60px;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+}
+.login-section tbody .login-user-input {
+  width: 100%;
+}
+.validate-wrap {
+  width: 100%;
+  text-align: center;
+}
+.validate-wrap >input {
+  width: 80%;
+  height: 30px;
+}
 /**
  *   Here's where everything gets included. You don't need
  *   to change anything here, and doing so might break

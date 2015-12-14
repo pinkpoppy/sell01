@@ -5,16 +5,28 @@ var app = (function(){
     // homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
     // homeModule:'http://www.yaerku.com/pjms/tmHome.php'
     homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
-    homeModule:'http://192.168.1.4:7784/tmHome.php'
-    list:'http://192.168.1.4:7784/tmTag.php?id=1&page=2'
+    homeModule:'http://192.168.1.4:7784/tmHome.php',
+    list:'http://192.168.1.4:7784/tmTag.php?id=1&page=2',
+    detail:'http://192.168.1.4:7784/tmGoods.php?id=9'
   }
+
+  var moduleId = 1,//起始酒款模块 id, 默认值1
+      pageId = 1; //酒款分页 id,默认为1
+
+  var appState = {
+    module:moduleId,
+    page:pageId
+  }
+  var loadDefaultData = ajaxMethod
 
   function calScreenWidth(){
     return screen.width
   }
-  var loadDefaultData = function(path,des,ajaxCallback,data){
+
+  function ajaxMethod(path,methodType,des,data,ajaxCallback) {
     $.ajax({
       url: path,
+      method:methodType,
       dataType: 'json',
       data:data
     })
@@ -26,31 +38,123 @@ var app = (function(){
       console.log("request ajax path : " + path + "des: " + des + "result: failed");
     })
     .always(function() {
-       //console.log("request ajax path : " + path + "des: " + des + "result: completed");
+      //console.log("request ajax path : " + path + "des: " + des + "result: completed");
     });
   }
+
   return {
     urls:configUrlMap,
-    get:loadDefaultData,
-    screenSize:calScreenWidth
+    acquire:loadDefaultData,
+    screenSize:calScreenWidth,
+    appState:appState,
+    methods:{
+      produceSeperateWineHtml : produceSeperateWineHtml
+    }
   }
 
+  function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength) {
+    if (arguments.length==4) {
+      currentWine = arguments[0],
+      wrap = arguments[1],
+      wineIndex = arguments[2],
+      wineLength = arguments[3];
+    }
+    var screenWidth = app.screenSize(),
+        imgWidth = liWidth = screenWidth * 0.425,
+        ratio = 0.6,
+        imgHeight = imgWidth / 0.75,
+        bottomHeight = 50,
+        liHeight = imgHeight + bottomHeight;
+
+    $li = $("<li></li>")
+    $wineWrap = $("<div class='wine-wrap'></div>") //包住酒款
+    $divUp = $("<div class='div-up'></div>") //酒款上部
+    $divBottom = $("<div class='div-bottom'></div>") //酒款下部
+
+    $awinePic = $("<a class='wine-detail'></a>")
+    $spanMailInfo = $("<span class='mail-info'>"+currentWine['mailInfo']+"</span>") //满200包邮 => 酒款上部
+    $spanCntInfo = $("<span class='cnt-info'>"+currentWine['goodsCnt']+"</span>") //仅剩6 => 酒款上部
+    $img = $("<img class='wine-img' src='"+currentWine['img']+"'>") //酒款图片 => 酒款上部
+    $img.css({
+      width: imgWidth,
+      height:imgHeight
+    })
+
+    $spanSubtitle = $("<span class='subtitle'>"+currentWine['subtitle']+"</span>") //副标题 => 酒款上部
+
+    $divHeadline = $("<div>"+currentWine['headline']+"</div>") //主描述 => 酒款下部
+    $spanCurrentPrice = $("<span>"+currentWine['currentPrice']+"</span>")//现价 => 酒款下部
+    $spanOriginalPrice = $("<del>"+currentWine['originalPrice']+"</del>")//原价 or 其他标注 => 酒款下部
+    $spanRecom = $("<span>"+currentWine['restrictCnt']+"</span>")//主描述 => 提示
+
+    $awinePic.append($img)
+    $divUp.append($awinePic)
+    $divUp.append($spanMailInfo)
+    $divUp.append($spanCntInfo)
+    $divUp.append($spanSubtitle)
+
+
+    $divBottom.append($divHeadline)
+    $divBottom.append($spanCurrentPrice)
+    $divBottom.append($spanOriginalPrice)
+    $divBottom.append($spanRecom)
+
+    // 设置 divUp 以及 divBottom 的高度
+    $divUp.css('height', imgHeight)
+    $divBottom.css('height', bottomHeight)
+    $awinePic.css('height', imgHeight)
+
+    $wineWrap.append($divUp)
+    $wineWrap.append($divBottom)
+    $li.append($wineWrap)
+
+    var y = parseInt(wineIndex / 2) * liHeight
+    if (wineIndex % 2 == 0) {
+      $li.css({
+        left: '5%',
+        top:y 
+      });
+    } else if (wineIndex % 2 == 1) {
+      $li.css({
+        left: '52.5%',
+        top: y
+      })
+    }
+
+    $wineWrap.css('width', liWidth)
+
+    $(wrap).append($li)
+    if (arguments.length == 6){
+      console.log("arguments.length: " + arguments.length)
+      // if i === 最后一行 && j === 最后一行 添加 margin
+      if (moduleIndex == moduleLength - 1 && 
+          ((wineIndex == wineLength - 1) || (wineIndex == wineLength - 2))) {
+          $li.addClass('last-wine-item')
+        }
+    } else if (arguments.length == 4) {
+      console.log("arguments.length: "+arguments.length)
+      if (wineIndex == wineLength-1 || wineIndex == wineLength - 2) {
+        $li.addClass('last-wine-item')
+      }
+    }
+  }
   // 432 / 720 = 0.6
+  //下面是最后的});
 })();
 
 /**
  * Created by sszhu on 15/12/8.
  */
-jQuery(document).ready(function($){
+ jQuery(document).ready(function($){
   $('.unslider').unslider({
     animation: 'fade',
     autoplay: true,
     arrows: false
   });
 
-  app.get(app.urls.homeBannerAndNotify,"请求特卖首页轮播图片和通知",function(data){
+  app.acquire(app.urls.homeBannerAndNotify,'GET',"请求特卖首页轮播图片和通知",{},function(data){
     var imgArr = data.img,
-        notification = data.notification;
+    notification = data.notification;
     var parent = $('.unslider>ul');
     var notify = $('.notify');
 
@@ -63,35 +167,99 @@ jQuery(document).ready(function($){
     notify.text(notification);
   });
 
-  app.get(app.urls.homeModule,"请求特卖首页特卖模块",function(data){
-    var totalWine = 0,
-        screenWidth = app.screenSize(),
-        imgWidth = liWidth = screenWidth * 0.425,
-        ratio = 0.6,
-        imgHeight = imgWidth / 0.75,
-        bottomHeight = 50,
-        liHeight = imgHeight + bottomHeight;
-        console.log("screenWidth: " + screenWidth + " imgWidth: " + imgWidth)
+  app.acquire(app.urls.homeModule,'GET',"请求特卖首页特卖模块",{},function(data){
+    var totalWine = 0
+    var moduleArr = data.specialSellModule
+    parent = $('.home-special-sell-wrap') //特卖模块包裹层
+    for (var i = 0; i < moduleArr.length; i++) {
+      var currentModule = moduleArr[i],
+          wineArr = currentModule['exampleList'];
 
-    var moduleArr = data.specialSellModule,
-        parent = $('.home-special-sell-wrap') //特卖模块包裹层
-        for (var i = 0; i < moduleArr.length; i++) {
-
-          var currentModule = moduleArr[i],
-              wineArr = currentModule['exampleList'];
-
-          var $moduleItem = $("<div class='module-item'></div>"),
-              $moduleBar = $("<div class='module-bar'></div>"),
-              $a = $("<a data-moduleId ='"+currentModule['id']+"'></a>"),
-              $img = $("<img src='"+currentModule['modulImgLink']+"'>"),
-              $moduleName = $("<span>"+currentModule['moduleName']+"</span>"),
-              $checkOut = $("<span>查看全部 >></span>");
+      var $moduleItem = $("<div class='module-item'></div>"),
+          $moduleBar = $("<div class='module-bar'></div>"),
+          $a = $("<a class='module-clicked' href='list.html?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
+          $img = $("<img src='"+currentModule['modulImgLink']+"'>"),
+          $moduleName = $("<span>"+currentModule['moduleName']+"</span>"),
+          $checkOut = $("<span>查看全部 >></span>");
 
           $a.append($img)
           $a.append($moduleName)
           $a.append($checkOut)
           $moduleBar.append($a)
           
+      var $moduleListWrap = $("<div class='module-list-wrap'></div>")
+
+      $ul = $("<ul></ul>")
+
+      var screenWidth = app.screenSize(),
+        imgWidth = liWidth = screenWidth * 0.425,
+        ratio = 0.6,
+        imgHeight = imgWidth / 0.75,
+        bottomHeight = 50,
+        liHeight = imgHeight + bottomHeight;
+
+        
+      for (var j = 0; j < wineArr.length; j++) {
+        ++ totalWine
+        app.methods.produceSeperateWineHtml(wineArr[j],$ul,j,i,moduleArr.length,wineArr.length)
+        $moduleListWrap.append($ul)
+        var itemTop = 0
+        if (i > 0) {
+          var itemTop = i * 30 + Math.ceil(totalWine / 2 ) * liHeight
+          //console.log("itemTop: " + itemTop + " i: " + i)
+        }
+        $moduleItem.css({
+          top: itemTop,
+          left: 0
+        });
+        $moduleItem.append($moduleBar)
+        $moduleItem.append($moduleListWrap)
+        parent.append($moduleItem)
+      }
+    }
+  });
+//下面是最后的});
+});
+jQuery(document).ready(function($) {
+  var arg = app.appState
+
+  function callBack(wineArr) {
+    for (var i = 0; i < wineArr.length; i++) {
+      console.log(wineArr.length)
+      app.methods.produceSeperateWineHtml(app,wineArr[i],$('.wine-list-ul'),i,wineArr.length)
+    }
+  }
+  app.acquire(app.urls.list,'GET','获取指定 moduleID 的列表',arg,callBack)
+});
+
+  app.acquire(app.urls.homeModule,'GET',"请求特卖首页特卖模块",{},function(data){
+    var totalWine = 0,
+    screenWidth = app.screenSize(),
+    imgWidth = liWidth = screenWidth * 0.425,
+    ratio = 0.6,
+    imgHeight = imgWidth / 0.75,
+    bottomHeight = 50,
+    liHeight = imgHeight + bottomHeight;
+        //console.log("screenWidth: " + screenWidth + " imgWidth: " + imgWidth)
+
+        var moduleArr = data.specialSellModule,
+        parent = $('.home-special-sell-wrap') //特卖模块包裹层
+        for (var i = 0; i < moduleArr.length; i++) {
+
+          var currentModule = moduleArr[i],
+          wineArr = currentModule['exampleList'];
+
+          var $moduleItem = $("<div class='module-item'></div>"),
+          $moduleBar = $("<div class='module-bar'></div>"),
+          $a = $("<a class='module-clicked' href='list.html?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
+          $img = $("<img src='"+currentModule['modulImgLink']+"'>"),
+          $moduleName = $("<span>"+currentModule['moduleName']+"</span>"),
+          $checkOut = $("<span>查看全部 >></span>");
+
+          $a.append($img)
+          $a.append($moduleName)
+          $a.append($checkOut)
+          $moduleBar.append($a)
           
           var $moduleListWrap = $("<div class='module-list-wrap'></div>")
 
@@ -99,9 +267,9 @@ jQuery(document).ready(function($){
 
           for (var j = 0; j < wineArr.length; j++) {
             var currentWine = wineArr[j];
-                ++ totalWine
+            ++ totalWine
 
-                $li = $("<li></li>")
+            $li = $("<li></li>")
 
                 $wineWrap = $("<div class='wine-wrap'></div>") //包住酒款
                 $wineWrap.css('width', liWidth);
@@ -131,7 +299,7 @@ jQuery(document).ready(function($){
                 $divUp.append($spanMailInfo)
                 $divUp.append($spanCntInfo)
                 $divUp.append($spanSubtitle)
-            
+
 
                 $divBottom.append($divHeadline)
                 $divBottom.append($spanCurrentPrice)
@@ -149,10 +317,10 @@ jQuery(document).ready(function($){
 
                 $ul.append($li)
 
-             
-               var y = parseInt(j / 2) * liHeight
+
+                var y = parseInt(j / 2) * liHeight
                 if (j % 2 ==0) {
-                  
+
                   $li.css({
                     left: '5%',
                     top:y 
@@ -167,17 +335,17 @@ jQuery(document).ready(function($){
 
                 // if i === 最后一行 && j === 最后一行 添加 margin
                 if (i == moduleArr.length - 1 && 
-                    (j == wineArr.length - 1) || 
-                    (j == wineArr.length - 2)) {
+                  (j == wineArr.length - 1) || 
+                  (j == wineArr.length - 2)) {
                   $li.addClass('last-wine-item')
-                }
-          }
-          $moduleListWrap.append($ul)
+              }
+            }
+            $moduleListWrap.append($ul)
 
-          var itemTop = 0
-          if (i > 0) {
-            var itemTop = i * 30 + Math.ceil(totalWine / 2 ) * liHeight
-            console.log("itemTop: " + itemTop + " i: " + i)
+            var itemTop = 0
+            if (i > 0) {
+              var itemTop = i * 30 + Math.ceil(totalWine / 2 ) * liHeight
+            //console.log("itemTop: " + itemTop + " i: " + i)
           }
           
           $moduleItem.css({
@@ -188,5 +356,4 @@ jQuery(document).ready(function($){
           $moduleItem.append($moduleListWrap)
           parent.append($moduleItem)
         }
-  });  
-});
+      });  
