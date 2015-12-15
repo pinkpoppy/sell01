@@ -375,7 +375,15 @@ th {
   width: 31%;
 }
 .module-list-wrap .wine-list-ul {
-  width: 100%;
+  padding: 0 5%;
+  position: relative;
+}
+.module-list-wrap li {
+  display: inline-block;
+  position: absolute;
+}
+.module-list-wrap .wine-wrap {
+  display: inline-block;
 }
 .login-section table {
   width: 100%;
@@ -442,4 +450,12 @@ th {
 body {
   font: 0.5em Helvetica, Arial, sans-serif;
   background-color: #008000;
+}
+.wrap ul {
+  -webkit-margin-after: 0em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0px;
+  -webkit-margin-before: 0px;
+  list-style-type: none;
 }

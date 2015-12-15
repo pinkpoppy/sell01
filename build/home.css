@@ -1,0 +1,118 @@
+.wrap {
+  position: relative;
+}
+.header {
+  height: $bar-height;
+  background: $bar-color;
+}
+.unslider {
+  display: visible;
+}
+.unslider img {
+  width: 100%;
+}
+.home-special-sell-wrap {
+  margin-top: 300px;
+  padding: 0 5%;
+  position: relative;
+}
+.module-item {
+  position: absolute;
+  width: 100%;
+}
+.module-item .module-bar {
+  height: 30px;
+  background: $bar-color;
+}
+.module-item .module-bar a {
+  display: inline-block;
+  line-height: 30px;
+  vertical-align: midlle;
+  height: 30px;
+  width: 100%;
+}
+.module-item .module-bar a img {
+  width: 30px;
+  height: 30px;
+  float: left;
+}
+.module-item .module-bar a >span {
+  float: left;
+  margin-left: 40px;
+}
+.module-item .module-bar a:nth-child(3) {
+  float: right;
+}
+.module-item .module-bar a span {
+  display: inline-block;
+  height: 30px;
+}
+.module-item .module-list-wrap {
+  position: relative;
+}
+.module-item .module-list-wrap ul li {
+  position: absolute;
+  display: inline-block;
+}
+.module-item .module-list-wrap ul li .wine-wrap {
+  display: inline-block;
+  overflow: hidden;
+}
+.module-item .module-list-wrap ul li .wine-wrap .div-up {
+  position: relative;
+}
+.module-item .module-list-wrap ul li .wine-wrap .div-up .wine-detail {
+  display: inline-block;
+}
+.module-item .module-list-wrap ul li .wine-wrap .div-up img {
+  ppsition: absolute;
+}
+.module-item .module-list-wrap ul li .wine-wrap .div-up span {
+  position: absolute;
+  display: inline-block;
+}
+.module-item .module-list-wrap ul li .wine-wrap .div-up .mail-info {
+  left: 0;
+  top: 0;
+  background: #800080;
+  opacity: 0.8;
+}
+.module-item .module-list-wrap ul li .wine-wrap .div-up .cnt-info {
+  top: 0;
+  right: 0;
+}
+.module-item .module-list-wrap ul li .wine-wrap .div-up .subtitle {
+  left: 0;
+  bottom: 0;
+  background: #000;
+  opacity: 0.5;
+  width: 100%;
+  color: #fff;
+}
+.module-item .module-list-wrap ul li .wine-wrap .div-up .wine-img {
+  display: block;
+}
+.last-wine-item {
+  margin-bottom: $bottom-height;
+}
+.bottom {
+  height: $bottom-height;
+  background: $bar-color;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+.bottom a {
+  display: inline-block;
+  text-decoration: none;
+}
+.bottom a:nth-child(1) {
+  width: 33%;
+}
+.bottom a:nth-child(2) {
+  width: 34%;
+}
+.bottom a:nth-child(3) {
+  width: 31%;
+}
