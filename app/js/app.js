@@ -1,12 +1,13 @@
 
 var app = (function(){
   var configUrlMap = {
-    homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
-    homeModule:'http://www.yaerku.com/pjms/tmHome.php'
-    // homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
-    // homeModule:'http://192.168.1.4:7784/tmHome.php',
-    // list:'http://192.168.1.4:7784/tmTag.php?id=1&page=2',
-    // detail:'http://192.168.1.4:7784/tmGoods.php?id=9'
+    //http://t.snapwine.net:7784/pjms/swmp/
+    // homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
+    // homeModule:'http://www.yaerku.com/pjms/tmHome.php'
+    homeBannerAndNotify:'http://t.snapwine.net:7784/pjms/swmp/tmBanner.php',
+    homeModule:'http://t.snapwine.net:7784/pjms/swmp/tmHome.php',
+    list:'http://t.snapwine.net:7784/pjms/swmp/tmTag.php?id=1&page=2',
+    detail:'http://t.snapwine.net:7784/pjms/swmp/tmGoods.php?id=9'
   }
 
   var moduleId = 1,//起始酒款模块 id, 默认值1
@@ -20,6 +21,22 @@ var app = (function(){
 
   function calScreenWidth(){
     return screen.width
+  }
+
+  function getSearchArgFromUrl(){
+    var searchString = window.location.search
+    var res = {}
+    if (searchString.length > 0) {
+      var argArr = searchString.substr(1,searchString.length -1 ).split('&')
+      
+      for (var i = 0; i < argArr.length; i++) {
+        var coupleArg = argArr[i].split('=')
+        console.log(coupleArg)
+
+        res[coupleArg[0]] = coupleArg[1]
+      }
+    }
+    return res
   }
 
   function ajaxMethod(path,methodType,des,data,ajaxCallback) {

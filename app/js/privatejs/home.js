@@ -33,7 +33,7 @@
 
       var $moduleItem = $("<div class='module-item'></div>"),
           $moduleBar = $("<div class='module-bar'></div>"),
-          $a = $("<a class='module-clicked' href='list.html?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
+          $a = $("<a class='module-clicked' href='list.html?page=1&id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
           $img = $("<img src='"+currentModule['modulImgLink']+"'>"),
           $moduleName = $("<span>"+currentModule['moduleName']+"</span>"),
           $checkOut = $("<span>查看全部 >></span>");
