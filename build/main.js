@@ -13,12 +13,13 @@
 
 var app = (function(){
   var configUrlMap = {
-    homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
-    homeModule:'http://www.yaerku.com/pjms/tmHome.php'
-    // homeBannerAndNotify:'http://192.168.1.4:7784/tmBanner.php',
-    // homeModule:'http://192.168.1.4:7784/tmHome.php',
-    // list:'http://192.168.1.4:7784/tmTag.php?id=1&page=2',
-    // detail:'http://192.168.1.4:7784/tmGoods.php?id=9'
+    //http://t.snapwine.net:7784/pjms/swmp/
+    // homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
+    // homeModule:'http://www.yaerku.com/pjms/tmHome.php'
+    homeBannerAndNotify:'http://t.snapwine.net:7784/pjms/swmp/tmBanner.php',
+    homeModule:'http://t.snapwine.net:7784/pjms/swmp/tmHome.php',
+    list:'http://t.snapwine.net:7784/pjms/swmp/tmTag.php?id=1&page=2',
+    detail:'http://t.snapwine.net:7784/pjms/swmp/tmGoods.php?id=9'
   }
 
   var moduleId = 1,//起始酒款模块 id, 默认值1
@@ -32,6 +33,22 @@ var app = (function(){
 
   function calScreenWidth(){
     return screen.width
+  }
+
+  function getSearchArgFromUrl(){
+    var searchString = window.location.search
+    var res = {}
+    if (searchString.length > 0) {
+      var argArr = searchString.substr(1,searchString.length -1 ).split('&')
+      
+      for (var i = 0; i < argArr.length; i++) {
+        var coupleArg = argArr[i].split('=')
+        console.log(coupleArg)
+
+        res[coupleArg[0]] = coupleArg[1]
+      }
+    }
+    return res
   }
 
   function ajaxMethod(path,methodType,des,data,ajaxCallback) {
@@ -154,83 +171,3 @@ var app = (function(){
   // 432 / 720 = 0.6
   //下面是最后的});
 })();
-
-/**
- * Created by sszhu on 15/12/8.
- */
- jQuery(document).ready(function($){
-  $('.unslider').unslider({
-    animation: 'fade',
-    autoplay: true,
-    arrows: false
-  });
-
-  app.acquire(app.urls.homeBannerAndNotify,'GET',"请求特卖首页轮播图片和通知",{},function(data){
-    var imgArr = data.img,
-    notification = data.notification;
-    var parent = $('.unslider>ul');
-    var notify = $('.notify');
-
-    for(var i = 0; i < imgArr.length; i++) {
-      var li = $("<li class='unslider-active' data-url="+imgArr[i]['url']+"></li>");
-      var img = $("<img src='"+imgArr[i]['pic']+"'>");
-      li.append(img);
-      parent.append(li);
-    }
-    notify.text(notification);
-  });
-
-  app.acquire(app.urls.homeModule,'GET',"请求特卖首页特卖模块",{},function(data){
-    var totalWine = 0
-    var moduleArr = data.specialSellModule
-    parent = $('.home-special-sell-wrap') //特卖模块包裹层
-    for (var i = 0; i < moduleArr.length; i++) {
-      var currentModule = moduleArr[i],
-          wineArr = currentModule['exampleList'];
-
-      var $moduleItem = $("<div class='module-item'></div>"),
-          $moduleBar = $("<div class='module-bar'></div>"),
-          $a = $("<a class='module-clicked' href='list.html?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
-          $img = $("<img src='"+currentModule['modulImgLink']+"'>"),
-          $moduleName = $("<span>"+currentModule['moduleName']+"</span>"),
-          $checkOut = $("<span>查看全部 >></span>");
-
-          $a.append($img)
-          $a.append($moduleName)
-          $a.append($checkOut)
-          $moduleBar.append($a)
-          $moduleItem.append($moduleBar)
-          
-      var $moduleListWrap = $("<div class='module-list-wrap'></div>")
-
-      $ul = $("<ul></ul>")
-
-      var screenWidth = app.screenSize(),
-        imgWidth = liWidth = screenWidth * 0.425,
-        ratio = 0.6,
-        imgHeight = imgWidth / 0.75,
-        bottomHeight = 50,
-        liHeight = imgHeight + bottomHeight;
-
-        
-      for (var j = 0; j < wineArr.length; j++) {
-        ++ totalWine
-        app.methods.produceSeperateWineHtml(wineArr[j],$ul,j,i,moduleArr.length,wineArr.length)
-        $moduleListWrap.append($ul)
-        var itemTop = 0
-        if (i > 0) {
-          var itemTop = i * 30 + Math.ceil(totalWine / 2 ) * liHeight
-          //console.log("itemTop: " + itemTop + " i: " + i)
-        }
-        $moduleItem.css({
-          top: itemTop,
-          left: 0
-        });
-        
-        $moduleItem.append($moduleListWrap)
-        parent.append($moduleItem)
-      }
-    }
-  });
-//下面是最后的});
-});
