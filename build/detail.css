@@ -1,0 +1,67 @@
+.detail-wine-info {
+  margin-top: 600px;
+  padding-bottom: $shopping-bar10;
+  width: 100%;
+}
+.detail-wine-info .inline-div {
+  display: inline-block;
+  height: $detail-bar-height;
+}
+.detail-wine-info .detail-headline-left {
+  background: #00f;
+  width: 90%;
+  clear: right;
+}
+.detail-wine-info .price-right {
+  background: #800080;
+  width: 10%;
+  float: right;
+  text-align: right;
+}
+.detail-wine-info .other-attr {
+  background: #fff;
+}
+.detail-wine-info .other-attr p {
+  display: inline-block;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+.detail-wine-info .in-activity {
+  background: #800080;
+  margin-top: 20px;
+  height: 30px;
+  line-height: 30px;
+}
+.detail-wine-info .in-activity a {
+  cursor: pointer;
+  text-decoration: none;
+}
+.detail-wine-info .in-activity span {
+  float: right;
+}
+.detail-wine-info .shopping-bar {
+  background: #fff;
+  position: fixed;
+  height: $shopping-bar;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  border-top: 1px solid #eee;
+}
+.detail-wine-info .shopping-bar .op-wrap button {
+  display: inline-block;
+  margin-top: 10px;
+  outline: none;
+}
+.detail-wine-info .shopping-bar .op-wrap .op {
+  border: 1px solid;
+  width: 30px;
+  height: 30px;
+}
+.detail-wine-info .shopping-bar .op-wrap .buy-button {
+  background: #f00;
+  border-radius: 5px;
+  height: 30px;
+  width: 120px;
+}

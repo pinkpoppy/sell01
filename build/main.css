@@ -231,6 +231,8 @@ th {
   height: 10%;
   margin: 40% auto;
   background: #aeefff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
   border-radius: 50%;
 }
 .coupon-item .coupon-option-wrap .inner-circle {
@@ -255,6 +257,75 @@ th {
   -webkit-margin-start: 0px;
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
+}
+.detail-wine-info {
+  margin-top: 600px;
+  padding-bottom: 60px;
+  width: 100%;
+}
+.detail-wine-info .inline-div {
+  display: inline-block;
+  height: 30px;
+}
+.detail-wine-info .detail-headline-left {
+  background: #00f;
+  width: 90%;
+  clear: right;
+}
+.detail-wine-info .price-right {
+  background: #800080;
+  width: 10%;
+  float: right;
+  text-align: right;
+}
+.detail-wine-info .other-attr {
+  background: #fff;
+}
+.detail-wine-info .other-attr p {
+  display: inline-block;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+}
+.detail-wine-info .in-activity {
+  background: #800080;
+  margin-top: 20px;
+  height: 30px;
+  line-height: 30px;
+}
+.detail-wine-info .in-activity a {
+  cursor: pointer;
+  text-decoration: none;
+}
+.detail-wine-info .in-activity span {
+  float: right;
+}
+.detail-wine-info .shopping-bar {
+  background: #fff;
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  border-top: 1px solid #eee;
+}
+.detail-wine-info .shopping-bar .op-wrap button {
+  display: inline-block;
+  margin-top: 10px;
+  outline: none;
+}
+.detail-wine-info .shopping-bar .op-wrap .op {
+  border: 1px solid;
+  width: 30px;
+  height: 30px;
+}
+.detail-wine-info .shopping-bar .op-wrap .buy-button {
+  background: #f00;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  height: 30px;
+  width: 120px;
 }
 .wrap {
   position: relative;
