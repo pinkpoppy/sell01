@@ -10,7 +10,7 @@ var minify = require('gulp-minify');
 gulp.task('default',['watch:all']);
 
 gulp.task('styles', function () {
-  gulp.src('app/main.styl')
+  gulp.src(['app/main.styl','app/styl/*.styl'])
       .pipe(stylus({'include css':true}))
       .pipe(gulp.dest('build/'));
 });

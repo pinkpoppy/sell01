@@ -1,0 +1,11 @@
+.module-list-wrap .wine-list-ul {
+  padding: 0 5%;
+  position: relative;
+}
+.module-list-wrap li {
+  display: inline-block;
+  position: absolute;
+}
+.module-list-wrap .wine-wrap {
+  display: inline-block;
+}

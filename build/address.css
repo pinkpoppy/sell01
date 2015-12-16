@@ -1,0 +1,18 @@
+.address-table {
+  width: 100%;
+}
+.address-table table {
+  width: 100%;
+}
+.address-table tr {
+  width: 100%;
+}
+.address-table tr>td {
+  width: 80px;
+}
+.address-table .cont {
+  width: auto;
+}
+.address-table input {
+  width: 100%;
+}

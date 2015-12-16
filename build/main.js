@@ -77,10 +77,11 @@ var app = (function(){
     appState:appState,
     methods:{
       produceSeperateWineHtml : produceSeperateWineHtml
+      getSearchArgFromUrl :     getSearchArgFromUrl
     }
   }
 
-  function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength) 
+  function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength,moduleId) 
   {
     console.log("arguments.length = " + arguments.length)
     if (arguments.length==4) {
@@ -101,7 +102,7 @@ var app = (function(){
     $divUp = $("<div class='div-up'></div>") //酒款上部
     $divBottom = $("<div class='div-bottom'></div>") //酒款下部
 
-    $awinePic = $("<a class='wine-detail'></a>")
+    $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"'&wineId="+currentWine['id']+"'></a>")
     $spanMailInfo = $("<span class='mail-info'>"+currentWine['mailInfo']+"</span>") //满200包邮 => 酒款上部
     $spanCntInfo = $("<span class='cnt-info'>"+currentWine['goodsCnt']+"</span>") //仅剩6 => 酒款上部
     $img = $("<img class='wine-img' src='"+currentWine['img']+"'>") //酒款图片 => 酒款上部
