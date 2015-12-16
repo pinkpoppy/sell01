@@ -64,7 +64,7 @@ var app = (function(){
     screenSize:calScreenWidth,
     appState:appState,
     methods:{
-      produceSeperateWineHtml : produceSeperateWineHtml
+      produceSeperateWineHtml : produceSeperateWineHtml,
       getSearchArgFromUrl :     getSearchArgFromUrl
     }
   }
@@ -72,11 +72,12 @@ var app = (function(){
   function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength,moduleId) 
   {
     console.log("arguments.length = " + arguments.length)
-    if (arguments.length==4) {
+    if (arguments.length==5) {
       currentWine = arguments[0],
       wrap = arguments[1],
       wineIndex = arguments[2],
-      wineLength = arguments[3];
+      wineLength = arguments[3],
+      moduleId = arguments[4];
     }
     var screenWidth = app.screenSize(),
         imgWidth = liWidth = screenWidth * 0.425,
@@ -90,7 +91,9 @@ var app = (function(){
     $divUp = $("<div class='div-up'></div>") //酒款上部
     $divBottom = $("<div class='div-bottom'></div>") //酒款下部
 
-    $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"'&wineId="+currentWine['id']+"'></a>")
+
+
+    $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"&id="+currentWine['id']+"'></a>")
     $spanMailInfo = $("<span class='mail-info'>"+currentWine['mailInfo']+"</span>") //满200包邮 => 酒款上部
     $spanCntInfo = $("<span class='cnt-info'>"+currentWine['goodsCnt']+"</span>") //仅剩6 => 酒款上部
     $img = $("<img class='wine-img' src='"+currentWine['img']+"'>") //酒款图片 => 酒款上部
@@ -143,14 +146,14 @@ var app = (function(){
     $wineWrap.css('width', liWidth)
 
     $(wrap).append($li)
-    if (arguments.length == 6){
+    if (arguments.length == 7){
       console.log("arguments.length: " + arguments.length)
       // if i === 最后一行 && j === 最后一行 添加 margin
       if (moduleIndex == moduleLength - 1 && 
           ((wineIndex == wineLength - 1) || (wineIndex == wineLength - 2))) {
           $li.addClass('last-wine-item')
         }
-    } else if (arguments.length == 4) {
+    } else if (arguments.length == 6) {
       console.log("arguments.length: "+arguments.length)
       if (wineIndex == wineLength-1 || wineIndex == wineLength - 2) {
         $li.addClass('last-wine-item')

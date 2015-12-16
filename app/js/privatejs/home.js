@@ -58,7 +58,13 @@
         
       for (var j = 0; j < wineArr.length; j++) {
         ++ totalWine
-        app.methods.produceSeperateWineHtml(wineArr[j],$ul,j,i,moduleArr.length,wineArr.length,currentModule['id'])
+        app.methods.produceSeperateWineHtml(wineArr[j],
+                                            $ul,
+                                            j,
+                                            i,
+                                            moduleArr.length,
+                                            wineArr.length,
+                                            currentModule['id'])
         $moduleListWrap.append($ul)
         var itemTop = 0
         if (i > 0) {
