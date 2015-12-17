@@ -42,7 +42,7 @@ jQuery(document).ready(function($) {
   
   // minus shopping cart
   $('#minus').click(function(event) {
-    
+    //app.acquire("")
   });
 
   // plus shopping cart
@@ -60,5 +60,6 @@ jQuery(document).ready(function($) {
     
   });
 
+  
 
 });

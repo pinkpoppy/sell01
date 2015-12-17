@@ -8,6 +8,7 @@ var app = (function(){
     homeModule:'http://t.snapwine.net:7784/pjms/swmp/tmHome.php',
     list:'http://t.snapwine.net:7784/pjms/swmp/tmTag.php?id=1&page=2',
     detail:'http://t.snapwine.net:7784/pjms/swmp/tmGoods.php?id=9'
+    
   }
 
   var moduleId = 1,//起始酒款模块 id, 默认值1
@@ -39,6 +40,16 @@ var app = (function(){
     return res
   }
 
+  function b64EncodeUnicode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,function(match,p1) {
+      return String.fromCharCode('0x' + p1)
+    })
+  }
+
+  function aesCBC(pt) {
+    var timestamp = Date.now()
+
+  }
   function ajaxMethod(path,methodType,des,data,ajaxCallback) {
     $.ajax({
       url: path,
@@ -65,7 +76,8 @@ var app = (function(){
     appState:appState,
     methods:{
       produceSeperateWineHtml : produceSeperateWineHtml,
-      getSearchArgFromUrl :     getSearchArgFromUrl
+      getSearchArgFromUrl :     getSearchArgFromUrl,
+      aesCBC                  : aesCBC
     }
   }
 
