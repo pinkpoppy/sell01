@@ -16,7 +16,13 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts',function(){
-  gulp.src(['vendor/*.js','app/js/*.js'])
+  gulp.src(['vendor/core.js',
+            'vendor/clipher-core.js',
+            'vendor/enc-base64.js',
+            'vendor/aes.js',
+            'vendor/unslider.js',
+            'vendor/jquery.cxselect.min.js',//vendor directory load end
+            'app/js/*.js'])
       .pipe(concat('main.js'))
       // .pipe(uglify())
       // .pipe(minify())
