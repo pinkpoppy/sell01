@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="res/core.js"></script>
-    <script type="text/javascript" src="res/clipher-core.js"></script>
-    <script type="text/javascript" src="res/aes.js"></script>
-    <script type="text/javascript" src="res/enc-base64.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    
     <title>Title</title>
     <script>
         pkcs7 = function(txt) {
@@ -22,10 +20,23 @@
         var Base64Key='RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb'+t+'=';
         var key=CryptoJS.enc.Base64.parse(Base64Key);
         var iv=key.left(16);
-        var text='abc123';
+        var text='{"userId":"abc","userType":"3","version":"2.2.0","deviceModel":"iphone"}';
         text=pkcs7(text);
         var ciphertext = CryptoJS.AES.encrypt(text, key, {iv: iv, mode:CryptoJS.mode.CBC, padding:CryptoJS.pad.NoPadding});
         var base64Text = CryptoJS.enc.Base64.stringify(ciphertext.ciphertext);
+
+        var m='getMall';
+
+        var data={"m":m, "t":t, "p":base64Text};
+
+        var obj= $.ajax({
+            url: 'http://t.snapwine.net:7784/pjapi/',
+            type: 'post',
+            data: data,
+            async: false
+        });
+
+        document.write(obj.responseText);
     </script>
 </head>
 <body>
