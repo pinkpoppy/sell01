@@ -1,10 +1,28 @@
 jQuery(document).ready(function($) {
-  var queryArg = app.methods.getSearchArgFromUrl()
-  app.acquire(app.urls.detail,'GET',"请求酒款详情",{"id":queryArg.id},function(data){
+  
+  var 
+    userData = function jointUserinfo() {
+      var basicUserinfo = app.methods.getBasicUserinfo()
+      var queryArg = app.methods.getSearchArgFromUrl()
+      basicUserinfo['gid'] = queryArg['id']
+      return JSON.stringify(basicUserinfo)
+    },
+    des = '请求酒款详情'
+    methodName = 'getGoods',
+    requestType = 'POST',
+    timestamp = app.methods.timestamp()
+    ;
 
+  app.methods.appAjax(des,
+                      methodName,
+                      requestType,
+                      userData,
+                      timestamp,
+                      function(data){
     (function(imgArr) {
       var parent =  $('.unslider-wrap')
       for(var i = 0,len = data.pics.length; i < len; i++) {
+        console.log("len = " + len)
         var li = $("<li class='unslider-active'></li>"),
             img = $("<img src='"+imgArr[i]+"'>")
         li.append(img)

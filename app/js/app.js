@@ -1,22 +1,25 @@
 
 var app = (function(){
   var configUrlMap = {
-    //http://t.snapwine.net:7784/pjms/swmp/
-    // homeBannerAndNotify:'http://www.yaerku.com/pjms/tmBanner.php',
-    // homeModule:'http://www.yaerku.com/pjms/tmHome.php'
     homeBannerAndNotify:'http://t.snapwine.net:7784/pjms/swmp/tmBanner.php',
     homeModule:'http://t.snapwine.net:7784/pjms/swmp/tmHome.php',
     list:'http://t.snapwine.net:7784/pjms/swmp/tmTag.php?id=1&page=2',
-    detail:'http://t.snapwine.net:7784/pjms/swmp/tmGoods.php?id=9'
-    
+    detail:'http://www.yaerku.com/pjapi/',
+    APIBase : "http://www.yaerku.com/pjapi/"
+  }
+
+  var config = {
+    Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
+    userId :"o4ILEuHaZ9rZqXcEL4izPJcEnFnM",
+    userType : "5",
   }
 
   var moduleId = 1,//起始酒款模块 id, 默认值1
       pageId = 1; //酒款分页 id,默认为1
 
   var appState = {
-    module:moduleId,
-    page:pageId
+      module:moduleId,
+      page:pageId
   }
   var loadDefaultData = ajaxMethod
 
@@ -39,18 +42,54 @@ var app = (function(){
     }
     return res
   }
+  
+  function deviceInfo(){
+    var device = "iphone"
+    return device
+  }  
 
-  function b64EncodeUnicode(str) {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,function(match,p1) {
-      return String.fromCharCode('0x' + p1)
-    })
+  function appVersion(){
+    var version = "2.2.0"
+    return version
   }
 
-  function aesCBC(pt) {
-    var timestamp = Date.now()
-
+  function timestamp(){
+    return parseInt(new Date() / 1000)
   }
-  function ajaxMethod(path,methodType,des,data,ajaxCallback) {
+
+  function AES(plainText,timestamp) {
+    pkcs7 = function(str) {
+      var len = str.length,
+          block_size = 32,
+          pad = block_size-(len % block_size),
+          padChar=String.fromCharCode(pad);
+
+      for (var i = 0; i < pad; i++) {
+        str = str + padChar
+      }
+      return str
+    }
+
+    var Base64Key = config['Base64Key'] + timestamp + '=',
+        key = CryptoJS.enc.Base64.parse(Base64Key),
+        iv = key.left(16);
+
+    var text=pkcs7(plainText)
+        ciphertext = CryptoJS.AES.encrypt(text, 
+                                          key, 
+                                          {iv: iv, 
+                                            mode:CryptoJS.mode.CBC, 
+                                            padding:CryptoJS.pad.NoPadding}),
+        base64Text = CryptoJS.enc.Base64.stringify(ciphertext.ciphertext)
+
+    return base64Text
+  }
+
+  function ajaxMethod(path,
+                      methodType,
+                      des,
+                      data,
+                      ajaxCallback) {
     $.ajax({
       url: path,
       method:methodType,
@@ -69,6 +108,72 @@ var app = (function(){
     });
   }
 
+
+
+
+
+
+  /**
+  *@param Des descripption of the request String
+  *@param MethodName specific API name of current request String
+  *@param RequestType GET/POST or Other Type String
+  *@param userData JSON
+  *@param Timestamp Current Timestamp an 10bit Interger
+  */
+  function appAjax(des,
+                   methodName,
+                   requestType,
+                   userData,
+                   timestamp,
+                   clallBack
+                   ) {
+    //var base64Text = AES(userData,timestamp)
+    var path = configUrlMap['APIBase'] + methodName
+    var data = jointPostData(methodName,timestamp,AES(userData,timestamp))
+    $.ajax({
+      url : path,
+      method : requestType,
+      dataType : 'json',
+      data : data
+    })
+    .done(function(data) {
+      console.log("request ajax path : " + path + "des: " + des + "result: successed" );
+      ajaxCallback(data);
+    })
+    .fail(function() {
+      console.log("request ajax path : " + path + "des: " + des + "result: failed");
+    })
+    .always(function() {
+      //console.log("request ajax path : " + path + "des: " + des + "result: completed");
+    });
+  }
+
+
+
+
+
+
+  /**
+  *   
+  */
+  function getUserinfoData(){
+    var u = {}
+    u.userId = config.userId
+    u.userType = config.userType
+    u.version = appVersion()
+    u.deviceMode = deviceInfo()
+    return u
+  }
+
+  /**
+  * @m API method name
+  * @t timestamp using for AES
+  * @p base64text representing the sensitive user info
+  */
+  function jointPostData(m,t,p) {
+    return data = {"m" : m,"t" : t,"p" : p}
+  }
+
   return {
     urls:configUrlMap,
     acquire:loadDefaultData,
@@ -77,7 +182,11 @@ var app = (function(){
     methods:{
       produceSeperateWineHtml : produceSeperateWineHtml,
       getSearchArgFromUrl :     getSearchArgFromUrl,
-      aesCBC                  : aesCBC
+      deviceInfo : deviceInfo,
+      appVersion : appVersion,
+      timestamp : timestamp,
+      getBasicUserinfo : getUserinfoData,
+      appAjax : appAjax
     }
   }
 
