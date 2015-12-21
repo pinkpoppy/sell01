@@ -1,11 +1,8 @@
 
 var app = (function(){
   var configUrlMap = {
-    homeBannerAndNotify:'http://t.snapwine.net:7784/pjms/swmp/tmBanner.php',
-    homeModule:'http://t.snapwine.net:7784/pjms/swmp/tmHome.php',
-    list:'http://t.snapwine.net:7784/pjms/swmp/tmTag.php?id=1&page=2',
-    detail:'http://www.yaerku.com/pjapi/',
-    APIBase : "http://www.yaerku.com/pjapi/"
+    //APIBase : "http://www.yaerku.com/pjapi/"
+    APIBase:"http://t.snapwine.net:7784/pjapi/"
   }
 
   var config = {
@@ -127,9 +124,15 @@ var app = (function(){
                    timestamp,
                    clallBack
                    ) {
+    //console.log("userData = " + userData)
     //var base64Text = AES(userData,timestamp)
-    var path = configUrlMap['APIBase'] + methodName
+    //var path = configUrlMap['APIBase'] + methodName
+    var path = configUrlMap['APIBase']
+    //console.log("path = " + path)
+
     var data = jointPostData(methodName,timestamp,AES(userData,timestamp))
+    //var data = jointPostData(methodName,timestamp,base64Text)
+    //console.log("base64Text = " + base64Text)
     $.ajax({
       url : path,
       method : requestType,
@@ -138,7 +141,7 @@ var app = (function(){
     })
     .done(function(data) {
       console.log("request ajax path : " + path + "des: " + des + "result: successed" );
-      ajaxCallback(data);
+      clallBack(data);
     })
     .fail(function() {
       console.log("request ajax path : " + path + "des: " + des + "result: failed");
@@ -192,7 +195,7 @@ var app = (function(){
 
   function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength,moduleId) 
   {
-    console.log("arguments.length = " + arguments.length)
+    //console.log("arguments.length = " + arguments.length)
     if (arguments.length==5) {
       currentWine = arguments[0],
       wrap = arguments[1],
@@ -214,6 +217,7 @@ var app = (function(){
 
 
 
+    // $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"&id="+currentWine['id']+"'></a>")
     $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"&id="+currentWine['id']+"'></a>")
     $spanMailInfo = $("<span class='mail-info'>"+currentWine['mailInfo']+"</span>") //满200包邮 => 酒款上部
     $spanCntInfo = $("<span class='cnt-info'>"+currentWine['goodsCnt']+"</span>") //仅剩6 => 酒款上部
