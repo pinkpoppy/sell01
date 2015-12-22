@@ -327,6 +327,9 @@ th {
   height: 30px;
   width: 120px;
 }
+.detail-wine-intro .intro-pic {
+  width: 100%;
+}
 .wrap {
   position: relative;
 }
@@ -341,7 +344,7 @@ th {
   width: 100%;
 }
 .home-special-sell-wrap {
-  margin-top: 300px;
+  margin-top: 420px;
   padding: 0 5%;
   position: relative;
 }
@@ -452,6 +455,21 @@ th {
 .module-list-wrap li {
   display: inline-block;
   position: absolute;
+}
+.module-list-wrap li a {
+  display: inline-block;
+  position: relative;
+}
+.module-list-wrap li .mail-info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #fff;
+}
+.module-list-wrap li .cnt-info {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .module-list-wrap .wine-wrap {
   display: inline-block;

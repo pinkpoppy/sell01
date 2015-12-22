@@ -1907,9 +1907,8 @@ CryptoJS.lib.Cipher || (function (undefined) {
 
 var app = (function(){
   var configUrlMap = {
-    //APIBase : "http://www.yaerku.com/pjapi/"
-    //trueBase : "http://t.snapwine.net:7784/pjapi/",
-    APIBase:"../app/json/home.json"
+    APIBase : "http://www.yaerku.com/pjapi/"
+    //APIBase:"../app/json/home.json"
   }
 
   var config = {
@@ -1925,8 +1924,6 @@ var app = (function(){
       module:moduleId,
       page:pageId
   }
-  var loadDefaultData = ajaxMethod
-
   function calScreenWidth(){
     return screen.width
   }
@@ -1961,6 +1958,11 @@ var app = (function(){
     return parseInt(new Date() / 1000)
   }
 
+  function ajaxLog(path,des,feedback) {
+    console.log("Ajax path : " + path + 
+                "des: " + des + 
+                "result: " + feedback)
+  }
   function AES(plainText,timestamp) {
     pkcs7 = function(str) {
       var len = str.length,
@@ -1985,37 +1987,8 @@ var app = (function(){
                                             mode:CryptoJS.mode.CBC, 
                                             padding:CryptoJS.pad.NoPadding}),
         base64Text = CryptoJS.enc.Base64.stringify(ciphertext.ciphertext)
-
     return base64Text
   }
-
-  function ajaxMethod(path,
-                      methodType,
-                      des,
-                      data,
-                      ajaxCallback) {
-    $.ajax({
-      url: path,
-      method:methodType,
-      dataType: 'json',
-      data:data
-    })
-    .done(function(data) {
-      console.log("request ajax path : " + path + "des: " + des + "result: successed" );
-      ajaxCallback(data);
-    })
-    .fail(function() {
-      console.log("request ajax path : " + path + "des: " + des + "result: failed");
-    })
-    .always(function() {
-      //console.log("request ajax path : " + path + "des: " + des + "result: completed");
-    });
-  }
-
-
-
-
-
 
   /**
   *@param Des descripption of the request String
@@ -2031,29 +2004,20 @@ var app = (function(){
                    timestamp,
                    callBack
                    ) {
-
-    function ajaxLog(path,des,feedback) {
-      console.log("request ajax path : " + path + "des: " + des + "result: " + feedback)
-    }
-    //console.log("userData = " + userData)
-    //var base64Text = AES(userData,timestamp)
-    //var path = configUrlMap['APIBase'] + methodName
-    var path = configUrlMap['APIBase']
-    //console.log("path = " + path)
-
-    var data = jointPostData(methodName,timestamp,AES(userData,timestamp))
-    //var data = jointPostData(methodName,timestamp,base64Text)
-    //console.log("base64Text = " + base64Text)
+    var 
+      path = configUrlMap['APIBase']
+      data = jointPostData(methodName,timestamp,AES(userData,timestamp))
     $.ajax({
       url : path,
       method : requestType,
-      dataType : 'text',
+      dataType : 'json',
       data : data
     })
     .done(function(data) {
       ajaxLog(path,des,'successed')
-      var json = JSON.parse(JSON.stringify(eval( "(" + data +")")))
-      callBack(json)
+      //var json = JSON.parse(JSON.stringify(eval( "(" + data +")")))
+      //callBack(json)
+      callBack(data)
     })
     .fail(function(data) {
       ajaxLog(path,des,'failed')
@@ -2062,11 +2026,6 @@ var app = (function(){
       ajaxLog(path,des,'completed')
     });
   }
-
-
-
-
-
 
   /**
   *   
@@ -2091,7 +2050,6 @@ var app = (function(){
 
   return {
     urls:configUrlMap,
-    acquire:loadDefaultData,
     screenSize:calScreenWidth,
     appState:appState,
     methods:{
@@ -2130,11 +2088,11 @@ var app = (function(){
 
 
     // $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"&id="+currentWine['id']+"'></a>")
-    $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"&id="+currentWine['id']+"'></a>")
+    $awinePic = $("<a class='wine-detail' href='detail.html?id="+currentWine['id']+"' data-id="+currentWine['id']+"></a>")
     $spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>") //满200包邮 => 酒款上部
     $spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>") //仅剩6 => 酒款上部
     console.log(currentWine['pics']);
-    $img = $("<img class='wine-img' src='"+currentWine['pics'].pic+"'>") //酒款图片 => 酒款上部
+    $img = $("<img class='wine-img' src='"+currentWine['pics'][0]['pic']+"'>") //酒款图片 => 酒款上部
     $img.css({
       width: imgWidth,
       height:imgHeight
