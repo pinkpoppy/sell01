@@ -6,22 +6,7 @@
     animation: 'fade',
     autoplay: true,
     arrows: false
-  });
-
-  // app.acquire(app.urls.homeBannerAndNotify,'GET',"请求特卖首页轮播图片和通知",{},function(data){
-  //   var imgArr = data.img,
-  //   notification = data.notification;
-  //   var parent = $('.unslider>ul');
-  //   var notify = $('.notify');
-
-  //   for(var i = 0; i < imgArr.length; i++) {
-  //     var li = $("<li class='unslider-active' data-url="+imgArr[i]['url']+"></li>");
-  //     var img = $("<img src='"+imgArr[i]['pic']+"'>");
-  //     li.append(img);
-  //     parent.append(li);
-  //   }
-  //   notify.text(notification);
-  // });
+  })
 
   var
     userData = function jointUserinfo() {
@@ -29,95 +14,98 @@
       return JSON.stringify(basicUserinfo)
     },
 
-    des = '请求特卖首页轮播图片和通知'
+    des = '请求特卖首页'
     methodName = 'getMall',
     requestType = 'POST',
     timestamp = app.methods.timestamp()
-  ;
-  app.methods.appAjax(des,
-                      methodName,
-                      requestType,
-                      userData(),
-                      timestamp,
-                      function(response){
-                        if (response.msg=="成功") {
-                          var imgArr = response.banner.items,
-                          notification = response.notice;
-                          
-                          var parent = $('.unslider>ul'),
-                          notify = $('.notify');
 
-                          console.log(response.banner.items.length)
-                          for(var i = 0, len = imgArr.length; i < len; i++) {
-                            var li = $("<li class='unslider-active' data-url="+imgArr[i]['url']+"></li>")
-                            console.log("i = " + i + 1 + imgArr[i]['pic'])
-                            var img = $("<img src='"+imgArr[i]['pic']+"'>")
-                            li.append(img)
-                            parent.append(li)
-                          }
-                          notify.text(notification)
-                        }
-                        
-                      })
+  app.methods.appAjax(des,methodName,requestType,userData(),timestamp,callBack)
 
+  function callBack(response) {
+    if (response.msg=="成功") {
+      var 
+        imgArr = response.banner.items,//获取轮播图
+        notification = response.notice,//获取通知
+        moduleArr = response.tags//获取模块
 
-  // app.acquire(app.urls.homeModule,'GET',"请求特卖首页特卖模块",{},function(data){
-  //   var totalWine = 0
-  //   var moduleArr = data.specialSellModule
-  //   parent = $('.home-special-sell-wrap') //特卖模块包裹层
-  //   for (var i = 0; i < moduleArr.length; i++) {
-  //     var currentModule = moduleArr[i],
-  //         wineArr = currentModule['exampleList'];
+      var 
+        parent = $('.unslider>ul'),
+        notify = $('.notify')
 
-  //     var $moduleItem = $("<div class='module-item'></div>"),
-  //         $moduleBar = $("<div class='module-bar'></div>"),
-  //         $a = $("<a class='module-clicked' href='list.html?page=1&id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
-  //         $img = $("<img src='"+currentModule['modulImgLink']+"'>"),
-  //         $moduleName = $("<span>"+currentModule['moduleName']+"</span>"),
-  //         $checkOut = $("<span>查看全部 >></span>");
+      // 轮播图和通知 开始
+      for(var i = 0, len = imgArr.length; i < len; i++) {
+        var 
+          li = $("<li class='unslider-active' data-url="+imgArr[i]['url']+"></li>"),
+          img = $("<img src='"+imgArr[i]['pic']+"'>")
+          li.append(img)
+          parent.append(li)
+      }
+      notify.text(notification)
+      // 轮播图和通知 结束
 
-  //         $a.append($img)
-  //         $a.append($moduleName)
-  //         $a.append($checkOut)
-  //         $moduleBar.append($a)
-  //         $moduleItem.append($moduleBar)
+      // 特卖主体 开始
+      insertDOM(response.tags)
+      // 特卖主体 结束
+    }
+  }
+
+  function insertDOM(module) {
+    var
+      totalWine = 0,
+      parent = $('.home-special-sell-wrap') //特卖模块包裹层
+      for (var i = 0, l = module.length; i < l; i++) {
+        var
+          currentModule = module[i],
+          wineArr = currentModule['goods']
+
+        var 
+          $moduleItem = $("<div class='module-item'></div>"),
+          $moduleBar = $("<div class='module-bar'></div>"),
+          $a = $("<a class='module-clicked' href='list.html?page=1&id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
+          $img = $("<img src='"+currentModule['modulImgLink']+"'>"),
+          $moduleName = $("<span>"+currentModule['moduleName']+"</span>"),
+          $checkOut = $("<span>查看全部 >></span>")
+
+          $a.append($img)
+          $a.append($moduleName)
+          $a.append($checkOut)
+          $moduleBar.append($a)
+          $moduleItem.append($moduleBar)
+
+        var 
+          $moduleListWrap = $("<div class='module-list-wrap'></div>"),
+          $ul = $("<ul></ul>")
+
+        var 
+          screenWidth = app.screenSize(),
+          imgWidth = liWidth = screenWidth * 0.425,
+          ratio = 0.6,
+          imgHeight = imgWidth / 0.75,
+          bottomHeight = 50,
+          liHeight = imgHeight + bottomHeight
+
+        for (var j = 0; j < wineArr.length; j++) {
+          ++ totalWine
+          app.methods.produceSeperateWineHtml(wineArr[j],
+                                              $ul,
+                                              j,
+                                              i,
+                                              module.length,
+                                              wineArr.length,
+                                              currentModule['id'])
+          $moduleListWrap.append($ul)
+          var itemTop = 0
+          if (i > 0) {
+            var itemTop = i * 30 + Math.ceil(totalWine / 2 ) * liHeight
+          }
+          $moduleItem.css({
+            top: itemTop,
+            left: 0
+          });
           
-  //     var $moduleListWrap = $("<div class='module-list-wrap'></div>")
-
-  //     $ul = $("<ul></ul>")
-
-  //     var screenWidth = app.screenSize(),
-  //       imgWidth = liWidth = screenWidth * 0.425,
-  //       ratio = 0.6,
-  //       imgHeight = imgWidth / 0.75,
-  //       bottomHeight = 50,
-  //       liHeight = imgHeight + bottomHeight;
-
-        
-  //     for (var j = 0; j < wineArr.length; j++) {
-  //       ++ totalWine
-  //       app.methods.produceSeperateWineHtml(wineArr[j],
-  //                                           $ul,
-  //                                           j,
-  //                                           i,
-  //                                           moduleArr.length,
-  //                                           wineArr.length,
-  //                                           currentModule['id'])
-  //       $moduleListWrap.append($ul)
-  //       var itemTop = 0
-  //       if (i > 0) {
-  //         var itemTop = i * 30 + Math.ceil(totalWine / 2 ) * liHeight
-  //         //console.log("itemTop: " + itemTop + " i: " + i)
-  //       }
-  //       $moduleItem.css({
-  //         top: itemTop,
-  //         left: 0
-  //       });
-        
-  //       $moduleItem.append($moduleListWrap)
-  //       parent.append($moduleItem)
-  //     }
-  //   }
-  // });
-//下面是最后的});
+          $moduleItem.append($moduleListWrap)
+          parent.append($moduleItem)
+      }
+    }
+  }
 });

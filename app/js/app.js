@@ -2,13 +2,14 @@
 var app = (function(){
   var configUrlMap = {
     //APIBase : "http://www.yaerku.com/pjapi/"
-    APIBase:"http://t.snapwine.net:7784/pjapi/"
+    //trueBase : "http://t.snapwine.net:7784/pjapi/",
+    APIBase:"../app/json/home.json"
   }
 
   var config = {
     Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
     userId :"o4ILEuHaZ9rZqXcEL4izPJcEnFnM",
-    userType : "5",
+    userType : "5"
   }
 
   var moduleId = 1,//起始酒款模块 id, 默认值1
@@ -122,8 +123,12 @@ var app = (function(){
                    requestType,
                    userData,
                    timestamp,
-                   clallBack
+                   callBack
                    ) {
+
+    function ajaxLog(path,des,feedback) {
+      console.log("request ajax path : " + path + "des: " + des + "result: " + feedback)
+    }
     //console.log("userData = " + userData)
     //var base64Text = AES(userData,timestamp)
     //var path = configUrlMap['APIBase'] + methodName
@@ -136,18 +141,19 @@ var app = (function(){
     $.ajax({
       url : path,
       method : requestType,
-      dataType : 'json',
+      dataType : 'text',
       data : data
     })
     .done(function(data) {
-      console.log("request ajax path : " + path + "des: " + des + "result: successed" );
-      clallBack(data);
+      ajaxLog(path,des,'successed')
+      var json = JSON.parse(JSON.stringify(eval( "(" + data +")")))
+      callBack(json)
     })
-    .fail(function() {
-      console.log("request ajax path : " + path + "des: " + des + "result: failed");
+    .fail(function(data) {
+      ajaxLog(path,des,'failed')
     })
     .always(function() {
-      //console.log("request ajax path : " + path + "des: " + des + "result: completed");
+      ajaxLog(path,des,'completed')
     });
   }
 
@@ -219,9 +225,10 @@ var app = (function(){
 
     // $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"&id="+currentWine['id']+"'></a>")
     $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"&id="+currentWine['id']+"'></a>")
-    $spanMailInfo = $("<span class='mail-info'>"+currentWine['mailInfo']+"</span>") //满200包邮 => 酒款上部
-    $spanCntInfo = $("<span class='cnt-info'>"+currentWine['goodsCnt']+"</span>") //仅剩6 => 酒款上部
-    $img = $("<img class='wine-img' src='"+currentWine['img']+"'>") //酒款图片 => 酒款上部
+    $spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>") //满200包邮 => 酒款上部
+    $spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>") //仅剩6 => 酒款上部
+    console.log(currentWine['pics']);
+    $img = $("<img class='wine-img' src='"+currentWine['pics'].pic+"'>") //酒款图片 => 酒款上部
     $img.css({
       width: imgWidth,
       height:imgHeight
@@ -229,10 +236,10 @@ var app = (function(){
 
     $spanSubtitle = $("<span class='subtitle'>"+currentWine['subtitle']+"</span>") //副标题 => 酒款上部
 
-    $divHeadline = $("<div>"+currentWine['headline']+"</div>") //主描述 => 酒款下部
-    $spanCurrentPrice = $("<span>"+currentWine['currentPrice']+"</span>")//现价 => 酒款下部
-    $spanOriginalPrice = $("<del>"+currentWine['originalPrice']+"</del>")//原价 or 其他标注 => 酒款下部
-    $spanRecom = $("<span>"+currentWine['restrictCnt']+"</span>")//主描述 => 提示
+    $divHeadline = $("<div>"+currentWine['title']+"</div>") //主描述 => 酒款下部
+    $spanCurrentPrice = $("<span>"+currentWine['market']+"</span>")//现价 => 酒款下部
+    $spanOriginalPrice = $("<del>"+currentWine['price']+"</del>")//原价 or 其他标注 => 酒款下部
+    $spanRecom = $("<span>"+currentWine['limit']+"</span>")//主描述 => 提示
 
     $awinePic.append($img)
     $divUp.append($awinePic)
