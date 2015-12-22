@@ -16,19 +16,19 @@ jQuery(document).ready(function($) {
   app.methods.appAjax(des,
                       methodName,
                       requestType,
-                      userData,
+                      userData(),
                       timestamp,
                       function(data){
     (function(imgArr) {
       var parent =  $('.unslider-wrap')
-      for(var i = 0,len = data.pics.length; i < len; i++) {
-        console.log("len = " + len)
+
+      for(var i = 0,len = imgArr.length; i < len; i++) {
         var li = $("<li class='unslider-active'></li>"),
-            img = $("<img src='"+imgArr[i]+"'>")
+            img = $("<img src='"+imgArr[i]['pic']+"'>")
         li.append(img)
         parent.append(li)
       }
-    })(data.pics);
+    })(data.goods.pics);
 
     // 轮播图
     $('.unslider').unslider({
@@ -37,14 +37,14 @@ jQuery(document).ready(function($) {
       arrows: false
     });
 
-    (function showWineData() {
-      $('.detail-headline-left').text(data['headline'])
-      $('.price-right span').text(data['currentPrice'])
-      $('.price-right del').text(data['originalPrice'])
+    (function showWineData(data) {
+      $('.detail-headline-left').text(data['title'])
+      $('.price-right span').text(data['market'])
+      $('.price-right del').text(data['price'])
 
-      //$('other-attr .sales-cnt').text("销量 " + data[''])
-      $('.other-attr .supply').text("库存 " + data['goodsCnt'])
-      $('.other-attr .time-or-restrict').text(data['restrictCnt'])
+      $('.other-attr .sales-cnt').text("销量 " + data['sold'])
+      $('.other-attr .supply').text("库存 " + data['inventory'])
+      $('.other-attr .time-or-restrict').text(data['limit'])
 
       var isInActity = function() {
         return !$.isEmptyObject(data.ad)
@@ -55,7 +55,23 @@ jQuery(document).ready(function($) {
       } else {
          $('.in-activity').remove()
       }
-    })();
+    })(data.goods);
+
+    // 商品介绍 开始
+    (function showWineIntro (introArr){
+      $wrap = $('.detail-wine-intro') //DOM中的包裹元素
+
+      for (var i = 0, l = introArr.length; i < l; i++) {
+        var
+          wrap = $("<div class='intro-wrap'></div>"),
+          img = $("<img class='intro-pic' src='"+introArr[i]['image']+"'>"),
+          txt = $("<div class='intro-cont'>"+introArr[i]['text']+"</div>")
+        wrap.append(img)
+        wrap.append(txt)
+        $wrap.append(wrap)
+      }
+    })(data.goods.intro);
+    // 商品介绍 结束
   });
   
   // minus shopping cart
@@ -77,7 +93,4 @@ jQuery(document).ready(function($) {
   $('#immediate-buy').click(function(event) {
     
   });
-
-  
-
 });

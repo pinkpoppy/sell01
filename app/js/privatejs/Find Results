@@ -1,0 +1,292 @@
+Searching 1 file for "AD_FLAG"
+
+/Users/sszhu/Sites/gitwork/sell01/app/json/list.json:
+    8        "ad": [
+    9          {
+   10:           "AD_FLAG": 1,
+   11            "fmt": 2,
+   12            "id": 1,
+   ..
+   16            "url": "50" },
+   17          {
+   18:           "AD_FLAG": 1,
+   19            "fmt": 3,
+   20            "id": 2,
+   ..
+   24            "url": "174914" },
+   25          {
+   26:           "AD_FLAG": 1,
+   27            "fmt": 1,
+   28            "id": 3,
+   ..
+   32            "url": "" },
+   33          {
+   34:           "AD_FLAG": 1,
+   35            "fmt": 9,
+   36            "id": 3,
+   ..
+   40            "url": "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd" },
+   41          {
+   42:           "AD_FLAG": 1,
+   43            "fmt": 0,
+   44            "id": 3,
+   ..
+   48            "url": "http://m.pai9.com.cn" },
+   49          {
+   50:           "AD_FLAG": 1,
+   51            "fmt": 4,
+   52            "id": 3,
+   ..
+   56            "url": "" },
+   57          {
+   58:           "AD_FLAG": 1,
+   59            "fmt": 5,
+   60            "id": 3,
+   ..
+   65          },
+   66          {
+   67:           "AD_FLAG": 1,
+   68            "fmt": 6,
+   69            "id": 3,
+   ..
+  111    "ad": [
+  112      {
+  113:       "AD_FLAG": 1,
+  114        "fmt": 2,
+  115        "id": 1,
+  ...
+  119        "url": "50" },
+  120      {
+  121:       AD_FLAG: 1,
+  122        fmt: 3,
+  123        id: 2,
+  ...
+  128      },
+  129      {
+  130:       AD_FLAG: 1,
+  131        fmt: 1,
+  132        id: 3,
+  ...
+  136        url: "" },
+  137      {
+  138:       AD_FLAG: 1,
+  139        fmt: 9,
+  140        id: 3,s
+  ...
+  144        url: "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd" },
+  145      {
+  146:       AD_FLAG: 1,
+  147        fmt: 0,
+  148        id: 3,
+  ...
+  153      },
+  154      {
+  155:       AD_FLAG: 1,
+  156        fmt: 4,
+  157        id: 3,
+  ...
+  162      },
+  163      {
+  164:       AD_FLAG: 1,
+  165        fmt: 5,
+  166        id: 3,
+  ...
+  171      },
+  172      {
+  173:       AD_FLAG: 1,
+  174        fmt: 6,
+  175        id: 3,
+  ...
+  217      ad: [
+  218        {
+  219:         AD_FLAG: 1,
+  220          fmt: 2,
+  221          id: 1,
+  ...
+  225          url: "50" },
+  226        {
+  227:         AD_FLAG: 1,
+  228          fmt: 3,
+  229          id: 2,
+  ...
+  233          url: "174914" },
+  234        {
+  235:         AD_FLAG: 1,
+  236          fmt: 1,
+  237          id: 3,
+  ...
+  241          url: "" },
+  242        {
+  243:         AD_FLAG: 1,
+  244          fmt: 9,
+  245          id: 3,
+  ...
+  249          url: "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd" },
+  250        {
+  251:         AD_FLAG: 1,
+  252          fmt: 0,
+  253          id: 3,
+  ...
+  257          url: "http://m.pai9.com.cn" },
+  258        {
+  259:         AD_FLAG: 1,
+  260          fmt: 4,
+  261          id: 3,
+  ...
+  266        },
+  267        {
+  268:         AD_FLAG: 1,
+  269          fmt: 5,
+  270          id: 3,
+  ...
+  275        },
+  276        {
+  277:         AD_FLAG: 1,
+  278          fmt: 6,
+  279          id: 3,
+  ...
+  323  ad: [
+  324  {
+  325: AD_FLAG: 1,
+  326  fmt: 2,
+  327  id: 1,
+  ...
+  332  },
+  333  {
+  334: AD_FLAG: 1,
+  335  fmt: 3,
+  336  id: 2,
+  ...
+  341  },
+  342  {
+  343: AD_FLAG: 1,
+  344  fmt: 1,
+  345  id: 3,
+  ...
+  350  },
+  351  {
+  352: AD_FLAG: 1,
+  353  fmt: 9,
+  354  id: 3,
+  ...
+  359  },
+  360  {
+  361: AD_FLAG: 1,
+  362  fmt: 0,
+  363  id: 3,
+  ...
+  368  },
+  369  {
+  370: AD_FLAG: 1,
+  371  fmt: 4,
+  372  id: 3,
+  ...
+  377  },
+  378  {
+  379: AD_FLAG: 1,
+  380  fmt: 5,
+  381  id: 3,
+  ...
+  386  },
+  387  {
+  388: AD_FLAG: 1,
+  389  fmt: 6,
+  390  id: 3,
+  ...
+  434  ad: [
+  435  {
+  436: AD_FLAG: 1,
+  437  fmt: 2,
+  438  id: 1,
+  ...
+  443  },
+  444  {
+  445: AD_FLAG: 1,
+  446  fmt: 3,
+  447  id: 2,
+  ...
+  452  },
+  453  {
+  454: AD_FLAG: 1,
+  455  fmt: 1,
+  456  id: 3,
+  ...
+  461  },
+  462  {
+  463: AD_FLAG: 1,
+  464  fmt: 9,
+  465  id: 3,
+  ...
+  470  },
+  471  {
+  472: AD_FLAG: 1,
+  473  fmt: 0,
+  474  id: 3,
+  ...
+  479  },
+  480  {
+  481: AD_FLAG: 1,
+  482  fmt: 4,
+  483  id: 3,
+  ...
+  488  },
+  489  {
+  490: AD_FLAG: 1,
+  491  fmt: 5,
+  492  id: 3,
+  ...
+  497  },
+  498  {
+  499: AD_FLAG: 1,
+  500  fmt: 6,
+  501  id: 3,
+  ...
+  545  ad: [
+  546  {
+  547: AD_FLAG: 1,
+  548  fmt: 2,
+  549  id: 1,
+  ...
+  554  },
+  555  {
+  556: AD_FLAG: 1,
+  557  fmt: 3,
+  558  id: 2,
+  ...
+  563  },
+  564  {
+  565: AD_FLAG: 1,
+  566  fmt: 1,
+  567  id: 3,
+  ...
+  572  },
+  573  {
+  574: AD_FLAG: 1,
+  575  fmt: 9,
+  576  id: 3,
+  ...
+  581  },
+  582  {
+  583: AD_FLAG: 1,
+  584  fmt: 0,
+  585  id: 3,
+  ...
+  590  },
+  591  {
+  592: AD_FLAG: 1,
+  593  fmt: 4,
+  594  id: 3,
+  ...
+  599  },
+  600  {
+  601: AD_FLAG: 1,
+  602  fmt: 5,
+  603  id: 3,
+  ...
+  608  },
+  609  {
+  610: AD_FLAG: 1,
+  611  fmt: 6,
+  612  id: 3,
+
+48 matches in 1 file

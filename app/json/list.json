@@ -1,0 +1,657 @@
+{
+  "msg": "成功",
+  "state": 1,
+  "tag": {
+  "goods": [
+    {
+      "JSON_TYPE": 2,
+      "ad": [
+        {
+          "AD_FLAG": 1,
+          "fmt": 2,
+          "id": 1,
+          "json_type": 1,
+          "name": "test测试拍卖详情",
+          "type": 3,
+          "url": "50" },
+        {
+          "AD_FLAG": 1,
+          "fmt": 3,
+          "id": 2,
+          "json_type": 1,
+          "name": "test测试晒图",
+          "type": 3,
+          "url": "174914" },
+        {
+          "AD_FLAG": 1,
+          "fmt": 1,
+          "id": 3,
+          "json_type": 1,
+          "name": "test测试拍卖列表",
+          "type": 3,
+          "url": "" },
+        {
+          "AD_FLAG": 1,
+          "fmt": 9,
+          "id": 3,
+          "json_type": 1,
+          "name": "0元拍卖，天天有好酒。点击了解>>>",
+          "type": 3,
+          "url": "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd" },
+        {
+          "AD_FLAG": 1,
+          "fmt": 0,
+          "id": 3,
+          "json_type": 1,
+          "name": "test测试不可点击",
+          "type": 3,
+          "url": "http://m.pai9.com.cn" },
+        {
+          "AD_FLAG": 1,
+          "fmt": 4,
+          "id": 3,
+          "json_type": 1,
+          "name": "测试特卖首页",
+          "type": 3,
+          "url": "" },
+        {
+          "AD_FLAG": 1,
+          "fmt": 5,
+          "id": 3,
+          "json_type": 1,
+          "name": "测试特卖标签分组",
+          "type": 3,
+          "url": "1"
+        },
+        {
+          "AD_FLAG": 1,
+          "fmt": 6,
+          "id": 3,
+          "json_type": 1,
+          "name": "测试特卖商品详情",
+          "type": 3,
+          "url": "3"
+        }
+  ],
+  "discount": "满100送10",
+  "id": 20,
+  "intro": [
+    {
+      "height": 341,
+      "image": "http://www.yaerku.com/pjapi/media/auction/42b6b84ad24463888cadb92f53ed0ef6.jpg",
+      "text": "这款黑皮诺属于勃艮第法定产区A.O.C，值得一提的是：老布夏父子酒庄于1750年起就扎根在勃艮第的中心，在当地享有极高的威望。自19世纪开始老布夏父子的酒开始在世界各大航空公司、高级饭店和餐厅风靡。 供应商：米柯尼斯,市场参考价：1902元/6瓶",
+      "width": 452 },
+    {
+      "height": 880,
+      "image": "http://www.yaerku.com/pjapi/media/auction/248772cb43600e6455b2ae0163eb6b6b.jpg",
+      "text": "http://m.pai9.com.cn 老布夏父子酒庄拥有最优秀的酿酒师，几乎每一年的酒都在世界各个葡萄酒大赛中摘金夺银。",
+      "width": 502
+    }
+  ],
+  "inventory": 6,
+  "limit": "限量10瓶",
+  "market": 317,
+  "pics": [
+    {
+      "height": 682,
+      "pic": "http://www.yaerku.com/pjapi/media/auction/6b198a426823d51e40e2f77753366dc1.png",
+      "width": 512 }
+  ],
+  "price": 2,
+  "quantity": 1,
+  "shareLink": "http://m.pai9.com.cn",
+  "shortage": "仅剩6",
+  "sold": 0,
+  "sortId": 20,
+  "subtitle": "我是副标题，我任性",
+  "title": "老布夏父子-勒弗当瑟勃艮第黑品乐干红"
+  },
+  {
+  "JSON_TYPE": 2,
+  "ad": [
+    {
+      "AD_FLAG": 1,
+      "fmt": 2,
+      "id": 1,
+      "json_type": 1,
+      "name": "test测试拍卖详情",
+      "type": 3,
+      "url": "50" },
+    {
+      "AD_FLAG": 1,
+      "fmt": 3,
+      "id": 2,
+      "json_type": 1,
+      "name": "test测试晒图",
+      "type": 3,
+      "url": "174914"
+    },
+    {
+      "AD_FLAG": 1,
+      "fmt": 1,
+      "id": 3,
+      "json_type": 1,
+      "name": "test测试拍卖列表",
+      "type": 3,
+      "url": "" },
+    {
+      "AD_FLAG": 1,
+      "fmt": 9,
+      "id": 3,
+      "json_type": 1,
+      "name": "0元拍卖，天天有好酒。点击了解>>>",
+      "type": 3,
+      "url": "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd" },
+    {
+      "AD_FLAG": 1,
+      "fmt": 0,
+      "id": 3,
+      "json_type": 1,
+      "name": "test测试不可点击",
+      "type": 3,
+      "url": "http://m.pai9.com.cn"
+    },
+    {
+      "AD_FLAG": 1,
+      "fmt": 4,
+      "id": 3,
+      "json_type": 1,
+      "name": "测试特卖首页",
+      "type": 3,
+      "url": ""
+    },
+    {
+      "AD_FLAG": 1,
+      "fmt": 5,
+      "id": 3,
+      "json_type": 1,
+      "name": "测试特卖标签分组",
+      "type": 3,
+      "url": "1"
+    },
+    {
+      "AD_FLAG": 1,
+      "fmt": 6,
+      "id": 3,
+      "json_type": 1,
+      "name": "测试特卖商品详情",
+      "type": 3,
+      "url": "3"
+    }
+  ],
+  "discount": "满100送10",
+  "id": 18,
+  "intro": [
+    {
+      "height": 341,
+      "image": "http://www.yaerku.com/pjapi/media/auction/42b6b84ad24463888cadb92f53ed0ef6.jpg",
+      "text": "http://m.pai9.com.cn 这款黑皮诺属于勃艮第法定产区A.O.C，值得一提的是：老布夏父子酒庄于1750年起就扎根在勃艮第的中心，在当地享有极高的威望。自19世纪开始老布夏父子的酒开始在世界各大航空公司、高级饭店和餐厅风靡。 供应商：米柯尼斯,市场参考价：1902元/6瓶",
+      "width": 452 },
+    {
+      "height": 880,
+      "image": "http://www.yaerku.com/pjapi/media/auction/248772cb43600e6455b2ae0163eb6b6b.jpg",
+      "text": "http://m.pai9.com.cn 老布夏父子酒庄拥有最优秀的酿酒师，几乎每一年的酒都在世界各个葡萄酒大赛中摘金夺银。",
+      "width": 502 }
+  ],
+  "inventory": 6,
+  "limit": "限量10瓶",
+  "market": 317,
+  "pics": [
+    {
+    "height": 682,
+    "pic": "http://www.yaerku.com/pjapi/media/auction/6b198a426823d51e40e2f77753366dc1.png",
+    "width": 512
+    }
+  ],
+  "price": 1.8,
+  "quantity": 1,
+  "shareLink": "http://m.pai9.com.cn",
+  "shortage": "仅剩6",
+  "sold": 0,
+  "sortId": 18,
+  "subtitle": "我是副标题，我任性",
+  "title": "老布夏父子-勒弗当瑟勃艮第黑品乐干红"
+  },
+  {
+    "JSON_TYPE": 2,
+    "ad": [
+      {
+        "AD_FLAG": 1,
+        "fmt": 2,
+        "id": 1,
+        "json_type": 1,
+        "name": "test测试拍卖详情",
+        "type": 3,
+        "url": "50" },
+      {
+        "AD_FLAG": 1,
+        "fmt": 3,
+        "id": 2,
+        "json_type": 1,
+        "name": "test测试晒图",
+        "type": 3,
+        "url": "174914" },
+      {
+        "AD_FLAG": 1,
+        "fmt": 1,
+        "id": 3,
+        "json_type": 1,
+        "name": "test测试拍卖列表",
+        "type": 3,
+        "url": "" },
+      {
+        "AD_FLAG": 1,
+        "fmt": 9,
+        "id": 3,
+        "json_type": 1,
+        "name": "0元拍卖，天天有好酒。点击了解>>>",
+        "type": 3,
+        "url": "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd" },
+      {
+        "AD_FLAG": 1,
+        "fmt": 0,
+        "id": 3,
+        "json_type": 1,
+        "name": "test测试不可点击",
+        "type": 3,
+        "url": "http://m.pai9.com.cn" },
+      {
+        "AD_FLAG": 1,
+        "fmt": 4,
+        "id": 3,
+        "json_type": 1,
+        "name": "测试特卖首页",
+        "type": 3,
+        "url": ""
+      },
+      {
+        "AD_FLAG": 1,
+        "fmt": 5,
+        "id": 3,
+        "json_type": 1,
+        "name": "测试特卖标签分组",
+        "type": 3,
+        "url": "1"
+      },
+      {
+        "AD_FLAG": 1,
+        "fmt": 6,
+        "id": 3,
+        "json_type": 1,
+        "name": "测试特卖商品详情",
+        "type": 3,
+        "url": "3"
+      }
+  ],
+  discount: "满100送10",
+  id: 17,
+  intro: [
+  {
+    height: 400,
+    image: "http://www.yaerku.com/pjapi/media/auction/5d5ede5100eab36b31e056bcd636bc70.jpg",
+    text: "市场价格1196 供应商：中粮,市场参考价：2392元/2瓶",
+    width: 300 },
+  {
+    height: 366,
+    image: "http://www.yaerku.com/pjapi/media/auction/09f992cfef4d4ce7b09593ceb70c9f6c.jpg",
+    text: "酒体轻盈具有柑橘菠萝的香气，酸度活泼",
+    width: 252 }
+  ],
+    inventory: 999,
+    limit: "限量10瓶",
+    market: 1196,
+    pics: [
+      {
+        height: 366,
+        pic: "http://www.yaerku.com/pjapi/media/auction/974d2d57e3f908d22b3cff26c223721d.jpg",
+        width: 252
+      }
+    ],
+    price: 1.7,
+    quantity: 1,
+    shareLink: "http://m.pai9.com.cn",
+    shortage: "",
+    sold: 0,
+    sortId: 17,
+    subtitle: "我就是不一样的副标题",
+    title: "力士金庄园干红葡萄酒"
+  },
+{
+JSON_TYPE: 2,
+ad: [
+{
+AD_FLAG: 1,
+fmt: 2,
+id: 1,
+json_type: 1,
+name: "test测试拍卖详情",
+type: 3,
+url: "50"
+},
+{
+AD_FLAG: 1,
+fmt: 3,
+id: 2,
+json_type: 1,
+name: "test测试晒图",
+type: 3,
+url: "174914"
+},
+{
+AD_FLAG: 1,
+fmt: 1,
+id: 3,
+json_type: 1,
+name: "test测试拍卖列表",
+type: 3,
+url: ""
+},
+{
+AD_FLAG: 1,
+fmt: 9,
+id: 3,
+json_type: 1,
+name: "0元拍卖，天天有好酒。点击了解>>>",
+type: 3,
+url: "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd"
+},
+{
+AD_FLAG: 1,
+fmt: 0,
+id: 3,
+json_type: 1,
+name: "test测试不可点击",
+type: 3,
+url: "http://m.pai9.com.cn"
+},
+{
+AD_FLAG: 1,
+fmt: 4,
+id: 3,
+json_type: 1,
+name: "测试特卖首页",
+type: 3,
+url: ""
+},
+{
+AD_FLAG: 1,
+fmt: 5,
+id: 3,
+json_type: 1,
+name: "测试特卖标签分组",
+type: 3,
+url: "1"
+},
+{
+AD_FLAG: 1,
+fmt: 6,
+id: 3,
+json_type: 1,
+name: "测试特卖商品详情",
+type: 3,
+url: "3"
+}
+],
+discount: "满100送10",
+id: 16,
+intro: [
+{
+height: 341,
+image: "http://www.yaerku.com/pjapi/media/auction/42b6b84ad24463888cadb92f53ed0ef6.jpg",
+text: "http://m.pai9.com.cn 这款黑皮诺属于勃艮"第法定产区"A.O.C，值得一提的是：老布夏父子酒庄于1750年起就扎根在勃艮第的中心，在当地享有极高的威望。自19世纪开始老布夏父子的酒开始在世界各大航空公司、高级饭店和餐厅风靡。 供应商：米柯尼斯,市场参考价：1902元/6瓶",
+width: 452
+},
+{
+height: 880,
+image: "http://www.yaerku.com/pjapi/media/auction/248772cb43600e6455b2ae0163eb6b6b.jpg",
+text: "http://m.pai9.com.cn 老布夏父子酒庄拥有最优秀的酿酒师，几乎每一年的酒都在世界各个葡萄酒大赛中摘金夺银。",
+width: 502
+}
+],
+inventory: 6,
+limit: "限量10瓶",
+market: 317,
+pics: [
+{
+height: 682,
+pic: "http://www.yaerku.com/pjapi/media/auction/6b198a426823d51e40e2f77753366dc1.png",
+width: 512
+}
+],
+price: 1.6,
+quantity: 1,
+shareLink: "http://m.pai9.com.cn",
+shortage: "仅剩6",
+sold: 0,
+sortId: 16,
+subtitle: "我是副标题，我任性",
+title: "老布夏父子-勒弗当瑟勃艮第黑品乐干红"
+},
+{
+JSON_TYPE: 2,
+ad: [
+{
+AD_FLAG: 1,
+fmt: 2,
+id: 1,
+json_type: 1,
+name: "test测试拍卖详情",
+type: 3,
+url: "50"
+},
+{
+AD_FLAG: 1,
+fmt: 3,
+id: 2,
+json_type: 1,
+name: "test测试晒图",
+type: 3,
+url: "174914"
+},
+{
+AD_FLAG: 1,
+fmt: 1,
+id: 3,
+json_type: 1,
+name: "test测试拍卖列表",
+type: 3,
+url: ""
+},
+{
+AD_FLAG: 1,
+fmt: 9,
+id: 3,
+json_type: 1,
+name: "0元拍卖，天天有好酒。点击了解>>>",
+type: 3,
+url: "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd"
+},
+{
+AD_FLAG: 1,
+fmt: 0,
+id: 3,
+json_type: 1,
+name: "test测试不可点击",
+type: 3,
+url: "http://m.pai9.com.cn"
+},
+{
+AD_FLAG: 1,
+fmt: 4,
+id: 3,
+json_type: 1,
+name: "测试特卖首页",
+type: 3,
+url: ""
+},
+{
+AD_FLAG: 1,
+fmt: 5,
+id: 3,
+json_type: 1,
+name: "测试特卖标签分组",
+type: 3,
+url: "1"
+},
+{
+AD_FLAG: 1,
+fmt: 6,
+id: 3,
+json_type: 1,
+name: "测试特卖商品详情",
+type: 3,
+url: "3"
+}
+],
+discount: "满100送10",
+id: 15,
+intro: [
+{
+height: 400,
+image: "http://www.yaerku.com/pjapi/media/auction/5d5ede5100eab36b31e056bcd636bc70.jpg",
+text: "市场价格1196 供应商：中粮,市场参考价：2392元/2瓶",
+width: 300
+},
+{
+height: 366,
+image: "http://www.yaerku.com/pjapi/media/auction/09f992cfef4d4ce7b09593ceb70c9f6c.jpg",
+text: "酒体轻盈具有柑橘菠萝的香气，酸度活泼",
+width: 252
+}
+],
+inventory: 999,
+limit: "限量10瓶",
+market: 1196,
+pics: [
+{
+height: 366,
+pic: "http://www.yaerku.com/pjapi/media/auction/974d2d57e3f908d22b3cff26c223721d.jpg",
+width: 252
+}
+],
+price: 1.5,
+quantity: 1,
+shareLink: "http://m.pai9.com.cn",
+shortage: "",
+sold: 0,
+sortId: 15,
+subtitle: "我就是不一样的副标题",
+title: "力士金庄园干红葡萄酒"
+},
+{
+JSON_TYPE: 2,
+ad: [
+{
+AD_FLAG: 1,
+fmt: 2,
+id: 1,
+json_type: 1,
+name: "test测试拍卖详情",
+type: 3,
+url: "50"
+},
+{
+AD_FLAG: 1,
+fmt: 3,
+id: 2,
+json_type: 1,
+name: "test测试晒图",
+type: 3,
+url: "174914"
+},
+{
+AD_FLAG: 1,
+fmt: 1,
+id: 3,
+json_type: 1,
+name: "test测试拍卖列表",
+type: 3,
+url: ""
+},
+{
+AD_FLAG: 1,
+fmt: 9,
+id: 3,
+json_type: 1,
+name: "0元拍卖，天天有好酒。点击了解>>>",
+type: 3,
+url: "http://mp.weixin.qq.com/s?__biz=MzA4MjY3NjgxNw==&mid=224997833&idx=1&sn=aab0510995056f79c0abf95a0fff50f0&scene=1&srcid=1014Jc0LSr22TQ0RJZakmjV1&from=groupmessage&isappinstalled=0#rd"
+},
+{
+AD_FLAG: 1,
+fmt: 0,
+id: 3,
+json_type: 1,
+name: "test测试不可点击",
+type: 3,
+url: "http://m.pai9.com.cn"
+},
+{
+AD_FLAG: 1,
+fmt: 4,
+id: 3,
+json_type: 1,
+name: "测试特卖首页",
+type: 3,
+url: ""
+},
+{
+AD_FLAG: 1,
+fmt: 5,
+id: 3,
+json_type: 1,
+name: "测试特卖标签分组",
+type: 3,
+url: "1"
+},
+{
+AD_FLAG: 1,
+fmt: 6,
+id: 3,
+json_type: 1,
+name: "测试特卖商品详情",
+type: 3,
+url: "3"
+}
+],
+discount: "满100送10",
+id: 14,
+intro: [
+{
+height: 341,
+image: "http://www.yaerku.com/pjapi/media/auction/42b6b84ad24463888cadb92f53ed0ef6.jpg",
+text: "http://m.pai9.com.cn 这款黑皮诺属于勃艮"第法定产区"A.O.C，值得一提的是：老布夏父子酒庄于1750年起就扎根在勃艮第的中心，在当地享有极高的威望。自19世纪开始老布夏父子的酒开始在世界各大航空公司、高级饭店和餐厅风靡。 供应商：米柯尼斯,市场参考价：1902元/6瓶",
+width: 452
+},
+{
+height: 880,
+image: "http://www.yaerku.com/pjapi/media/auction/248772cb43600e6455b2ae0163eb6b6b.jpg",
+text: "http://m.pai9.com.cn 老布夏父子酒庄拥有最优秀的酿酒师，几乎每一年的酒都在世界各个葡萄酒大赛中摘金夺银。",
+width: 502
+}
+],
+inventory: 6,
+limit: "限量10瓶",
+market: 317,
+pics: [
+{
+height: 682,
+pic: "http://www.yaerku.com/pjapi/media/auction/6b198a426823d51e40e2f77753366dc1.png",
+width: 512
+}
+],
+price: 1.4,
+quantity: 1,
+shareLink: "http://m.pai9.com.cn",
+shortage: "仅剩6",
+sold: 0,
+sortId: 14,
+subtitle: "我是副标题，我任性",
+title: "老布夏父子-勒弗当瑟勃艮第黑品乐干红"
+}
+],
+id: 1,
+pic: "http://sfault-avatar.b0.upaiyun.com/289/272/289272814-1030000000146330_big64",
+tag: "测试分组1"
+}
+}
