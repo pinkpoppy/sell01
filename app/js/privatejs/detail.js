@@ -1,23 +1,30 @@
 jQuery(document).ready(function($) {
-  
+
   var 
+    gId = app.methods.getSearchArgFromUrl()['id']
     userData = function jointUserinfo() {
-      var basicUserinfo = app.methods.getBasicUserinfo()
-      var queryArg = app.methods.getSearchArgFromUrl()
-      basicUserinfo['gid'] = queryArg['id']
-      return JSON.stringify(basicUserinfo)
-    },
+      var userinfo = app.methods.getBasicUserinfo()
+      if (isLegalGoodsId(gId) ) {
+        userinfo['gid'] = arguments[0]
+      }
+      if (arguments.length == 1) { 
+        //only gId parameter,loads wine info
+      } else if (arguments.length == 2) { 
+        //gId and quantity,add wine to basket
+        userinfo['quantity'] = arguments[1]
+      }
+       return JSON.stringify(userinfo) 
+    }
+
     des = '请求酒款详情'
-    methodName = 'getGoods',
-    requestType = 'POST',
-    timestamp = app.methods.timestamp()
-    ;
+    methodName = 'getGoods'
+    requestType = 'POST'
 
   app.methods.appAjax(des,
                       methodName,
                       requestType,
-                      userData(),
-                      timestamp,
+                      userData(gId),
+                      app.methods.timestamp(),
                       function(data){
     (function(imgArr) {
       var parent =  $('.unslider-wrap')
@@ -57,6 +64,8 @@ jQuery(document).ready(function($) {
       }
     })(data.goods);
 
+    //set shopping cart's href
+    $('#detail-basket').attr('href', 'cart.html?id='+gId);
     // 商品介绍 开始
     (function showWineIntro (introArr){
       $wrap = $('.detail-wine-intro') //DOM中的包裹元素
@@ -74,23 +83,62 @@ jQuery(document).ready(function($) {
     // 商品介绍 结束
   });
   
-  // minus shopping cart
-  $('#minus').click(function(event) {
-    //app.acquire("")
-  });
+  function isLegalGoodsId(gId) {
+    if (gId) {
+      return true
+    } else {
+      alert("非法商品 ID")
+      return false
+    }
+  }
 
-  // plus shopping cart
+  // 购物车相关 开始
+  var
+    gNum = 1
+    basketNum = 0
+    $showNum = $('#show-number')
+    $basketNum = $('#goods-num')
+
+
   $('#plus').click(function(event) {
-    
-  });
+    if (isLegalGoodsId(gId)) {
+      $showNum.text(++gNum)
+    }
+  })
 
-  // add to shopping cart
   $('#minus').click(function(event) {
-    
-  });
+    if (isLegalGoodsId(gId)) {
+      if (gNum > 1) {
+        $showNum.text(--gNum)
+      }
+    }
+    //TODO gNum== 1 minus button disabled
+  })
 
-  // immediate-buy 
+  $('#add-goods').click(function(event) {
+    //TODO gId,gNum ajax请求
+    //TODO succeed basketNum += gNum
+    //TODO failed alert("添加失败,重新添加")
+    function addCartSucceed(response){
+      var temp = parseInt(gNum + basketNum)
+      $basketNum.text(parseInt($basketNum.text()) + gNum)
+    }
+    function addCartFailed(response) {
+      //TODO 添加购物车失败
+    }
+    app.methods.appAjax("加入购物车操作",
+                        'addCart',
+                        requestType,
+                        userData(gId,gNum),
+                        app.methods.timestamp(),
+                        addCartSucceed)
+  })
+
+  $('#detail-basket').click(function(event) {
+     
+  });
   $('#immediate-buy').click(function(event) {
     
-  });
+  })
+  // 购物车相关 结束
 });
