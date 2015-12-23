@@ -1907,8 +1907,10 @@ CryptoJS.lib.Cipher || (function (undefined) {
 
 var app = (function(){
   var configUrlMap = {
-    APIBase : "http://www.yaerku.com/pjapi/"
+    //APIBase : "http://www.yaerku.com/pjapi/"
     //APIBase:"../app/json/home.json"
+    //APIBase : "http://www.yaerku.com/pjapi/"
+    APIBase : "http://t.snapwine.net:7784/pjapi/"
   }
 
   var config = {
@@ -1959,16 +1961,14 @@ var app = (function(){
   }
 
   function ajaxLog(path,des,feedback) {
-    console.log("Ajax path : " + path + 
-                "des: " + des + 
-                "result: " + feedback)
+    console.log(path +" "+ des +" " + feedback)
   }
   function AES(plainText,timestamp) {
     pkcs7 = function(str) {
-      var len = str.length,
-          block_size = 32,
-          pad = block_size-(len % block_size),
-          padChar=String.fromCharCode(pad);
+      var len = str.length
+          block_size = 32
+          pad = block_size-(len % block_size)
+          padChar=String.fromCharCode(pad)
 
       for (var i = 0; i < pad; i++) {
         str = str + padChar
@@ -1976,9 +1976,9 @@ var app = (function(){
       return str
     }
 
-    var Base64Key = config['Base64Key'] + timestamp + '=',
-        key = CryptoJS.enc.Base64.parse(Base64Key),
-        iv = key.left(16);
+    var Base64Key = config['Base64Key'] + timestamp + '='
+        key = CryptoJS.enc.Base64.parse(Base64Key)
+        iv = key.left(16)
 
     var text=pkcs7(plainText)
         ciphertext = CryptoJS.AES.encrypt(text, 
@@ -2002,7 +2002,8 @@ var app = (function(){
                    requestType,
                    userData,
                    timestamp,
-                   callBack
+                   succeedCallback,
+                   failedCallback
                    ) {
     var 
       path = configUrlMap['APIBase']
@@ -2017,12 +2018,14 @@ var app = (function(){
       ajaxLog(path,des,'successed')
       //var json = JSON.parse(JSON.stringify(eval( "(" + data +")")))
       //callBack(json)
-      callBack(data)
+      succeedCallback(data)
     })
     .fail(function(data) {
+      failedCallback(data)
       ajaxLog(path,des,'failed')
     })
-    .always(function() {
+    .always(function(data) {
+      //alwaysCallback(data)
       ajaxLog(path,des,'completed')
     });
   }
@@ -2140,7 +2143,7 @@ var app = (function(){
     }
 
     $wineWrap.css('width', liWidth)
-
+    
     $(wrap).append($li)
     if (arguments.length == 7){
       console.log("arguments.length: " + arguments.length)

@@ -194,6 +194,14 @@ th {
 .address-table input {
   width: 100%;
 }
+.empty-cart {
+  display: table-cell;
+  verticle-align: middle;
+  height: 100%;
+}
+.empty-cart a {
+  display: block;
+}
 .coupon-header {
   heigth: 50px;
   background: #f00;
@@ -258,9 +266,13 @@ th {
   -webkit-margin-before: 0em;
   -webkit-margin-after: 0em;
 }
+.wrap {
+  position: relative;
+}
 .detail-wine-info {
   margin-top: 600px;
   padding-bottom: 60px;
+  z-index: 10;
   width: 100%;
 }
 .detail-wine-info .inline-div {
@@ -329,6 +341,23 @@ th {
 }
 .detail-wine-intro .intro-pic {
   width: 100%;
+}
+#detail-basket {
+  width: 4em;
+  height: 5em;
+  background: #f00;
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  z-index: 10;
+}
+#goods-num {
+  width: 1em;
+  height: 1em;
+  background: #fff;
+  position: absolute;
+  top: -1em;
+  right: -1em;
 }
 .wrap {
   position: relative;
