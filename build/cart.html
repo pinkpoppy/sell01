@@ -5,18 +5,63 @@
   <meta charset="UTF-8">
   <title>购物车</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5 maximum-scale=-1.0">
-  <style rel="stylesheet" src="main.css"></style>
+    <!-- 引入 jquery mobile css 开始-->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <!-- 引入 jquery mobile css 结束-->
+
+  <!-- 引入 jquery 开始 -->
   <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <!-- 引入 jquery 结束 -->
+
+  <!-- 引入 jquery mobile js 开始 -->
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <!-- 引入 jquery mobile js 开始 -->
+
+  <!-- 共有 css/js 开始 -->
+  <link rel="stylesheet" href="main.css">
   <script src="main.js"></script>
+  <!-- 共有 css/js 结束 -->
+
+  <!-- 私有 js 开始 -->
   <script src="../app/js/privatejs/cart.js"></script>
+  <!-- 私有 js 结束 -->
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="empty-cart">
+  <div class="wrap" data-role="page">
+    <div data-role="content">
+      <ul data-role="listview" class="swipe-delete">
+        <!-- <li>
+          <div class="behind">
+            <a href="#" class="ui-btn delete-btn">删除</a>
+          </div>
+          <a href="#" class="goods-cont">
+            <div>
+              <div class="cart-left">
+                <input type="radio">
+                <img src="http://d06.res.meilishuo.net/pic/_o/13/65/a3910ae2be47de0438013864de7c_640_960.cf.jpg_031e5cd4_s0_320_520.jpg">
+              </div>
+              <div class="cart-right">
+                <dl>
+                  <dt>酒款名称最多显示两行其他的内容用...代替</dt>
+                  <dd>库存5</dd>
+                </dl>
+                <ul>
+                  <li>390&yen;</li>
+                  <li><button>-</button> </li>
+                  <li><button>2</button></li>
+                  <li><button>+</button></li>
+                </ul>
+              </div>
+            </div>
+          </a>
+        </li> -->
+      </ul>
+    </div>
+    <!-- <div class="empty-cart">
       购物车没有商品噢,去首页逛逛吧
       <a href="home.html">去逛逛</a>
-    </div>
+    </div> -->
   </div>
 </body>
 </html>
