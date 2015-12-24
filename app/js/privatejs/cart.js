@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
       //TODO 列表点击后的跳转,先不做
       var 
         link = "https://www.baidu.com"
-        $list = $("<li>"
+        $list = $("<li data-id='"+data[i]['id']+"'>"
                     +"<div class='behind'>"
                       +"<a href='#' class='ui-btn delete-btn'>删除</a>"
                     +"</div>"
@@ -46,13 +46,13 @@ jQuery(document).ready(function($) {
       $wrap.append($list)
 
       $('.cart-minus-op').on('click',function(event) {
-        console.log('minus ok')    
+        
       });
 
       $('.cart-plus-op').on('click',function(event) {
-       console.log('plus ok')    
+
      });
-  
+
     }
   }
 
