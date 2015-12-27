@@ -647,6 +647,52 @@ button
   width: 80%;
   height: 30px;
 }
+.order-listview {
+  height: 120px;
+  overflow: hidden;
+}
+.order-listview .goods-row {
+  display: -webkit-box;
+}
+display -webkit-flex,
+display -ms-flexbox,
+display flex,
+height 100%,
+.cell {
+  display: table-cell;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+.cell-input {
+  width: 30px;
+  flex: none;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+  -ms-flex: none;
+}
+.cell-img {
+  width: auto;
+  height: 100%;
+  flex: none;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+  -ms-flex: none;
+}
+.cell-img img {
+  height: 120px;
+}
+.cell-cont {
+  height: 120px;
+}
 body {
   font: 0.5em Helvetica, Arial, sans-serif;
   background-color: #008000;
