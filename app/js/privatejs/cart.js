@@ -1,13 +1,18 @@
 jQuery(document).ready(function($) {
   var 
-  userData = function jointUserinfo() {
-    var userinfo = app.methods.getBasicUserinfo()
-    if (arguments.length==2) {//调用updateCart接口
-      userinfo['gid'] = arguments[0]
-      userinfo['quantity'] = arguments[1]
-    } 
-    return JSON.stringify(userinfo) 
-  }
+    userData = function jointUserinfo() {
+      var userinfo = app.methods.getBasicUserinfo()
+      if (arguments.length == 1) {
+        userinfo['goods'] = arguments[0]
+
+      } else if (arguments.length==2) {//调用updateCart接口
+        userinfo['gid'] = arguments[0]
+        userinfo['quantity'] = arguments[1]
+      } 
+      console.log(JSON.stringify(userinfo))
+      return JSON.stringify(userinfo) 
+    }
+    cachedGoods = {}//将用户购物车中得物品cache住，随着购物车数量更新而更新
   app.methods.appAjax("获取用户购物车列表",
     "cart",
     "POST",
@@ -22,6 +27,7 @@ jQuery(document).ready(function($) {
       defaultTotalCost = 0
 
     for (var i= 0, l = data.length; i < l; i++) {
+      cachedGoods[data[i]['id']] = data[i]['quantity']
       //TODO 列表点击后的跳转,先不做
       var
         currentGoodsCost = parseInt(data[i]['quantity']) * parseFloat(data[i]['price'])
@@ -74,6 +80,7 @@ jQuery(document).ready(function($) {
                               $(self).text(--originalVal)
                               var price = -(parseFloat($(self).prev().prev().text()))//单价
                               $('#total').text(price + prevTotal)
+                              cachedGoods[gid] = parseInt(cachedGoods[gid]) - 1
                             },
                             function(){
                               alert("减少数量失败,请重试")
@@ -98,6 +105,7 @@ jQuery(document).ready(function($) {
                               $(self).text(++originalVal)
                               var price = parseFloat($(self).prev().prev().attr('data-price'))
                               $('#total').text(price + prevTotal)
+                              cachedGoods[gid] = parseInt(cachedGoods[gid]) + 1
                             },
                             function(){
                               alert("增加数量失败,请重试")
@@ -119,7 +127,22 @@ jQuery(document).ready(function($) {
 
   //结算
   $('#checkout').click(function(){
-    
+    app.methods.appAjax('结算请求',
+                        'placeOrder',
+                        'POST',
+                        userData(cachedGoods),
+                        app.methods.timestamp(),
+                        function(data){
+                          //TODO 请求成功，跳转到订单页面
+                          if (data['msg']=="库存不足" || data['state']=="0") {
+                            alert("库存不足，请重新选择数量")
+                          }
+
+                        },
+                        function(data){
+                          //TODO 请求结算失败，留在购物车页面，要求重试
+                          alert("no")
+                        })
   });
   
   // swipe to delete partial start
