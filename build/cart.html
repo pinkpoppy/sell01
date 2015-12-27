@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>购物车</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5 maximum-scale=-1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5 maximum-scale=-1.0,user-scalable=no">
     <!-- 引入 jquery mobile css 开始-->
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
   <!-- 引入 jquery mobile css 结束-->
@@ -29,35 +29,25 @@
 
 <body>
   <div class="wrap" data-role="page">
+    <div>
+      <input type="radio" id='choose-all'>
+      <span>全选</span>
+    </div>
     <div data-role="content">
-      <ul data-role="listview" class="swipe-delete">
-        <!-- <li>
-          <div class="behind">
-            <a href="#" class="ui-btn delete-btn">删除</a>
-          </div>
-          <a href="#" class="goods-cont">
-            <div>
-              <div class="cart-left">
-                <input type="radio">
-                <img src="http://d06.res.meilishuo.net/pic/_o/13/65/a3910ae2be47de0438013864de7c_640_960.cf.jpg_031e5cd4_s0_320_520.jpg">
-              </div>
-              <div class="cart-right">
-                <dl>
-                  <dt>酒款名称最多显示两行其他的内容用...代替</dt>
-                  <dd>库存5</dd>
-                </dl>
-                <ul>
-                  <li>390&yen;</li>
-                  <li><button>-</button> </li>
-                  <li><button>2</button></li>
-                  <li><button>+</button></li>
-                </ul>
-              </div>
-            </div>
-          </a>
-        </li> -->
+      <ul data-role="listview" class="swipe-delete cart-listview">
       </ul>
     </div>
+
+    <section class="money-bar">
+      <div class="money-bar-left">
+        <span id="total">0</span>
+        <span>&yen;</span>
+        <span>不计运费和优惠</span>  
+      </div>
+      <div class='money-bar-right'>
+        <button id="checkout">结算</button>
+      </div>
+    </section>
     <!-- <div class="empty-cart">
       购物车没有商品噢,去首页逛逛吧
       <a href="home.html">去逛逛</a>

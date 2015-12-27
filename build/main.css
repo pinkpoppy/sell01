@@ -237,18 +237,26 @@ th {
 .empty-cart a {
   display: block;
 }
-.listview {
+.cart-listview {
   margin: -1em;
-  padding: 10px 5px;
 }
-.listview > li {
+.cart-listview >li {
   position: relative;
-  overflow: visible;
-  height: 200px;
+  height: 120px;
+  background: #008000;
+  width: 100%;
+}
+.cart-listview >li >div {
+  height: 100%;
+}
+.cart-listview >li >div .cart-wine-pic {
+  height: 110px;
+  vertical-align: middle;
+  padding: 5px 0px;
 }
 .behind {
   width: 100%;
-  height: 100%;
+  height: 120px;
   position: absolute;
   top: 0;
   right: 0;
@@ -257,36 +265,59 @@ th {
 }
 .behind a {
   height: 100%;
+  display: table-cell;
+  line-height: 120px;
+  vertical-align: middle;
 }
-.goods-cont >div {
+.cont-right {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+}
+.cont-right div {
+  display: inline-block;
+}
+.cont-right .list-wine-title {
+  font-size: 1.2em;
+}
+.cont-right .list-wine-inventory {
+  font-size: 1em;
+}
+.cont-right .list-wine-price {
+  font-size: 1em;
+}
+.cont-right .list-wine-num {
+  font-size: 1em;
+}
+#choose-all {
+  margin-right: 0.5em;
+}
+#total {
+  display: inline-block;
+}
+.money-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  height: 44px;
+  background: #00f;
 }
-.goods-cont >div >div {
-  display: inline-block;
-}
-.goods-cont >div .cart-left {
-  float: left;
-  width: 40%;
-}
-.goods-cont >div .cart-left * {
-  display: inline-block;
-}
-.goods-cont >div .cart-left input {
-  width: 5%;
-}
-.goods-cont >div .cart-left img {
-  height: 100px;
-  float: right;
-}
-.goods-cont >div .cart-right >ul >li {
+.money-bar div {
   display: inline-block;
   height: 100%;
-  overflow: visible;
+  line-height: 44px;
+  vertical-align: middle;
 }
-.goods-cont >div .cart-right >ul >li >button {
-  display: inline-block;
-  outline: none;
-  border-radius: 0;
+.money-bar .money-bar-left {
+  height: 100%;
+  width: 60%;
+}
+.money-bar .money-bar-right {
+  height: 100%;
+  width: auto;
+  text-align: center;
+button
 }
 .coupon-header {
   heigth: 50px;

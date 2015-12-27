@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>订单详情</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5 maximum-scale=-1.0,user-scalable=no">
+    <!-- 引入 jquery mobile css 开始-->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <!-- 引入 jquery mobile css 结束-->
+
+  <!-- 引入 jquery 开始 -->
+  <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <!-- 引入 jquery 结束 -->
+
+  <!-- 引入 jquery mobile js 开始 -->
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <!-- 引入 jquery mobile js 开始 -->
+
+  <!-- 共有 css/js 开始 -->
+  <link rel="stylesheet" href="main.css">
+  <script src="main.js"></script>
+  <!-- 共有 css/js 结束 -->
+
+  <!-- 私有 js 开始 -->
+  <script src="../app/js/privatejs/placeOrder.js"></script>
+  <!-- 私有 js 结束 -->
+</head>
+
+<body>
+  <div class="wrap" data-role="page">
+    <header class="order-header">
+      <p class="order-serial-num">订单编号:<span></span></p>
+      <p class="order-time">订单时间:<span></span></p>
+      <p class="pay-state">支付状态<span></span></p>
+      <p class="tips">若出现物品破损，请勿签收，当快递面拍照并联系客服，我们会安排补发货.</p>
+    </header>
+
+    <section class="person-info">
+      <div info-left>
+        <header>收货信息</header>
+        <div class="name">
+          <img src="">
+          <span></span>
+        </div>
+        <div class="tel">
+          <img src="">
+          <span></span>
+        </div>
+      </div>
+      <img src="">
+    </section>
+
+    <section class="goods-info">
+      <header class="goods-header">
+        <span>商品信息</span>
+        <span class="goods-num"></span>
+      </header>
+      <ul class="order-wine-list">
+        <li>
+          <img src="">
+          <div>
+            <div>酒款主标题</div>
+            <span></span>
+            <span></span>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
