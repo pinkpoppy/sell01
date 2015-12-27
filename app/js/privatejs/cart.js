@@ -1,7 +1,11 @@
 jQuery(document).ready(function($) {
   var 
   userData = function jointUserinfo() {
-    var userinfo = app.methods.getBasicUserinfo() 
+    var userinfo = app.methods.getBasicUserinfo()
+    if (arguments.length==2) {//调用updateCart接口
+      userinfo['gid'] = arguments[0]
+      userinfo['quantity'] = arguments[1]
+    } 
     return JSON.stringify(userinfo) 
   }
   app.methods.appAjax("获取用户购物车列表",
@@ -13,47 +17,93 @@ jQuery(document).ready(function($) {
     getCartFailed)
 
   function insertDom(data){
-    var $wrap = $('.swipe-delete')
+    var 
+      $wrap = $('.swipe-delete')
+      defaultTotalCost = 0
+
     for (var i= 0, l = data.length; i < l; i++) {
       //TODO 列表点击后的跳转,先不做
-      var 
-        link = "https://www.baidu.com"
+      var
+        currentGoodsCost = parseInt(data[i]['quantity']) * parseFloat(data[i]['price'])
+        defaultTotalCost += currentGoodsCost
         $list = $("<li data-id='"+data[i]['id']+"'>"
-                    +"<div class='behind'>"
-                      +"<a href='#' class='ui-btn delete-btn'>删除</a>"
-                    +"</div>"
-                    +"<a href='#' class='goods-cont'>"
-                      +"<div>"
-                        +"<div class='cart-left'>"
-                          +"<input type='radio'>"
-                          +"<img src='"+data[i]['pics'][0]['pic']+"'>"
-                        +"</div>"
-                        +"<div class='cart-right'>"
-                          +"<dl>"
-                            +"<dt>"+data[i]['title']+"</dt>"
-                            +"<dd>"+data[i]['inventory']+"</dd>"
-                          +"</dl>"
-                          +"<ul>"
-                            +"<li>"+data[i]['price']+'&yen;'+"</li>"
-                            +"<li><button type='button' class='op cart-minus-op'>-</button></li>"
-                            +"<li>"+data[i]['quantity']+"</li>"
-                            +"<li><button type='button' class='op cart-plus-op'>+</button></li>"
-                          +"</ul>"
-                        +"</div>"
+                    +"<div>"
+                      +"<div class='behind'>"
+                        +"<a href='#'>删除</a>"
                       +"</div>"
-                    +"</a>"
+                      +"<input type='radio' class='goods-choosen'>"
+                      +"<img src='"+data[i]['pics'][0]['pic']+"' class='cart-wine-pic'>"
+                      +"<div class='cont-right'>"
+                        +"<div class='list-wine-title'>"+data[i]['title']+"</div><br>"
+                        +"<span class='list-wine-inventory'>"+data[i]['inventory']+"</span><br>"
+                        +"<span class='list-wine-price' data-price='"+data[i]['price']+"'>"+data[i]['price']+'&yen;'+"</span>"
+                        +"<button class='cart-minus-op'>-</button>"
+                        +"<span class='list-wine-num'>"+data[i]['quantity']+"</span>"
+                        +"<button class='cart-plus-op'>+</button>"
+                      +"</div>"
+                    +"</div>"
                   +"</li>")
+      
       $wrap.append($list)
+    }
+    //进入购物车页面时，默认选中所有商品，总价值已经计算出来
+    $('#total').text(defaultTotalCost)
 
-      $('.cart-minus-op').on('click',function(event) {
-        
+    $('.cart-minus-op').on('click',function(event) {
+        var
+          gid = $(this).parent().parent().parent().attr('data-id')
+          originalVal = parseInt($(this).next().text())
+          self = $(this).next()
+
+        if (originalVal == 1) {
+          alert("确认删除该商品吗?")
+          //YES TODO call delCart
+
+          //NO TODO nothing  
+        }
+
+        app.methods.appAjax("购物车数量减1",
+                            "updateCart",
+                            'POST',
+                            userData(gid,-1),
+                            app.methods.timestamp(),
+                            function() {
+                              var 
+                                originalVal = parseInt($(self).text())
+                                prevTotal = parseFloat($('#total').text())//上一次总价钱
+                              $(self).text(--originalVal)
+                              var price = -(parseFloat($(self).prev().prev().text()))//单价
+                              $('#total').text(price + prevTotal)
+                            },
+                            function(){
+                              alert("减少数量失败,请重试")
+                            })
       });
 
       $('.cart-plus-op').on('click',function(event) {
+        var
+          gid = $(this).parent().parent().parent().attr('data-id')
+          originalVal = parseInt($(this).prev().text())
+          self = $(this).prev()
 
-     });
+        app.methods.appAjax("购物车数量加1",
+                            "updateCart",
+                            'POST',
+                            userData(gid,1),
+                            app.methods.timestamp(),
+                            function() {
+                              var 
+                                originalVal = parseInt($(self).text())
+                                prevTotal = parseFloat($('#total').text())//上一次总价钱
+                              $(self).text(++originalVal)
+                              var price = parseFloat($(self).prev().prev().attr('data-price'))
+                              $('#total').text(price + prevTotal)
+                            },
+                            function(){
+                              alert("增加数量失败,请重试")
+                            })
 
-    }
+      });
   }
 
   
@@ -67,6 +117,11 @@ jQuery(document).ready(function($) {
 
   }
 
+  //结算
+  $('#checkout').click(function(){
+    
+  });
+  
   // swipe to delete partial start
   function prevent_default(e) {
     e.preventDefault();

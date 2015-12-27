@@ -5,17 +5,23 @@
   a 
     display block
 
-.listview
+.cart-listview
   margin -1em
-  > li
+  >li
     position relative
-    overflow visible
-    height 200px
-  padding 10px 5px
-    
+    height 120px
+    background green
+    width 100%
+    >div
+      height 100%
+      .cart-wine-pic
+        height 110px
+        vertical-align middle
+        padding 5px 0px
+
 .behind
   width 100%
-  height 100%
+  height 120px
   position absolute
   top 0
   right 0
@@ -23,31 +29,48 @@
   z-index -1
   a
     height 100%
-    
+    display table-cell
+    line-height 120px
+    vertical-align middle
 
-.goods-cont
-  >div
-    width 100%
-    >div
-      display inline-block
-    .cart-left
-      float left
-      *
-        display inline-block
-      width 40%
-      input
-        width 5%
-      img
-        height 100px
-        float right
-    .cart-right
-      >ul
-        >li
-          display inline-block
-          height 100%
-          overflow visible
-          >button
-            display inline-block
-            outline none
-            border-radius 0
+.cont-right
+  display inline-block 
+  vertical-align middle
+  width 50%
+  div 
+    display inline-block
+  .list-wine-title
+    font-size 1.2em
+  .list-wine-inventory
+    font-size 1em
+  .list-wine-price
+    font-size 1em
+  .list-wine-num
+    font-size 1em
+
+#choose-all
+  margin-right 0.5em
+#total
+  display inline-block
+.money-bar
+  position fixed
+  bottom 0
+  left 0
+  width 100%
+  height 44px
+  background blue
+  div
+    display inline-block
+    height 100%
+    line-height 44px
+    vertical-align middle
+  .money-bar-left
+    height 100%
+    width 60%
+  .money-bar-right
+    height 100%
+    width auto
+    text-align center
+    button
+  
         
