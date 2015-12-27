@@ -16,7 +16,8 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts',function(){
-  gulp.src(['vendor/core.js',
+  gulp.src(['vendor/jquery-2.1.4.min.js',
+            'vendor/core.js',
             'vendor/clipher-core.js',
             'vendor/enc-base64.js',
             'vendor/aes.js',
