@@ -693,9 +693,40 @@ height 100%,
 .cell-cont {
   height: 120px;
 }
+.orders-header {
+  line-height: 50px;
+  vertical-align: middle;
+  color: #f00;
+}
+.orders-header div {
+  display: inline-block;
+  width: 24%;
+  text-align: center;
+}
+.orders-header a {
+  text-decoration: none;
+}
+.each-page {
+  margin-top: 50px;
+}
+.order-header div {
+  display: inline-block;
+}
+.order-header .order-serial-num {
+  width: 40%;
+}
+.order-header .order-time {
+  width: 40%;
+}
+.order-header .pay-state {
+  width: 15%;
+  text-align: right;
+}
 body {
-  font: 0.5em Helvetica, Arial, sans-serif;
+  font: 1em Helvetica, Arial, sans-serif;
   background-color: #008000;
+  line-height: 1.5;
+  color: #333;
 }
 .wrap ul {
   -webkit-margin-after: 0em;
