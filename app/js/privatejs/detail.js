@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function() {
 
   var 
     gId = app.methods.getSearchArgFromUrl()['id']
@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
       }
        return JSON.stringify(userinfo) 
     }
-
+    alert("test")
     des = '请求酒款详情'
     methodName = 'getGoods'
     requestType = 'POST'

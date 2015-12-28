@@ -7,11 +7,33 @@ var app = (function(){
     APIBase : "http://t.snapwine.net:7784/pjapi/"
   }
 
-  var config = {
-    Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
-    userId :"o4ILEuHaZ9rZqXcEL4izPJcEnFnM",
-    userType : "5"
-  }
+  var 
+    config = {
+      Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
+      userId :"o4ILEuHaZ9rZqXcEL4izPJcEnFnM",
+      userType : "5"
+    }
+
+    browser = {
+      versions : function(){
+        var 
+          u = navigator.userAgent
+          app = navigator.appVersion
+        return {
+          trident: u.indexOf('Trident') > -1, //IE内核
+          presto: u.indexOf('Presto') > -1, //opera内核
+          webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+          gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+          mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+          ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+          android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+          iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+          iPad: u.indexOf('iPad') > -1, //是否iPad
+          webApp: u.indexOf('Safari') == -1 //是否web应用程序，没有头部与底部
+        }
+      }(),
+      language:(navigator.browserLanguage || navigator.language).toLowerCase()
+    }
 
   var moduleId = 1,//起始酒款模块 id, 默认值1
       pageId = 1; //酒款分页 id,默认为1
@@ -41,9 +63,35 @@ var app = (function(){
   }
   
   function deviceInfo(){
-    var device = "iphone"
+    var 
+      devicePlat = browser.versions
+      device = ""
+    if (devicePlat.ios) {
+       device = "iphone"
+    } else if (devicePlat.android) {
+      device = "android"
+    }
     return device
   }  
+
+  function browserInfo(){
+    if (browser.versions.mobile) {
+      var ua = navigator.userAgent.toLowerCase()
+      if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        return "weixin"
+      } else if (ua.match(/WeiBo/i) == "weibo") {
+        return "weibo"
+      } else if (ua.match(/QQ/i) == "qq") {
+        return qq
+      } else if (browser.versions.ios) {
+        return "ios"
+      } else if (browser.versions.android) {
+        return "android"
+      }
+    } else {
+      return "pc"
+    }
+  }
 
   function appVersion(){
     var version = "2.2.0"
@@ -156,7 +204,8 @@ var app = (function(){
       appVersion : appVersion,
       timestamp : timestamp,
       getBasicUserinfo : getUserinfoData,
-      appAjax : appAjax
+      appAjax : appAjax,
+      browser : browserInfo
     }
   }
 

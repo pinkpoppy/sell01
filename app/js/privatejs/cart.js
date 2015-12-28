@@ -8,7 +8,9 @@ jQuery(document).ready(function($) {
       } else if (arguments.length==2) {//调用updateCart接口
         userinfo['gid'] = arguments[0]
         userinfo['quantity'] = arguments[1]
-      } 
+      } else if (arguments.length == 3) { //删除酒款
+        userinfo['gid'] = arguments[0]
+      }
       console.log(JSON.stringify(userinfo))
       return JSON.stringify(userinfo) 
     }
@@ -64,7 +66,24 @@ jQuery(document).ready(function($) {
         if (originalVal == 1) {
           alert("确认删除该商品吗?")
           //YES TODO call delCart
-
+          function deleteSucceed(data){
+            if (data['state']==1) {
+              // $(".listview > li[data-id='3']").remove()
+              $("li[data-id='3']").remove()
+              alert("删除成功")
+            }
+          }
+          function deleteFailed(data){
+            if (data['state'] == 0)
+              alert("删除失败")
+          }
+          app.methods.appAjax("删除商品",
+                              "delCart",
+                              "POST",
+                              userData(gid,'del','del'),
+                              app.methods.timestamp(),
+                              deleteSucceed,
+                              deleteFailed)
           //NO TODO nothing  
         }
 
@@ -134,17 +153,34 @@ jQuery(document).ready(function($) {
                         app.methods.timestamp(),
                         function(data){
                           //TODO 请求成功，跳转到订单页面
-                          if (data['msg']=="库存不足" || data['state']=="0") {
-                            alert("库存不足，请重新选择数量")
-                          }
-
+                          afterPay(data)
                         },
                         function(data){
                           //TODO 请求结算失败，留在购物车页面，要求重试
-                          alert("no")
+                          afterPay(data)
                         })
   });
   
+  function afterPay(data) {
+    if (data['msg']=="库存不足" || data['state']=="0") {
+      var shortageGoods = data['goods']
+      for (var i=0,l = shortageGoods.length; i<l; i++) {
+        $(".listview").filter(function(index,ele) {
+          if ($(this).attr('id') == shortageGoods[i]['id']) {
+            $(this).attr('id', shortageGoods[i]['id'])
+          }
+          return
+        })
+      }
+      alert("库存不足，请重新选择数量")
+    } else if (data['state'] == 1) {
+      //库存没有问题.可以提交订单,服务器返回订单编号,到下一个页面再用订单编号去获取订单详情
+      //页面跳转
+      (function(order){
+        location.href = "placeOrder.html?order=" + order['order_no']
+      })(data['order'])
+    }
+  }
   // swipe to delete partial start
   function prevent_default(e) {
     e.preventDefault();
