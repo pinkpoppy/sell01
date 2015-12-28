@@ -22,6 +22,7 @@ gulp.task('scripts',function(){
             'vendor/enc-base64.js',
             'vendor/aes.js',
             'vendor/unslider.js',
+            'vendor/jquery.mobile.lazyloader.js',
             'vendor/jquery.cxselect.min.js',//vendor directory load end
             'app/js/*.js'])
       .pipe(concat('main.js'))
