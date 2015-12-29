@@ -8,11 +8,11 @@ $(function(){
       } else if (typeof arg === "object") {
         for (prop in arg) {
           if (arg.hasOwnProperty(prop)) {
-            userinfo[prop] = arg[prop]
+            userinfo[prop] = encodeURI(arg[prop])
           }
         }
       }
-      console.log(JSON.stringify(userinfo))
+      console.log(JSON.stringify(userinfo) )
       return JSON.stringify(userinfo) 
     }
     expressCost = 0

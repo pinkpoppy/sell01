@@ -120,7 +120,7 @@ var app = (function(){
   }
 
   function AES(plainText,timestamp) {
-    console.log("timestamp =" + timestamp)
+
     pkcs7 = function(str) {
       var len = str.length
           block_size = 32
@@ -137,6 +137,8 @@ var app = (function(){
         key = CryptoJS.enc.Base64.parse(Base64Key)
         iv = key.left(16)
 
+    //var text = pkcs7(unescape(encodeURIComponent(plainText)))
+    //alert(text)
     var text=pkcs7(plainText)
         ciphertext = CryptoJS.AES.encrypt(text, 
                                           key, 
