@@ -15,7 +15,6 @@ jQuery(document).ready(function() {
       }
        return JSON.stringify(userinfo) 
     }
-    alert("test")
     des = '请求酒款详情'
     methodName = 'getGoods'
     requestType = 'POST'
@@ -65,7 +64,13 @@ jQuery(document).ready(function() {
     })(data.goods);
 
     //set shopping cart's href
-    $('#detail-basket').attr('href', 'cart.html?id='+gId);
+    var href = app.methods.pathInfo("cart.html?id=")
+    
+    $("#detail-basket").click(function(event) {
+      event.stopPropagation()
+    });
+
+    $('#detail-basket').attr('href', href+gId);
     // 商品介绍 开始
     (function showWineIntro (introArr){
       $wrap = $('.detail-wine-intro') //DOM中的包裹元素
@@ -83,6 +88,22 @@ jQuery(document).ready(function() {
     // 商品介绍 结束
   });
   
+  //点击立即购买
+  $("#immediate-buy").click(function(event) {
+    app.methods.appAjax("加入购物车操作",
+                        'addCart',
+                        requestType,
+                        userData(gId,1),
+                        app.methods.timestamp(),
+                        function(data){
+                          if (data['state'] == 1 
+                            && data['msg'] == "成功") {
+                              var addPath = "cart.html?id="
+                            window.location.href = app.methods.pathInfo(addPath) + gId
+                          }
+                        })
+  });
+
   function isLegalGoodsId(gId) {
     if (gId) {
       return true

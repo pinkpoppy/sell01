@@ -111,6 +111,9 @@
           $moduleItem.append($moduleListWrap)
           parent.append($moduleItem)
       }
+      $(".wine-detail").click(function(event) {
+        event.stopPropagation()
+      });
     }
   }
 });

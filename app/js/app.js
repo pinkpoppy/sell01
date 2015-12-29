@@ -35,6 +35,8 @@ var app = (function(){
       language:(navigator.browserLanguage || navigator.language).toLowerCase()
     }
 
+
+
   var moduleId = 1,//起始酒款模块 id, 默认值1
       pageId = 1; //酒款分页 id,默认为1
 
@@ -105,7 +107,20 @@ var app = (function(){
   function ajaxLog(path,des,feedback) {
     console.log(path +" "+ des +" " + feedback)
   }
+
+  function pathInfo(addPath){
+    var
+      l = window.location
+      host = l.protocol + "//" + l.host
+      pathname = l.pathname
+      path = pathname.substring(0,pathname.lastIndexOf('/')+1)
+      newPathName = host + path + addPath
+
+    return newPathName
+  }
+
   function AES(plainText,timestamp) {
+    console.log("timestamp =" + timestamp)
     pkcs7 = function(str) {
       var len = str.length
           block_size = 32
@@ -129,6 +144,7 @@ var app = (function(){
                                             mode:CryptoJS.mode.CBC, 
                                             padding:CryptoJS.pad.NoPadding}),
         base64Text = CryptoJS.enc.Base64.stringify(ciphertext.ciphertext)
+        console.log("base64Text =" + base64Text)
     return base64Text
   }
 
@@ -205,7 +221,8 @@ var app = (function(){
       timestamp : timestamp,
       getBasicUserinfo : getUserinfoData,
       appAjax : appAjax,
-      browser : browserInfo
+      browser : browserInfo,
+      pathInfo : pathInfo
     }
   }
 
@@ -231,10 +248,13 @@ var app = (function(){
     $divUp = $("<div class='div-up'></div>") //酒款上部
     $divBottom = $("<div class='div-bottom'></div>") //酒款下部
 
+    $awinePic = $("<a class='wine-detail' href='"
+                    +pathInfo("detail.html?id=")
+                    +currentWine['id']
+                    +"'data-id='"
+                    +currentWine['id']
+                    +"'></a>")
 
-
-    // $awinePic = $("<a class='wine-detail' href='detail.html?moduleId="+moduleId+"&id="+currentWine['id']+"'></a>")
-    $awinePic = $("<a class='wine-detail' href='detail.html?id="+currentWine['id']+"' data-id="+currentWine['id']+"></a>")
     $spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>") //满200包邮 => 酒款上部
     $spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>") //仅剩6 => 酒款上部
     console.log(currentWine['pics']);
@@ -301,6 +321,8 @@ var app = (function(){
         $li.addClass('last-wine-item')
       }
     }
+
+
   }
   // 432 / 720 = 0.6
   //下面是最后的});
