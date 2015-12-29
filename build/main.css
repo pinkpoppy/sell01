@@ -722,6 +722,15 @@ height 100%,
   width: 15%;
   text-align: right;
 }
+.person-info {
+  margin-top: 40px;
+}
+.goods-info {
+  margin-top: 40px;
+}
+dd div {
+  display: inline-block;
+}
 body {
   font: 1em Helvetica, Arial, sans-serif;
   background-color: #008000;

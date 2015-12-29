@@ -40,12 +40,13 @@
         <header>收货信息</header>
         <div class="name">
           <img src="">
-          <span></span>
+          <span>祝莎莎</span>
         </div>
         <div class="tel">
           <img src="">
-          <span></span>
+          <span>18516764069</span>
         </div>
+        <div class="addr">上海市杨浦区大学路170号602室</div>
       </div>
       <img src="">
     </section>
@@ -56,7 +57,7 @@
         <span class="goods-num"></span>
       </header>
       <div class="order-listview">
-        <div class="goods-row">
+<!--         <div class="goods-row">
           <div class="cell cell-input"><input type="radio"></div>
           <div class="cell cell-img"><img src="https://gw.alicdn.com/bao/uploaded/i1/TB1ePLiKFXXXXb_XVXXXXXXXXXX_!!0-item_pic.jpg_200x200q50s150.jpg_.webp"></div>
           <div class="cell cell-cont">
@@ -64,8 +65,41 @@
             <span>knk</span>
             <span>9</span>
           </div>
-        </div>
+        </div> -->
       </div>
+    </section>
+
+    <section class="pay-section">
+      <div class="privilege">
+        <span>优惠</span>
+        <span>未使用优惠券</span>
+      </div>
+      <div class="note">
+        <input type="text" placehold="额外需求什么的" class="note-input">
+      </div>
+      <div class="pay-ways">
+        <dl>
+          <dt>付款方式</dt>
+          <dd>
+            <span>微信支付</span>
+            <input type="radio" class='pay-radio' name="pay" data-m="wx">
+          </dd>
+          <dd>
+            <span>支付宝</span>
+            <input type="radio" class='pay-radio' name="pay" data-m="alipay">
+          </dd>
+          <dd>
+            <span>银联支付</span>
+            <input type="radio" class='pay-radio' name="pay" data-m="upacp">
+          </dd>
+        </dl>
+      </div>
+    </section>
+
+    <section class="total-pay">
+      <span class="total-cost"></span>
+      <span class="express-cost"></span>
+      <button id="pay">支付</button>
     </section>
   </div>
 </body>
