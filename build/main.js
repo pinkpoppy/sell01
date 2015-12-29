@@ -1898,6 +1898,329 @@ CryptoJS.lib.Cipher || (function (undefined) {
     C.AES = BlockCipher._createHelper(AES);
 }());
 !function($){return $?($.Unslider=function(t,n){var e=this;return e._="unslider",e.defaults={autoplay:!1,delay:3e3,speed:750,easing:"swing",keys:{prev:37,next:39},nav:!0,arrows:{prev:'<a class="'+e._+'-arrow prev">←</a>',next:'<a class="'+e._+'-arrow next">→</a>'},animation:"horizontal",selectors:{container:"ul:first",slides:"li"},animateHeight:!1,activeClass:e._+"-active",swipe:!0},e.$context=t,e.options={},e.$parent=null,e.$container=null,e.$slides=null,e.$nav=null,e.$arrows=[],e.total=0,e.current=0,e.prefix=e._+"-",e.eventSuffix="."+e.prefix+~~(2e3*Math.random()),e.interval=null,e.init=function(t){return e.options=$.extend({},e.defaults,t),e.$container=e.$context.find(e.options.selectors.container).addClass(e.prefix+"wrap"),e.$slides=e.$container.children(e.options.selectors.slides),e.setup(),["nav","arrows","keys","infinite"].forEach(function(t){e.options[t]&&e["init"+$._ucfirst(t)]()}),void 0!==typeof jQuery.event.special.swipe&&e.options.swipe&&e.initSwipe(),e.options.autoplay&&e.start(),e.calculateSlides(),e.$context.trigger(e._+".ready"),e.animate(e.options.index||e.current,"init")},e.setup=function(){e.$context.addClass(e.prefix+e.options.animation).wrap('<div class="'+e._+'" />'),e.$parent=e.$context.parent("."+e._);var t=e.$context.css("position");"static"===t&&e.$context.css("position","relative"),e.$context.css("overflow","visible")},e.calculateSlides=function(){if(e.total=e.$slides.length,"fade"!==e.options.animation){var t="width";"vertical"===e.options.animation&&(t="height"),e.$container.css(t,100*e.total+"%").addClass(e.prefix+"carousel"),e.$slides.css(t,100/e.total+"%")}},e.start=function(){return e.interval=setTimeout(function(){e.next()},e.options.delay),e},e.stop=function(){return clearTimeout(e.interval),e},e.initNav=function(){var t=$('<nav class="'+e.prefix+'nav"><ol /></nav>');e.$slides.each(function(n){var i=this.getAttribute("data-nav")||n+1;$.isFunction(e.options.nav)&&(i=e.options.nav.call(e.$slides.eq(n),n,i)),t.children("ol").append('<li data-slide="'+n+'">'+i+"</li>")}),e.$nav=t.insertAfter(e.$context),e.$nav.find("li").on("click"+e.eventSuffix,function(){var t=$(this).addClass(e.options.activeClass);t.siblings().removeClass(e.options.activeClass),e.animate(t.attr("data-slide"))})},e.initArrows=function(){e.options.arrows===!0&&(e.options.arrows=e.defaults.arrows),$.each(e.options.arrows,function(t,n){e.$arrows.push($(n).insertAfter(e.$context).on("click"+e.eventSuffix,e[t]))})},e.initKeys=function(){e.options.keys===!0&&(e.options.keys=e.defaults.keys),$(document).on("keyup"+e.eventSuffix,function(t){$.each(e.options.keys,function(n,i){t.which===i&&$.isFunction(e[n])&&e[n].call(e)})})},e.initSwipe=function(){var t=e.$slides.width();e.$container.on({swipeleft:e.next,swiperight:e.prev,movestart:function(t){return t.distX>t.distY&&t.distX<-t.distY||t.distX<t.distY&&t.distX>-t.distY?!!t.preventDefault():void e.$container.css("position","relative")}}),"fade"!==e.options.animation&&e.$container.on({move:function(n){e.$container.css("left",-(100*e.current)+100*n.distX/t+"%")},moveend:function(n){return Math.abs(n.distX)/t<$.event.special.swipe.settings.threshold?e._move(e.$container,{left:-(100*e.current)+"%"},!1,200):void 0}})},e.initInfinite=function(){var t=["first","last"];t.forEach(function(n,i){e.$slides.push.apply(e.$slides,e.$slides.filter(':not(".'+e._+'-clone")')[n]().clone().addClass(e._+"-clone")["insert"+(0===i?"After":"Before")](e.$slides[t[~~!i]]()))})},e.destroyArrows=function(){e.$arrows.forEach(function(t){t.remove()})},e.destroySwipe=function(){e.$container.off("movestart move moveend")},e.destroyKeys=function(){$(document).off("keyup"+e.eventSuffix)},e.setIndex=function(t){return 0>t&&(t=e.total-1),e.current=Math.min(Math.max(0,t),e.total-1),e.options.nav&&e.$nav.find('[data-slide="'+e.current+'"]')._toggleActive(e.options.activeClass),e.$slides.eq(e.current)._toggleActive(e.options.activeClass),e},e.animate=function(t,n){if("first"===t&&(t=0),"last"===t&&(t=e.total),isNaN(t))return e;e.options.autoplay&&e.stop().start(),e.setIndex(t),e.$context.trigger(e._+".change",[t,e.$slides.eq(t)]);var i="animate"+$._ucfirst(e.options.animation);return $.isFunction(e[i])&&e[i](e.current,n),e},e.next=function(){var t=e.current+1;return t>=e.total&&(t=0),e.animate(t,"next")},e.prev=function(){return e.animate(e.current-1,"prev")},e.animateHorizontal=function(t){var n="left";return"rtl"===e.$context.attr("dir")&&(n="right"),e.options.infinite&&e.$container.css("margin-"+n,"-100%"),e.slide(n,t)},e.animateVertical=function(t){return e.options.animateHeight=!0,e.options.infinite&&e.$container.css("margin-top",-e.$slides.outerHeight()),e.slide("top",t)},e.slide=function(t,n){if(e.options.animateHeight&&e._move(e.$context,{height:e.$slides.eq(n).outerHeight()},!1),e.options.infinite){var i;n===e.total-1&&(i=e.total-3,n=-1),n===e.total-2&&(i=0,n=e.total-2),"number"==typeof i&&(e.setIndex(i),e.$context.on(e._+".moved",function(){e.current===i&&e.$container.css(t,-(100*i)+"%").off(e._+".moved")}))}var o={};return o[t]=-(100*n)+"%",e._move(e.$container,o)},e.animateFade=function(t){var n=e.$slides.eq(t).addClass(e.options.activeClass);e._move(n.siblings().removeClass(e.options.activeClass),{opacity:0}),e._move(n,{opacity:1},!1)},e._move=function(t,n,i,o){return i!==!1&&(i=function(){e.$context.trigger(e._+".moved")}),t._move(n,o||e.options.speed,e.options.easing,i)},e.init(n)},$.fn._toggleActive=function(t){return this.addClass(t).siblings().removeClass(t)},$._ucfirst=function(t){return(t+"").toLowerCase().replace(/^./,function(t){return t.toUpperCase()})},$.fn._move=function(){var t="animate";return this.stop(!0,!0),$.fn.velocity&&(t="velocity"),$.fn[t].apply(this,arguments)},void($.fn.unslider=function(t){return this.each(function(){var n=$(this);if("string"==typeof t&&n.data("unslider")){t=t.split(":");var e=t[0],i=n.data("unslider")[e];if(t[1]){var o=t[1].split(",");return $.isFunction(i)&&i.apply(n,o)}return $.isFunction(i)&&i(),this}return n.data("unslider",new $.Unslider(n,t))})})):console.warn("Unslider needs jQuery")}(window.jQuery);
+(function(){
+var
+  version = "2.0.7",
+  hasOwn = {}.hasOwnProperty,
+  PingppSDK = function(){},
+  cfg = {
+    PINGPP_NOTIFY_URL: 'https://api.pingxx.com/notify/charges/',
+    UPACP_WAP_URL: 'https://gateway.95516.com/gateway/api/frontTransReq.do',
+    ALIPAY_WAP_URL: 'http://wappaygw.alipay.com/service/rest.htm',
+    UPMP_WAP_URL: 'uppay://uppayservice/?style=token&paydata=',
+    JDPAY_WAP_URL: 'https://m.jdpay.com/wepay/web/pay',
+    YEEPAY_WAP_URL: 'https://ok.yeepay.com/paymobile/api/pay/request',
+    YEEPAY_WAP_TEST_URL: 'http://mobiletest.yeepay.com/paymobile/api/pay/request',
+    PINGPP_MOCK_URL: 'http://sissi.pingxx.com/mock.php'
+  },
+  channels = {
+    alipay_wap: 'alipay_wap',
+    upmp_wap: 'upmp_wap',
+    upacp_wap: 'upacp_wap',
+    bfb_wap: 'bfb_wap',
+    wx_pub: 'wx_pub',
+    yeepay_wap: 'yeepay_wap',
+    jdpay_wap: 'jdpay_wap'
+  };
+
+PingppSDK.prototype = {
+
+  version: version,
+
+  _resultCallback: undefined,
+
+  _jsApiParameters: {},
+
+  _debug: false,
+
+  _signature: undefined,
+
+  createPayment: function(charge_json, callback, signature, debug) {
+    if (typeof callback == "function") {
+      this._resultCallback = callback;
+    }
+    if (typeof signature != "undefined") {
+      this._signature = signature;
+    }
+    if (typeof debug == "boolean") {
+      this._debug = debug;
+    }
+    var charge;
+    if(typeof charge_json == "string"){
+      try{
+        charge = JSON.parse(charge_json);
+      }catch(err){
+        this._innerCallback("fail", this._error("json_decode_fail"));
+        return;
+      }
+    }else{
+      charge = charge_json;
+    }
+    if(typeof charge == "undefined"){
+      this._innerCallback("fail", this._error("json_decode_fail"));
+      return;
+    }
+    if(!hasOwn.call(charge, 'id')){
+      this._innerCallback("fail", this._error("invalid_charge", "no_charge_id"));
+      return;
+    }
+    if(!hasOwn.call(charge, 'channel')){
+      this._innerCallback("fail", this._error("invalid_charge", "no_channel"));
+      return;
+    }
+    var channel = charge['channel'];
+    if(!hasOwn.call(charge, 'credential')){
+      this._innerCallback("fail", this._error("invalid_charge", "no_credential"));
+      return;
+    }
+    if (!charge['credential']) {
+      this._innerCallback("fail", this._error("invalid_credential", "credential_is_undefined"));
+      return;
+    }
+    if (!hasOwn.call(channels, channel)) {
+      this._innerCallback("fail", this._error("invalid_charge", "no_such_channel:" + channel));
+      return;
+    }
+    if (!hasOwn.call(charge['credential'], channel)) {
+      this._innerCallback("fail", this._error("invalid_credential", "no_valid_channel_credential"));
+      return;
+    }
+    if(!hasOwn.call(charge, 'livemode')){
+      this._innerCallback("fail", this._error("invalid_charge", "no_livemode"));
+      return;
+    }
+    if (charge['livemode'] == false) {
+      this._testModeNotify(charge);
+      return;
+    }
+    var credential = charge['credential'][channel];
+    if (channel == channels.upmp_wap) {  // 调起银联支付控件，客户端需要安装银联支付控件才能调起
+      location.href = cfg.UPMP_WAP_URL + credential['paydata'];
+    } else if (channel == channels.upacp_wap) {
+      form_submit(cfg.UPACP_WAP_URL, 'post', credential);
+    } else if (channel == channels.alipay_wap) {  // 调起支付宝手机网页支付
+      credential['_input_charset'] = 'utf-8';
+      if (typeof _AP != "undefined") {
+        var query = stringify_data(credential, channel, true);
+        _AP.pay(cfg.ALIPAY_WAP_URL + "?" + query);
+      } else {
+        form_submit(cfg.ALIPAY_WAP_URL, 'get', credential);
+      }
+    } else if (channel == channels.bfb_wap) {
+      if (!hasOwn.call(credential, 'url')) {
+        this._innerCallback("fail", this._error("invalid_credential", "missing_field:url"));
+        return;
+      }
+      location.href = credential['url'] + '?' + stringify_data(credential, channel);
+    } else if (channel == channels.yeepay_wap) {
+      var fields = ["merchantaccount", "encryptkey", "data"];
+      for (var k = 0; k < fields.length; k++) {
+        if(!hasOwn.call(credential, fields[k])){
+          this._innerCallback("fail", this._error("invalid_credential", "missing_field_"+fields[k]));
+          return;
+        }
+      }
+      if (hasOwn.call(credential, "mode") && credential["mode"] == "test") {
+        location.href = cfg.YEEPAY_WAP_TEST_URL + '?' + stringify_data(credential, channel, true);
+      } else {
+        location.href = cfg.YEEPAY_WAP_URL + '?' + stringify_data(credential, channel, true);
+      }
+    } else if (channel == channels.wx_pub) {
+      var fields = ["appId", "timeStamp", "nonceStr", "package", "signType", "paySign"];
+      for (var k = 0; k < fields.length; k++) {
+        if (!hasOwn.call(credential, fields[k])) {
+          this._innerCallback("fail", this._error("invalid_credential", "missing_field_"+fields[k]));
+          return;
+        }
+      }
+      this._jsApiParameters = credential;
+      this._callpay();
+    } else if (channel == channels.jdpay_wap) {
+      form_submit(cfg.JDPAY_WAP_URL, 'post', credential);
+    }
+  },
+
+  _jsApiCall: function(){
+    var self = this;
+    if(self._jsApiParameters != {}){
+      WeixinJSBridge.invoke(
+        'getBrandWCPayRequest',
+        self._jsApiParameters,
+        function(res){
+          if(res.err_msg == 'get_brand_wcpay_request:ok'){
+            self._innerCallback("success");
+          }else if(res.err_msg == 'get_brand_wcpay_request:cancel'){
+            self._innerCallback("cancel");
+          }else{
+            self._innerCallback("fail", self._error("wx_result_fail", res.err_msg));
+          }
+        }
+      );
+    }
+  },
+
+  _callpay: function(){
+    var self = this;
+    if (typeof wx != "undefined" && typeof self._signature != "undefined") {
+      var wxConfigFailed = false;
+      wx.config({
+        debug: self._debug,
+        appId: self._jsApiParameters["appId"],
+        timestamp: self._jsApiParameters["timeStamp"],
+        nonceStr: self._jsApiParameters["nonceStr"],
+        signature: self._signature,
+        jsApiList: ['chooseWXPay']
+      });
+      wx.ready(function(){
+        if (wxConfigFailed) {
+          return;
+        }
+        wx.chooseWXPay({
+          timestamp: self._jsApiParameters["timeStamp"],
+          nonceStr: self._jsApiParameters["nonceStr"],
+          "package": self._jsApiParameters["package"],
+          signType: self._jsApiParameters["signType"],
+          paySign: self._jsApiParameters["paySign"],
+          success: function(res) {
+            if (res.errMsg == "chooseWXPay:ok") {
+              self._innerCallback("success");
+            } else {
+              self._innerCallback("fail", self._error("wx_result_fail", res.errMsg));
+            }
+          },
+          cancel: function(res) {
+            self._innerCallback("cancel");
+          },
+          fail: function(res) {
+            self._innerCallback("fail", self._error("wx_result_fail", res.errMsg));
+          }
+        });
+      });
+      wx.error(function(res){
+        wxConfigFailed = true;
+        self._innerCallback("fail", self._error("wx_config_error", res.errMsg));
+      });
+    } else if (typeof WeixinJSBridge == "undefined") {
+      function eventCallback(){
+        self._jsApiCall();
+      }
+      if (document.addEventListener) {
+        document.addEventListener('WeixinJSBridgeReady', eventCallback, false);
+      } else if(document.attachEvent) {
+        document.attachEvent('WeixinJSBridgeReady', eventCallback);
+        document.attachEvent('onWeixinJSBridgeReady', eventCallback);
+      }
+    }else{
+      this._jsApiCall();
+    }
+  },
+
+  _error: function(msg, extra) {
+    msg = (typeof msg == "undefined") ? "" : msg;
+    extra = (typeof extra == "undefined") ? "" : extra;
+    return {
+      msg:msg,
+      extra:extra
+    };
+  },
+
+  _innerCallback: function(result, err) {
+    if (typeof this._resultCallback == "function") {
+      if (typeof err == "undefined") {
+        err = this._error();
+      }
+      this._resultCallback(result, err);
+    }
+  },
+
+  _testModeNotify: function(charge) {
+    var self = this;
+    if (charge['channel'] == channels.wx_pub) {
+      var dopay = confirm("模拟付款？");
+      if (dopay) {
+        var request = new XMLHttpRequest();
+        request.open('GET', cfg.PINGPP_NOTIFY_URL+charge['id']+'?livemode=false', true);
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400 && request.responseText == "success"){
+            self._innerCallback("success");
+          } else {
+            var extra = 'http_code:'+request.status+';response:'+request.responseText;
+            self._innerCallback("fail", self._error("testmode_notify_fail", extra));
+          }
+        };
+        request.onerror = function() {
+          self._innerCallback("fail", self._error("network_err"));
+        };
+        request.send();
+      } else {
+        self._innerCallback("cancel");
+      }
+    } else {
+      var params = {
+        'ch_id': charge['id'],
+        'scheme': 'http',
+        'channel': charge['channel']
+      };
+      if (hasOwn.call(charge, 'order_no')) {
+        params['order_no'] = charge['order_no'];
+      } else if (hasOwn.call(charge, 'orderNo')) {
+        params['order_no'] = charge['orderNo'];
+      }
+      if (hasOwn.call(charge, 'time_expire')) {
+        params['time_expire'] = charge['time_expire'];
+      } else if (hasOwn.call(charge, 'timeExpire')) {
+        params['time_expire'] = charge['timeExpire'];
+      }
+      if (hasOwn.call(charge, 'extra')) {
+        params['extra'] = encodeURIComponent(JSON.stringify(charge['extra']));
+      }
+      location.href = cfg.PINGPP_MOCK_URL+'?'+stringify_data(params);
+    }
+  }
+};
+
+function form_submit(url, method, params) {
+  var form = document.createElement("form");
+  form.setAttribute("method", method);
+  form.setAttribute("action", url);
+
+  for (var key in params) {
+    if (hasOwn.call(params, key)) {
+      var hiddenField = document.createElement("input");
+      hiddenField.setAttribute("type", "hidden");
+      hiddenField.setAttribute("name", key);
+      hiddenField.setAttribute("value", params[key]);
+      form.appendChild(hiddenField);
+    }
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+}
+
+function stringify_data(data, channel, urlencode) {
+  if (typeof urlencode == "undefined") {
+    urlencode = false;
+  }
+  var output = [];
+  for (var i in data) {
+    if (channel == "bfb_wap" && i == "url") {
+      continue;
+    }
+    if (channel == "yeepay_wap" && i == "mode") {
+      continue;
+    }
+    output.push(i + '=' + (urlencode ? encodeURIComponent(data[i]) : data[i]));
+  }
+  return output.join('&');
+}
+
+PingppSDK.prototype.payment = PingppSDK.prototype.createPayment;
+window.pingpp = new PingppSDK();
+// aliases
+window.PINGPP_PAY_SDK = window.PINGPP_WX_PUB = window.pingpp;
+})();
+
 /*!
  * jQuery cxSelect
  * @name jquery.cxselect.js
@@ -2031,7 +2354,7 @@ var app = (function(){
   }
 
   function AES(plainText,timestamp) {
-    console.log("timestamp =" + timestamp)
+
     pkcs7 = function(str) {
       var len = str.length
           block_size = 32
@@ -2048,6 +2371,8 @@ var app = (function(){
         key = CryptoJS.enc.Base64.parse(Base64Key)
         iv = key.left(16)
 
+    //var text = pkcs7(unescape(encodeURIComponent(plainText)))
+    //alert(text)
     var text=pkcs7(plainText)
         ciphertext = CryptoJS.AES.encrypt(text, 
                                           key, 
