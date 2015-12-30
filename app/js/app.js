@@ -10,8 +10,8 @@ var app = (function(){
   var 
     config = {
       Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
-      userId :"o4ILEuHaZ9rZqXcEL4izPJcEnFnM",
-      userType : "5"
+      userId :"oUeq9t-m7cPT5sAb7V7nPTfxbnpU",
+      userType : "12"
     }
 
     browser = {
@@ -139,7 +139,9 @@ var app = (function(){
 
     //var text = pkcs7(unescape(encodeURIComponent(plainText)))
     //alert(text)
-    var text=pkcs7(plainText)
+
+    //text=CryptoJS.enc.Latin1.parse(plainText);
+    var text=CryptoJS.enc.Latin1.parse(pkcs7(plainText))
         ciphertext = CryptoJS.AES.encrypt(text, 
                                           key, 
                                           {iv: iv, 

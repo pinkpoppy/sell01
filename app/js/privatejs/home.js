@@ -7,11 +7,7 @@
     $(".header").remove()
   }
 
-  $('.unslider').unslider({
-    animation: 'fade',
-    autoplay: true,
-    arrows: false
-  })
+  // $('.banner').unslider()
 
   var
     userData = function jointUserinfo() {
@@ -34,17 +30,23 @@
         moduleArr = response.tags//获取模块
 
       var 
-        parent = $('.unslider>ul'),
+        wrap = $("<div class='banner' id='home-banner'></div>") 
+        ul = $("<ul></ul>")
+        wrap.append(ul)
         notify = $('.notify')
 
       // 轮播图和通知 开始
       for(var i = 0, len = imgArr.length; i < len; i++) {
         var 
-          li = $("<li class='unslider-active' data-url="+imgArr[i]['url']+"></li>"),
+          // li = $("<li class='unslider-active' data-url="+imgArr[i]['url']+"></li>"),
+          li = $("<li data-url="+imgArr[i]['url']+"></li>"),
           img = $("<img src='"+imgArr[i]['pic']+"'>")
           li.append(img)
-          parent.append(li)
+          ul.append(li)
       }
+      $(wrap).insertBefore('.notify')
+
+      $('.banner').unslider({autoplay:true})
       notify.text(notification)
       // 轮播图和通知 结束
 

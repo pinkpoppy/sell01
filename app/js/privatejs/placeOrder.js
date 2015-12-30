@@ -8,7 +8,8 @@ $(function(){
       } else if (typeof arg === "object") {
         for (prop in arg) {
           if (arg.hasOwnProperty(prop)) {
-            userinfo[prop] = encodeURI(arg[prop])
+            userinfo[prop] = unescape(encodeURIComponent(arg[prop]))
+            console.log(userinfo[prop])
           }
         }
       }
@@ -75,7 +76,7 @@ $(function(){
 
   var $pay = $("input:radio[name=pay]")
   if ($pay.is(':checked') === false) {
-    $pay.filter('[data-m=wx]').prop('checked',true)
+    $pay.filter('[data-m=wx_pub]').prop('checked',true)
   }
 
   function failedGetOrder(data) {
@@ -113,10 +114,40 @@ $(function(){
                         failedSubmit)
 
     function succeedSubmit(data){
-      console.log(data)
+      //console.log(data)
+      var payObj = data['pay']
+      if (data['state'] == 1 && data['msg'] == "支付成功") {
+
+        alert(amount)
+        var
+          amount = payObj['amount']
+          xhr = new XMLHttpRequest()
+          url = "http://127.0.0.1/~sszhu/gitwork/sell01/build/placeOrder.html?order=000134241451393095"
+          xhr.open("POST",url,true)
+          xhr.setRequestHeader("Content-type", "application/json")
+          xhr.send(JSON.stringify({
+            channel: payObj['channel'],
+            amount: amount
+          }))
+          
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(console.log(xhr.responseText))
+                console.log(xhr.responseText)
+                pingpp.createPayment(xhr.responseText, function(result, err) {
+                    console.log(result)
+                    console.log(err)
+                });
+            }
+        }
+      } else if (data['state'] == 0 && data['msg'] == "支付失败") {
+        alert(data['msg'])
+      } else {
+        alert("other")
+      }
     }
     function failedSubmit(data) {
-      console.log(data)
+      console.log(data.responseText)
     }
   });
   app.methods.appAjax("获取某个订单的详情",
