@@ -50,7 +50,6 @@ $(function(){
       $('.total-cost').text("总额:￥"+totalCost)
       $('.express-cost').text("运费:￥" + expressCost)
     } else if (data['state'] == 0) {
-      alert(data['msg'])
     }
     
     function insertDOM(good) {
@@ -114,33 +113,30 @@ $(function(){
                         failedSubmit)
 
     function succeedSubmit(data){
-      //console.log(data)
-      var payObj = data['pay']
-      if (data['state'] == 1 && data['msg'] == "支付成功") {
+      console.log("data['msg'] = " + data['msg'])
+      //在这里获取支付凭据 Charge 
+      var 
+        charge = data['pay']
+        //resultUrl = "http://t.snapwine.net:7784/test.html"
+        //charge.extra['result_url'] = resultUrl
 
-        alert(amount)
-        var
-          amount = payObj['amount']
-          xhr = new XMLHttpRequest()
-          url = "http://127.0.0.1/~sszhu/gitwork/sell01/build/placeOrder.html?order=000134241451393095"
-          xhr.open("POST",url,true)
-          xhr.setRequestHeader("Content-type", "application/json")
-          xhr.send(JSON.stringify({
-            channel: payObj['channel'],
-            amount: amount
-          }))
-          
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                alert(console.log(xhr.responseText))
-                console.log(xhr.responseText)
-                pingpp.createPayment(xhr.responseText, function(result, err) {
-                    console.log(result)
-                    console.log(err)
-                });
+      if (data['state'] == 1 && data['msg'] == "成功") {
+        var 
+          scheme = "http://t.snapwine.net:7784/test.html"
+          // params = {
+          //   charge:charge,
+          //   scheme:scheme
+          // }
+          pingpp.createPayment(charge, function(result, err) {
+
+              alert(result + " " +err['msg'] + " " + err['extra'])
+            if (result.result == "success") {
+              alert("支付成功")
+            } else{
+              alert("支付失败")
             }
-        }
-      } else if (data['state'] == 0 && data['msg'] == "支付失败") {
+          });
+      } else if (data['state'] == 0 && data['msg'] == "失败") {
         alert(data['msg'])
       } else {
         alert("other")
