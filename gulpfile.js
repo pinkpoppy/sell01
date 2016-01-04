@@ -23,6 +23,7 @@ gulp.task('scripts',function(){
             'vendor/aes.js',
             'vendor/unslider.js',
             'vendor/jquery.mobile.lazyloader.js',
+            'vendor/iscroll-lite.js',
             'vendor/pingpp.js',
             'vendor/jquery.cxselect.min.js',//vendor directory load end
             'app/js/*.js'])
