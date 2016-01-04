@@ -232,6 +232,7 @@ var app = (function(){
 
   function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength,moduleId) 
   {
+    var itemHeight = 0
     //console.log("arguments.length = " + arguments.length)
     if (arguments.length==5) {
       currentWine = arguments[0],
@@ -243,7 +244,7 @@ var app = (function(){
     var screenWidth = app.screenSize(),
         imgWidth = liWidth = screenWidth * 0.425,
         ratio = 0.6,
-        imgHeight = imgWidth / 0.75,
+        imgHeight = Math.ceil(imgWidth / 0.75),
         bottomHeight = 50,
         liHeight = imgHeight + bottomHeight;
 
@@ -261,7 +262,8 @@ var app = (function(){
 
     $spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>") //满200包邮 => 酒款上部
     $spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>") //仅剩6 => 酒款上部
-    console.log(currentWine['pics']);
+    
+
     $img = $("<img class='wine-img' src='"+currentWine['pics'][0]['pic']+"'>") //酒款图片 => 酒款上部
     $img.css({
       width: imgWidth,
@@ -312,6 +314,9 @@ var app = (function(){
     $wineWrap.css('width', liWidth)
     
     $(wrap).append($li)
+    console.log($li.css('height'))
+    itemHeight = Math.ceil(parseFloat($li.css('height')))
+
     if (arguments.length == 7){
       console.log("arguments.length: " + arguments.length)
       // if i === 最后一行 && j === 最后一行 添加 margin
@@ -326,7 +331,7 @@ var app = (function(){
       }
     }
 
-
+    return itemHeight
   }
   // 432 / 720 = 0.6
   //下面是最后的});
