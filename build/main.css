@@ -477,7 +477,13 @@ button
   right: -1em;
 }
 .wrap {
-  position: relative;
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: #aaa;
+  overflow: auto;
 }
 .header {
   height: 50px;
@@ -601,7 +607,6 @@ button
 }
 .module-list-wrap .wine-list-ul {
   padding: 0 5%;
-  position: relative;
 }
 .module-list-wrap li {
   display: inline-block;

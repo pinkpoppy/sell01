@@ -6,40 +6,47 @@
     
     <title>Title</title>
     <script>
-        pkcs7 = function(txt) {
-            var len=txt.length;
-            var block_size=32;
-            var pad=block_size-(len%block_size);
-            var padChar=String.fromCharCode(pad);
-            for (var i=0;i<pad;i++) {
-                txt=txt+padChar;
-            }
-            return txt;
-        }
-        var t=1450335080;
-        var Base64Key='RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb'+t+'=';
-        var key=CryptoJS.enc.Base64.parse(Base64Key);
-        var iv=key.left(16);
-        var text='{"userId":"abc","userType":"3","version":"2.2.0","deviceModel":"iphone"}';
-        text=pkcs7(text);
-        var ciphertext = CryptoJS.AES.encrypt(text, key, {iv: iv, mode:CryptoJS.mode.CBC, padding:CryptoJS.pad.NoPadding});
-        var base64Text = CryptoJS.enc.Base64.stringify(ciphertext.ciphertext);
+        // pkcs7 = function(txt) {
+        //     var len=txt.length;
+        //     var block_size=32;
+        //     var pad=block_size-(len%block_size);
+        //     var padChar=String.fromCharCode(pad);
+        //     for (var i=0;i<pad;i++) {
+        //         txt=txt+padChar;
+        //     }
+        //     return txt;
+        // }
+        // var t=1450335080;
+        // var Base64Key='RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb'+t+'=';
+        // var key=CryptoJS.enc.Base64.parse(Base64Key);
+        // var iv=key.left(16);
+        // var text='{"userId":"abc","userType":"3","version":"2.2.0","deviceModel":"iphone"}';
+        // text=pkcs7(text);
+        // var ciphertext = CryptoJS.AES.encrypt(text, key, {iv: iv, mode:CryptoJS.mode.CBC, padding:CryptoJS.pad.NoPadding});
+        // var base64Text = CryptoJS.enc.Base64.stringify(ciphertext.ciphertext);
 
-        var m='getMall';
+        // var m='getMall';
 
-        var data={"m":m, "t":t, "p":base64Text};
+        // var data={"m":m, "t":t, "p":base64Text};
 
-        var obj= $.ajax({
-            url: 'http://t.snapwine.net:7784/pjapi/',
-            type: 'post',
-            data: data,
-            async: false
-        });
+        // var obj= $.ajax({
+        //     url: 'http://t.snapwine.net:7784/pjapi/',
+        //     type: 'post',
+        //     data: data,
+        //     async: false
+        // });
 
-        document.write(obj.responseText);
+        // document.write(obj.responseText);
     </script>
 </head>
 <body>
-
+<div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</div>
 </body>
 </html>
