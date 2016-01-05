@@ -46,7 +46,7 @@
       }
       $(wrap).insertBefore('.notify')
 
-      $('.banner').unslider({autoplay:true})
+      $('.banner').unslider({autoplay:true,arrows:false})
       notify.text(notification)
       // 轮播图和通知 结束
 
