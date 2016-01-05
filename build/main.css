@@ -3880,16 +3880,22 @@ button
   height: 100%;
 }
 .home-special-sell-wrap {
-  padding: 0 5%;
   position: relative;
 }
-.notify,
+.notify {
+  padding: 0px 8px;
+}
 .module-clicked {
-  padding: 0 8px;
+  padding: 0px 8px;
+}
+.moduleName {
+  margin-left: 8px;
 }
 .module-item {
   position: absolute;
   width: 100%;
+  color: #bebcbc;
+  padding: 0px 8px;
 }
 .module-item .module-bar {
   height: 42px;
@@ -3898,14 +3904,27 @@ button
 .module-item .module-bar a {
   display: inline-block;
   line-height: 42px;
-  vertical-align: midlle;
+  vertical-align: middlle;
   height: 42px;
   width: 100%;
+  text-align: justify;
+  color: #bebcbc;
+}
+.module-item .module-bar a div {
+  display: inline-block;
+  line-height: 42px;
+  height: 100%;
+}
+.module-item .module-bar a div span {
+  height: 100%;
 }
 .module-item .module-bar a img {
-  width: 42px;
-  height: 42px;
-  float: left;
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  vertical-align: middle;
 }
 .module-item .module-bar a >span {
   float: left;
@@ -3918,41 +3937,44 @@ button
   display: inline-block;
   height: 30px;
 }
-.module-item .module-list-wrap {
+.checkout {
+  margin-right: 0px;
+}
+.checkout .module-list-wrap {
   position: relative;
 }
-.module-item .module-list-wrap ul li {
+.checkout .module-list-wrap ul li {
   position: absolute;
   display: inline-block;
 }
-.module-item .module-list-wrap ul li .wine-wrap {
+.checkout .module-list-wrap ul li .wine-wrap {
   display: inline-block;
   overflow: hidden;
 }
-.module-item .module-list-wrap ul li .wine-wrap .div-up {
+.checkout .module-list-wrap ul li .wine-wrap .div-up {
   position: relative;
 }
-.module-item .module-list-wrap ul li .wine-wrap .div-up .wine-detail {
+.checkout .module-list-wrap ul li .wine-wrap .div-up .wine-detail {
   display: inline-block;
 }
-.module-item .module-list-wrap ul li .wine-wrap .div-up img {
+.checkout .module-list-wrap ul li .wine-wrap .div-up img {
   ppsition: absolute;
 }
-.module-item .module-list-wrap ul li .wine-wrap .div-up span {
+.checkout .module-list-wrap ul li .wine-wrap .div-up span {
   position: absolute;
   display: inline-block;
 }
-.module-item .module-list-wrap ul li .wine-wrap .div-up .mail-info {
+.checkout .module-list-wrap ul li .wine-wrap .div-up .mail-info {
   left: 0;
   top: 0;
   background: #800080;
   opacity: 0.8;
 }
-.module-item .module-list-wrap ul li .wine-wrap .div-up .cnt-info {
+.checkout .module-list-wrap ul li .wine-wrap .div-up .cnt-info {
   top: 0;
   right: 0;
 }
-.module-item .module-list-wrap ul li .wine-wrap .div-up .subtitle {
+.checkout .module-list-wrap ul li .wine-wrap .div-up .subtitle {
   left: 0;
   bottom: 0;
   background: #000;
@@ -3960,7 +3982,7 @@ button
   width: 100%;
   color: #fff;
 }
-.module-item .module-list-wrap ul li .wine-wrap .div-up .wine-img {
+.checkout .module-list-wrap ul li .wine-wrap .div-up .wine-img {
   display: block;
 }
 .last-wine-item {
