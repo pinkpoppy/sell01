@@ -69,13 +69,21 @@
           $moduleItem = $("<div class='module-item'></div>"),
           $moduleBar = $("<div class='module-bar'></div>"),
           $a = $("<a class='module-clicked' href='list.html?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
+          $justifyLeftDiv = $("<div></div>"),
+          $justifyRightDiv = $("<div class='checkout'></div>"),
           $img = $("<img src='"+currentModule['pic']+"'>"),
-          $moduleName = $("<span>"+currentModule['tag']+"</span>"),
-          $checkOut = $("<span>查看全部 >></span>")
+          $moduleName = $("<span class='moduleName'>"+currentModule['tag']+"</span>"),
+          $checkOut = $("<span >查看全部</span>")
 
-          $a.append($img)
-          $a.append($moduleName)
-          $a.append($checkOut)
+          $justifyLeftDiv.append($img)
+          $justifyLeftDiv.append($moduleName)
+          $justifyRightDiv.append($checkOut)
+
+          // $a.append($img)
+          // $a.append($moduleName)
+          // $a.append($checkOut)
+          $a.append($justifyLeftDiv)
+          $a.append($justifyRightDiv)
           $moduleBar.append($a)
           $moduleItem.append($moduleBar)
 

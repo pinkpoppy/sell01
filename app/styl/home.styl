@@ -7,6 +7,7 @@
   background $basic-color
   overflow auto
   color #333
+  
 .header
   height $bar-height
   background $bar-color
@@ -26,30 +27,45 @@
     width 100%
     height 100%
 .home-special-sell-wrap
-  padding 0 5%
   position relative
 
 .notify
+  padding 0px 8px
+  
 .module-clicked
-  padding 0 8px
-
+  padding 0px 8px
+  
+  
+.moduleName
+  margin-left 8px
   
 .module-item
   position absolute
   width 100%
+  color $module-bar-color
+  padding 0px 8px
   .module-bar
     height $module-bar
     background transparent
     a
       display inline-block
       line-height $module-bar
-      vertical-align midlle
+      vertical-align middlle
       height $module-bar
       width 100%
+      text-align justify
+      color $module-bar-color
+      div
+        display inline-block
+        line-height 42px
+        height 100%
+        span
+          height 100%
       img
-        width $module-bar
-        height $module-bar
-        float left
+        width 40px
+        height 40px
+        border-radius(50%)
+        vertical-align middle
       >span
         float left
         margin-left 40px
@@ -58,6 +74,9 @@
       span
         display inline-block
         height 30px
+.checkout
+  margin-right 0px
+
   .module-list-wrap
     position relative
     ul
