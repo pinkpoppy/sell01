@@ -2,7 +2,6 @@
   position relative
   
 .detail-wine-info
-  margin-top 600px
   padding-bottom $shopping-bar+10
   z-index 10
   width 100%
@@ -10,25 +9,35 @@
     display inline-block
     height $detail-bar-height
   .detail-headline-left
-    background blue
     width 90%
     clear right
   .price-right
-    background purple
     width 10%
     float right
     text-align right
+    >span
+      color $market-price
   .other-attr
-    background white
+    background #fff
+    padding 10px 18px
+    margin-bottom 6px
     p
       display inline-block
       -webkit-margin-before: 0em
       -webkit-margin-after: 0em
+      width 32%
+    .supply
+      text-align center
+    .sales-cnt
+      text-align left
+    .time-or-restrict
+      text-align right
   .in-activity
-    background purple
-    margin-top 20px
+    background #fff
     height 30px
     line-height 30px
+    padding 10px
+    margin-bottom 6px
     a
       cursor pointer
       text-decoration none
@@ -44,21 +53,29 @@
     z-index 2
     border-top 1px solid #eee
     .op-wrap
+      padding 9px 10px 9px 22px
       button
         display inline-block
-        margin-top 10px
         outline none
       .op 
         border 1px solid
-        width 30px
-        height 30px
+        width 23px
+        height 23px
+        background #efefef
       .buy-button
         background red
         border-radius 5px
-        height 30px
-        width 120px
-    
+        height 34px
+        min-width 80px
+        
 .detail-wine-intro
+  background #fff
+  .intro-header
+    width 100%
+    padding 10px
+    a
+      margin-left 70%
+      
   .intro-pic
     width 100%
 
@@ -77,3 +94,19 @@
   position absolute
   top -1em
   right -1em
+
+.main-info-wrap
+  padding 10px
+  background #fff
+  margin-bottom 1px
+#immediate-buy
+  background #f5a623
+#add-goods
+  background #fff
+  margin-right 0.5em
+#minus
+  margin-right 1.5em
+#show-number
+  margin-right 1.5em
+#plus
+  margin-right 1em

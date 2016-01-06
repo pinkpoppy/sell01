@@ -26,14 +26,20 @@ jQuery(document).ready(function() {
                       app.methods.timestamp(),
                       function(data){
     (function(imgArr) {
-      var parent =  $('.unslider-wrap')
+      wrap = $("<div class='banner' id='detail-banner'></div>")
+      ul = $("<ul></ul>")
+      wrap.append(ul)
+
+      //var parent =  $('.unslider-wrap')
 
       for(var i = 0,len = imgArr.length; i < len; i++) {
-        var li = $("<li class='unslider-active'></li>"),
+        var li = $("<li></li>"),
             img = $("<img src='"+imgArr[i]['pic']+"'>")
         li.append(img)
-        parent.append(li)
+        ul.append(li)
       }
+      wrap.insertBefore('.detail-wine-info')
+      $('.banner').unslider({autoplay:true,arrows:false})
     })(data.goods.pics);
 
     // 轮播图
@@ -45,8 +51,8 @@ jQuery(document).ready(function() {
 
     (function showWineData(data) {
       $('.detail-headline-left').text(data['title'])
-      $('.price-right span').text(data['market'])
-      $('.price-right del').text(data['price'])
+      $('.price-right span').text('￥'+data['market'])
+      $('.price-right del').text('￥'+data['price'])
 
       $('.other-attr .sales-cnt').text("销量 " + data['sold'])
       $('.other-attr .supply').text("库存 " + data['inventory'])

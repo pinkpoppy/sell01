@@ -242,12 +242,14 @@ var app = (function(){
       wineLength = arguments[3],
       moduleId = arguments[4];
     }
-    var screenWidth = app.screenSize(),
-        imgWidth = liWidth = screenWidth * 0.425,
-        ratio = 0.6,
-        imgHeight = Math.ceil(imgWidth / 0.75),
-        bottomHeight = 50,
-        liHeight = imgHeight + bottomHeight;
+    var 
+      screenWidth = app.screenSize()
+      //imgWidth = liWidth = screenWidth * 0.425
+      imgWidth = liWidth = parseInt(parseInt((screenWidth - 26) / 2))
+      ratio = 0.6 //图片原始的高宽比:432 / 720 = 0.6
+      imgHeight = Math.ceil(imgWidth * ratio)
+      liBottomHeight = 70
+      liHeight = imgHeight + liBottomHeight
 
     $li = $("<li></li>")
     $wineWrap = $("<div class='wine-wrap'></div>") //包住酒款
@@ -274,10 +276,10 @@ var app = (function(){
     $spanSubtitle = $("<span class='subtitle'>"+currentWine['subtitle']+"</span>") //副标题 => 酒款上部
 
     $divHeadline = $("<div>"+currentWine['title']+"</div>") //主描述 => 酒款下部
-    $spanCurrentPrice = $("<span>"+currentWine['market']+"</span>")//现价 => 酒款下部
+    $spanCurrentPrice = $("<span class='market'>"+'&yen;'+currentWine['market']+"</span>")//现价 => 酒款下部
     $spanOriginalPrice = $("<del>"+currentWine['price']+"</del>")//原价 or 其他标注 => 酒款下部
     $spanRecom = $("<span>"+currentWine['limit']+"</span>")//主描述 => 提示
-
+    
     $awinePic.append($img)
     $divUp.append($awinePic)
     $divUp.append($spanMailInfo)
@@ -292,34 +294,50 @@ var app = (function(){
 
     // 设置 divUp 以及 divBottom 的高度
     $divUp.css('height', imgHeight)
-    $divBottom.css('height', bottomHeight)
+    $divBottom.css('height', liBottomHeight)
     $awinePic.css('height', imgHeight)
 
     $wineWrap.append($divUp)
     $wineWrap.append($divBottom)
     $li.append($wineWrap)
 
-    var y = parseInt(wineIndex / 2) * liHeight
-    if (wineIndex % 2 == 0) {
+
+    var 
+      y = parseInt(wineIndex / 2) * liHeight
+      base = 42
+      liMargin = 15
+      rightColumnStart = 8 + liWidth + 10
+    if (wineIndex == 0) {
       $li.css({
-        left: '5%',
-        top:y 
+        left: '8',
+        top:y + base
+      });
+    } else if (wineIndex % 2 == 0 && wineIndex !== 0) {
+      $li.css({
+        left: '8',
+        top:y + base + liMargin * parseInt(wineIndex / 2)
       });
     } else if (wineIndex % 2 == 1) {
-      $li.css({
-        left: '52.5%',
-        top: y
-      })
+      if (wineIndex == 1) {
+        $li.css({
+          left: rightColumnStart,
+          top: y + base
+        });
+      } else{
+        $li.css({
+          left: rightColumnStart,
+          top: y + base + liMargin * parseInt(wineIndex / 2)
+        })
+      }
+      
     }
 
     $wineWrap.css('width', liWidth)
     
     $(wrap).append($li)
-    console.log($li.css('height'))
     itemHeight = Math.ceil(parseFloat($li.css('height')))
 
     if (arguments.length == 7){
-      console.log("arguments.length: " + arguments.length)
       // if i === 最后一行 && j === 最后一行 添加 margin
       if (moduleIndex == moduleLength - 1 && 
           ((wineIndex == wineLength - 1) || (wineIndex == wineLength - 2))) {
