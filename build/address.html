@@ -3,61 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <title>编辑收获地址</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5 maximum-scale=-1.0,user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <style rel="stylesheet" src="main.css"></style>
 
   <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
   <script src="main.js"></script>
+  <script src="../app/js/privatejs/add.js"></script>
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
   <div class="wrap">
-    <section class="address-table">
-      <div>仅限中国大陆地区</div>
-      <form class="address-form">
-        <table>
-          <tbody>
-            <tr>
-              <td>收货人姓名</td>
-              <td class="cont">
-                <input type="text">
-              </td>
-            </tr>
+    <form class="address-form">
+      <table>
+        <tbody>
+          <tr>
+            <td>收货人姓名</td>
+            <td class="cont">
+              <input type="text">
+            </td>
+          </tr>
 
-            <tr>
-              <td>联系电话</td>
-              <td class="cont">
-                <input type="text">
-              </td>
-            </tr>
+          <tr>
+            <td>联系电话</td>
+            <td class="cont">
+              <input type="text">
+            </td>
+          </tr>
 
-            <tr>
-              <td>区域选择</td>
-              <td class="cont">
-                <div id="element_id">
-                  <select class="province">
-                    <option value="浙江省" selected>浙江省</option>
-                  </select>
-                  <select class="city">
-                    <option value="杭州市" selected>杭州市</option>
-                  </select>
-                  <select class="area">
-                    <option value="西湖区" selected>西湖区</option>
-                  </select>
-                </div>
-              </td>
-            </tr>
+          <tr>
+            <td>区域选择</td>
+            <td class="cont">
+              <div id="element_id">
+                <select class="province">
+                  <option value="上海" selected>上海</option>
+                </select>
+                <select class="city">
+                  <option value="上海市" selected>上海市</option>
+                </select>
 
-            <tr>
-              <td>详细地址</td>
-              <td class="cont">
-                <input placehold="请输出详细地址，方便寄送">
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-    </section>
+                <select class="area">
+                  <option value="上海市" selected>浦东新区</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>详细地址</td>
+            <td class="cont">
+              <input placehold="请输出详细地址，方便寄送">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class='footer'>
+        <div class='tips'>仅限中国大陆地区,因为天气原因以下地方暂不发货,黑龙江 内蒙古 辽宁 吉林</div>
+        <div class='save'>
+          <button>保存</button>
+        </div>
+      </div>
+    </form>
   </div>
 </body>
 </html>
