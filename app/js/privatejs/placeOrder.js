@@ -54,22 +54,17 @@ $(function(){
     
     function insertDOM(good) {
       var 
-        $item = $("<div class='goods-row'>"
-                    +"<div class='cell cell-input'>"
-                      +"<div class='ui-radio'>"
-                        +"<input type='radio'>"
+        $item = $("<li data-id='"+good['id']+"'>"
+                    +"<a>"
+                      +"<img class='po-wine-pic' src='"+good['pics'][0]['pic']+"'>"
+                      +"<div class='po-pic-wrap'>"
+                        +"<div class='po-title'>"+good['title']+"</div>"
+                        +"<span>&yen;</span><span class='price'>"+good['price']+"</span>"
+                        +"<span class='po-quantity'>x </span><span class='po-quantity'>"+good['quantity']+"</span>"
                       +"</div>"
-                    +"</div>"
-                    +"<div class='cell cell-img'>"
-                      +"<img src='"+good['pics'][0]['pic']+"'>"
-                    +"</div>"
-                    +"<div class='cell cell-cont'>"
-                      +"<div class='title'>"+good['title']+"</div>"
-                      +"<span class='price'>"+good['price']+"</span>"
-                      +"<span class='cnt'>"+good['quantity']+"</span>"
-                    +"</div>"
-                  +"</div>")
-        $('.order-listview').append($item)
+                    +"</a>"
+                  +"</li>")
+        $('.order-listview>ul').append($item)
     }
   }
 
