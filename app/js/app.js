@@ -4,7 +4,8 @@ var app = (function(){
     //APIBase : "http://www.yaerku.com/pjapi/"
     //APIBase:"../app/json/home.json"
     //APIBase : "http://www.yaerku.com/pjapi/"
-    APIBase : "http://t.snapwine.net:7784/pjapi/"
+    // APIBase : "http://t.snapwine.net:7784/pjapi/"
+    APIBase : "http://192.168.1.7:7784/pjapi/"
   }
 
   var 
@@ -226,10 +227,19 @@ var app = (function(){
       getBasicUserinfo : getUserinfoData,
       appAjax : appAjax,
       browser : browserInfo,
-      pathInfo : pathInfo
+      pathInfo : pathInfo,
+      setBgImage :setBgImage
     }
   }
 
+  function setBgImage(str) {
+    if (str.search('focus') != -1) {//点击的时候是选中状态
+      str = str.replace('focus','blur')
+    } else if (str.search('blur') != -1) { //点击的时候是未选中状态
+      str = str.replace('blur','focus')
+    }
+    return str
+  }
   
   function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength,moduleId) 
   {

@@ -9,16 +9,29 @@
   margin -1em
   >li
     position relative
-    height 120px
-    background green
+    height 110px
     width 100%
+    margin-bottom 4px
     >div
       height 100%
+      box-sizing border-box
+      padding 20px 15px 15px 15px
+      background #fff
+      input
+        display inline-block
+        width 18px
+        height 18px
+        background url('../app/resources/icon/ch_focus.png') no-repeat
+        background-size 18px 18px
+        display inline-block
+      img 
+        width 77px
+        height 77px
+        
       .cart-wine-pic
-        height 110px
-        vertical-align middle
-        padding 5px 0px
-
+        margin-left 18px
+        vertical-align: middle
+        border-radius 2px
 .behind
   width 100%
   height 120px
@@ -36,41 +49,70 @@
 .cont-right
   display inline-block 
   vertical-align middle
-  width 50%
+  padding-left 5px
   div 
     display inline-block
   .list-wine-title
-    font-size 1.2em
+    font-size .7em
   .list-wine-inventory
-    font-size 1em
+    font-size .7em
   .list-wine-price
-    font-size 1em
+    font-size .9em
   .list-wine-num
-    font-size 1em
+    font-size .9em
 
 #choose-all
   margin-right 0.5em
 #total
   display inline-block
 .money-bar
-  position fixed
-  bottom 0
-  left 0
-  width 100%
-  height 44px
-  background blue
+  padding 0 15px 0 20px
+  ul 
+    
   div
     display inline-block
     height 100%
-    line-height 44px
+    line-height 52px
     vertical-align middle
-  .money-bar-left
+#cart-all
+  width: 18px;
+  height: 18px;
+  background: url("../app/resources/icon/ch_focus.png") no-repeat;
+  background-size: 18px 18px;
+  display: inline-block     
+.cart-left
+  height 100%
+  span
     height 100%
-    width 60%
-  .money-bar-right
-    height 100%
-    width auto
-    text-align center
-    button
+    display inline-block
+    line-height 50px
+    vertical-align middle
+    margin-left 3px
+#cart-mid
+  display inline-block
+  height 100%
+  margin-left 25%
+  vertical-align middle
+  li 
+    line-height 16px
+  .price 
+    font-size 0.9em
+    vertical-align middle
+    padding-top 10px
+  .mail-info
+    font-size 0.5em
+    vertical-align middle
+.money-bar-right
+  float right
+  line-height 53px
+  margin-right 29px
   
-        
+#checkout
+  background #f5a623
+  border-radius 5px
+  height 34px
+  min-width 80px
+  border none
+  line-height 34px
+  vertical-align middle
+  display inline-block

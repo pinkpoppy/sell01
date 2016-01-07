@@ -15,6 +15,9 @@ jQuery(document).ready(function($) {
       return JSON.stringify(userinfo) 
     }
     cachedGoods = {}//将用户购物车中得物品cache住，随着购物车数量更新而更新
+    totalGoodsCnt = 0
+    defaultTotalCost = 0
+    chooseCnt = 0
   app.methods.appAjax("获取用户购物车列表",
     "cart",
     "POST",
@@ -26,34 +29,36 @@ jQuery(document).ready(function($) {
   function insertDom(data){
     var 
       $wrap = $('.swipe-delete')
-      defaultTotalCost = 0
+      
 
     for (var i= 0, l = data.length; i < l; i++) {
       cachedGoods[data[i]['id']] = data[i]['quantity']
+      totalGoodsCnt += data[i]['quantity']
+      ++chooseCnt
       //TODO 列表点击后的跳转,先不做
       var
         currentGoodsCost = parseInt(data[i]['quantity']) * parseFloat(data[i]['price'])
         defaultTotalCost += currentGoodsCost
         $list = $("<li data-id='"+data[i]['id']+"'>"
                     +"<div>"
-                      +"<div class='behind'>"
-                        +"<a href='#'>删除</a>"
-                      +"</div>"
-                      +"<input type='radio' class='goods-choosen'>"
+                      +"<input type='button' class='goods-choosen'>"
                       +"<img src='"+data[i]['pics'][0]['pic']+"' class='cart-wine-pic'>"
                       +"<div class='cont-right'>"
                         +"<div class='list-wine-title'>"+data[i]['title']+"</div><br>"
-                        +"<span class='list-wine-inventory'>"+data[i]['inventory']+"</span><br>"
-                        +"<span class='list-wine-price' data-price='"+data[i]['price']+"'>"+data[i]['price']+'&yen;'+"</span>"
-                        +"<button class='cart-minus-op'>-</button>"
+                        +"<span class='list-wine-inventory'>"+'库存'+data[i]['inventory']+"</span><br>"
+                        +"<span>&yen;</span>"
+                        +"<span class='list-wine-price' data-price='"+data[i]['price']+"'>"+data[i]['price']+"</span>"
+                        +"<button class='cart-minus-op op'>-</button>"
                         +"<span class='list-wine-num'>"+data[i]['quantity']+"</span>"
-                        +"<button class='cart-plus-op'>+</button>"
+                        +"<button class='cart-plus-op op'>+</button>"
                       +"</div>"
                     +"</div>"
                   +"</li>")
       
       $wrap.append($list)
     }
+
+    $('#checkout').text('去结算('+totalGoodsCnt+')')
     //进入购物车页面时，默认选中所有商品，总价值已经计算出来
     $('#total').text(defaultTotalCost)
 
@@ -62,14 +67,13 @@ jQuery(document).ready(function($) {
           gid = $(this).parent().parent().parent().attr('data-id')
           originalVal = parseInt($(this).next().text())
           self = $(this).next()
-
         if (originalVal == 1) {
           alert("确认删除该商品吗?")
           //YES TODO call delCart
           function deleteSucceed(data){
             if (data['state']==1) {
               // $(".listview > li[data-id='3']").remove()
-              $("li[data-id='3']").remove()
+              $("li[data-id='"+gid+"']").remove()
               alert("删除成功")
             }
           }
@@ -100,37 +104,99 @@ jQuery(document).ready(function($) {
                               var price = -(parseFloat($(self).prev().prev().text()))//单价
                               $('#total').text(price + prevTotal)
                               cachedGoods[gid] = parseInt(cachedGoods[gid]) - 1
+
+                              -- totalGoodsCnt //-1成功后,去结算按钮上数量-1
+                              $('#checkout').val('去结算('+totalGoodsCnt+')')
                             },
                             function(){
                               alert("减少数量失败,请重试")
                             })
-      });
+    });
 
-      $('.cart-plus-op').on('click',function(event) {
+    $('.cart-plus-op').on('click',function(event) {
+      var
+        gid = $(this).parent().parent().parent().attr('data-id')
+        originalVal = parseInt($(this).prev().text())
+        self = $(this).prev()
+      app.methods.appAjax("购物车数量加1",
+                          "updateCart",
+                          'POST',
+                          userData(gid,1),
+                          app.methods.timestamp(),
+                          function() {
+                            var 
+                              originalVal = parseInt($(self).text())
+                              prevTotal = parseFloat($('#total').text())//上一次总价钱
+                            $(self).text(++originalVal)
+                            var price = parseFloat($(self).prev().prev().attr('data-price'))
+                            $('#total').text(price + prevTotal)
+                            cachedGoods[gid] = parseInt(cachedGoods[gid]) + 1
+                            ++totalGoodsCnt//+1成功后,去结算按钮上数量+1
+                            $('#checkout').val('去结算('+totalGoodsCnt+')')
+                          },
+                          function(){
+                            alert("增加数量失败,请重试")
+                          })
+    });
+
+    //取消or 选中某个商品
+    $('.goods-choosen').on('click',function(event) {
+      event.preventDefault();
+      var
+        prevBgUrl = $(this).css('background-image')
+      bgUrl = app.methods.setBgImage(prevBgUrl)
+      $(this).css('backgroundImage', bgUrl)
+
+      if ($(this).attr('id')=='cart-all') {//按下的是全选按钮
+        $('.goods-choosen').css('backgroundImage', bgUrl)
+        defaultTotalCost = 0
+        totalGoodsCnt = 0
+        if (prevBgUrl.search('focus') == -1) {//按下全选的时候是全未选中状态
+          chooseCnt = $('.cont-right').size()
+          //选中全部商品 
+          $('.cont-right').each(function(i, el) {
+            var 
+              market = parseInt($(this).children('.list-wine-price').attr('data-price'))
+              quantity = 0
+              if (market) {
+                quantity = parseInt($(this).children('.list-wine-num').text())
+                defaultTotalCost += market * quantity
+                totalGoodsCnt += quantity
+              }
+          });
+          $('#checkout').text("去结算("+totalGoodsCnt +")")
+          $('#total').text(defaultTotalCost)
+        } else if (prevBgUrl.search('blur') == -1) {
+          chooseCnt = 0
+          //取消选中全部 商品
+          $('#checkout').text("去结算("+totalGoodsCnt +")")
+          $('#total').text(defaultTotalCost)
+        }
+      } else {
         var
-          gid = $(this).parent().parent().parent().attr('data-id')
-          originalVal = parseInt($(this).prev().text())
-          self = $(this).prev()
-
-        app.methods.appAjax("购物车数量加1",
-                            "updateCart",
-                            'POST',
-                            userData(gid,1),
-                            app.methods.timestamp(),
-                            function() {
-                              var 
-                                originalVal = parseInt($(self).text())
-                                prevTotal = parseFloat($('#total').text())//上一次总价钱
-                              $(self).text(++originalVal)
-                              var price = parseFloat($(self).prev().prev().attr('data-price'))
-                              $('#total').text(price + prevTotal)
-                              cachedGoods[gid] = parseInt(cachedGoods[gid]) + 1
-                            },
-                            function(){
-                              alert("增加数量失败,请重试")
-                            })
-
-      });
+          l = parseInt($('.cont-right').size())
+          price = parseInt($(this).siblings('.cont-right').children('.list-wine-price').text())
+          quantity = parseInt($(this).siblings('.cont-right').children('.list-wine-num').text())
+          console.log("price =" + price + " " + "quantity =" + quantity)
+        if (prevBgUrl.search('focus')!=-1) {
+          --chooseCnt
+          var newUrl = prevBgUrl.replace('focus','blur')
+          $('#cart-all').css('backgroundImage', newUrl);
+          totalGoodsCnt -= quantity
+          defaultTotalCost -= quantity * price
+        } else if (prevBgUrl.search('blur') !=-1) {
+          if (++chooseCnt == l) {
+            var newUrl = prevBgUrl.replace('blur','focus')
+            $('#cart-all').css('backgroundImage', newUrl);
+          }
+          totalGoodsCnt += quantity
+          defaultTotalCost += quantity * price
+        }
+        console.log("totalGoodsCnt = " + totalGoodsCnt + " " + "defaultTotalCost = " + defaultTotalCost)
+        $('#checkout').text("去结算("+totalGoodsCnt +")")
+        $('#total').text(defaultTotalCost)
+      }
+    });
   }
 
   
@@ -180,53 +246,5 @@ jQuery(document).ready(function($) {
         location.href = "placeOrder.html?order=" + order['order_no']
       })(data['order'])
     }
-  }
-  // swipe to delete partial start
-  function prevent_default(e) {
-    e.preventDefault();
-  }
-
-  function disable_scroll() {
-    $(document).on('touchmove', prevent_default);
-  }
-
-  function enable_scroll() {
-    $(document).unbind('touchmove', prevent_default)
-  }
-
-  var x
-
-  $('.swipe-delete li > a')
-  .on('touchstart', function(e) {
-    $('.swipe-delete li > a.open').css('left', '0px').removeClass('open')
-    $(e.currentTarget).addClass('open')
-    x = e.originalEvent.targetTouches[0].pageX 
-  })
-  .on('touchmove', function(e) {
-    var change = e.originalEvent.targetTouches[0].pageX - x
-    change = Math.min(Math.max(-100, change), 100) 
-    e.currentTarget.style.left = change + 'px'
-    if (change < -10) disable_scroll() 
-  })
-  .on('touchend', function(e) {
-    var left = parseInt(e.currentTarget.style.left)
-    var new_left;
-    if (left < -35) {
-      new_left = '-100px'
-    } else if (left > 35) {
-      new_left = '100px'
-    } else {
-      new_left = '0px'
-    }
-    $(e.currentTarget).animate({left: new_left}, 200)
-    enable_scroll()
-  });
-
-  $('li .delete-btn').on('touchend', function(e) {
-    e.preventDefault()
-    $(this).parents('li').slideUp('fast', function() {
-      $(this).remove()
-    })
-  })
-  // swipe to delete partial end
+  } 
 });

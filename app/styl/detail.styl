@@ -2,7 +2,8 @@
   position relative
   
 .detail-wine-info
-  padding-bottom $shopping-bar+10
+  padding-bottom $shopping-bar+6
+  background $basic-color
   z-index 10
   width 100%
   .inline-div
@@ -41,59 +42,107 @@
     a
       cursor pointer
       text-decoration none
+      display inline-block
+      vertical-align middle
+      width 100%
+      &:after 
+        content url('../app/resources/icon/arrow.png')
+        float right
+        vertical-align middle
+        display inline-block
+        width 14px
+        height 14px
+        padding-top 3px
     span
       float right
-  .shopping-bar
-    background white
-    position fixed
-    height $shopping-bar
-    width 100%
-    left 0
-    bottom 0
-    z-index 2
-    border-top 1px solid #eee
-    .op-wrap
-      padding 9px 10px 9px 22px
-      button
-        display inline-block
-        outline none
-      .op 
-        border 1px solid
-        width 23px
-        height 23px
-        background #efefef
-      .buy-button
-        background red
-        border-radius 5px
-        height 34px
-        min-width 80px
-        
+.shopping-bar
+  background white
+  position fixed
+  height $shopping-bar
+  width 100%
+  left 0
+  bottom 0
+  z-index 2
+  border-top 1px solid #eee
+  .op-wrap
+    padding 9px 10px 9px 22px
+    display inline-block
+    vertical-align middle
+    line-height 100%
+    button
+      display inline-block
+      outline none
+      box-shadow none
+    .buy-button
+      background red
+      border-radius 5px
+      height 34px
+      min-width 80px
+.op 
+  border 1px solid #cecece
+  width 23px
+  height 23px
+  background #efefef
+  vertical-align middle
+  line-height 100%
+               
 .detail-wine-intro
   background #fff
   .intro-header
     width 100%
     padding 10px
+    box-sizing border-box
+    span
+      display inline-block
+      vertical-align middle
+    div
+      display inline-block
+      height 100%
+      line-height 100%
+      vertical-align middle
+      height 100%
+      margin-right 0px
+      float right
+      margin-right 10px
+      span
+        width 24px
+        height 24px
+        background url('../app/resources/icon/ask.png') no-repeat
+        background-size 24px 24px
+        display inline-block
+        vertical-align middle
     a
-      margin-left 70%
-      
+      text-decoration none
+      vertical-align middle
+      display inline-block 
+      color #333
   .intro-pic
     width 100%
 
 #detail-basket
-  width 4em
-  height 5em
-  background red
+  width 43px
+  height 43px
   position fixed
-  bottom 100px
+  border-radius 50%
+  bottom 67px
+  background #fff url('../app/resources/icon/cart.png') no-repeat center
+  background-position center
+  background-size 24px 24px
   right 20px
   z-index 10
+  
 #goods-num
-  width 1em
-  height 1em
-  background #fff
+  width 15px
+  height 15px
+  background $common-red
   position absolute
-  top -1em
-  right -1em
+  top -7px
+  right -7px
+  border-radius 50%
+  color #fff
+  text-align center
+  font-size 10px
+  font-weight normal
 
 .main-info-wrap
   padding 10px
@@ -101,12 +150,24 @@
   margin-bottom 1px
 #immediate-buy
   background #f5a623
+  border none
 #add-goods
   background #fff
   margin-right 0.5em
+  border 1px solid #cecece
 #minus
   margin-right 1.5em
 #show-number
-  margin-right 1.5em
-#plus
   margin-right 1em
+  border none
+  background #fff
+  box-shadow none
+#plus
+  margin-right 1.5em
+.intro-wrap
+  img
+    width 100%
+  div 
+   padding 0 10px
+   padding-bottom 5px
+
