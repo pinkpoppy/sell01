@@ -26,7 +26,7 @@ $(function(){
         goods = order['goods']
         expressCost = order['express']
       $('.order-serial-num').text("订单编号: " + order['order_no'])
-      $('.order-time').text("下单时间: " + order['date'])
+      $('.order-time').text("下单时间" + order['date'])
 
       var 
         orderState = "代付款"
