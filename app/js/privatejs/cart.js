@@ -45,7 +45,7 @@ jQuery(document).ready(function($) {
                       +"<img src='"+data[i]['pics'][0]['pic']+"' class='cart-wine-pic'>"
                       +"<div class='cont-right'>"
                         +"<div class='list-wine-title'>"+data[i]['title']+"</div><br>"
-                        +"<span class='list-wine-inventory'>"+'库存'+data[i]['inventory']+"</span><br>"
+                        +"<span>库存</span><span class='list-wine-inventory'>"+data[i]['inventory']+"</span><br>"
                         +"<span>&yen;</span>"
                         +"<span class='list-wine-price' data-price='"+data[i]['price']+"'>"+data[i]['price']+"</span>"
                         +"<button class='cart-minus-op op'>-</button>"
@@ -118,25 +118,33 @@ jQuery(document).ready(function($) {
         gid = $(this).parent().parent().parent().attr('data-id')
         originalVal = parseInt($(this).prev().text())
         self = $(this).prev()
-      app.methods.appAjax("购物车数量加1",
+        prevCnt = parseInt($(self).text())
+        inventory = parseInt($(self).prev().prev().prev().prev().prev().text())
+        if (prevCnt + 1 <= inventory) {
+          app.methods.appAjax("购物车数量加1",
                           "updateCart",
                           'POST',
                           userData(gid,1),
                           app.methods.timestamp(),
-                          function() {
-                            var 
-                              originalVal = parseInt($(self).text())
-                              prevTotal = parseFloat($('#total').text())//上一次总价钱
-                            $(self).text(++originalVal)
-                            var price = parseFloat($(self).prev().prev().attr('data-price'))
-                            $('#total').text(price + prevTotal)
-                            cachedGoods[gid] = parseInt(cachedGoods[gid]) + 1
-                            ++totalGoodsCnt//+1成功后,去结算按钮上数量+1
-                            $('#checkout').val('去结算('+totalGoodsCnt+')')
+                          function(data) {
+                            if (data['state'] == 1) {
+                              var 
+                                originalVal = parseInt($(self).text())
+                                prevTotal = parseFloat($('#total').text())//上一次总价钱
+
+                              $(self).text(Math.min(++ originalVal,inventory))
+                              var price = parseFloat($(self).prev().prev().attr('data-price'))
+                              $('#total').text(price + prevTotal)
+                              cachedGoods[gid] = parseInt(cachedGoods[gid]) + 1
+                              ++totalGoodsCnt//+1成功后,去结算按钮上数量+1
+                              $('#checkout').val('去结算('+totalGoodsCnt+')')
+                            }
                           },
-                          function(){
+                          function(data){
+                            console.log(data['msg'])
                             alert("增加数量失败,请重试")
                           })
+        }
     });
 
     //取消or 选中某个商品
@@ -212,6 +220,11 @@ jQuery(document).ready(function($) {
 
   //结算
   $('#checkout').click(function(){
+    /* 检查三个点
+      * (1)如果一个商品都没选择，选择商品后再提交
+      * (2)检查是否绑定了手机号，如果没有，要求绑定，不绑定的话不允许提交
+      * (3)
+    */
     app.methods.appAjax('结算请求',
                         'placeOrder',
                         'POST',
