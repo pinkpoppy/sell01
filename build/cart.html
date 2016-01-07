@@ -5,17 +5,12 @@
   <meta charset="UTF-8">
   <title>购物车</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5 maximum-scale=-1.0,user-scalable=no">
-    <!-- 引入 jquery mobile css 开始-->
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-  <!-- 引入 jquery mobile css 结束-->
 
   <!-- 引入 jquery 开始 -->
   <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
   <!-- 引入 jquery 结束 -->
 
-  <!-- 引入 jquery mobile js 开始 -->
-  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-  <!-- 引入 jquery mobile js 开始 -->
+
 
   <!-- 共有 css/js 开始 -->
   <link rel="stylesheet" href="main.css">
@@ -29,23 +24,22 @@
 
 <body>
   <div class="wrap" data-role="page">
-    <div>
-      <input type="radio" id='choose-all'>
-      <span>全选</span>
-    </div>
     <div data-role="content">
       <ul data-role="listview" class="swipe-delete cart-listview">
       </ul>
     </div>
 
-    <section class="money-bar">
-      <div class="money-bar-left">
-        <span id="total">0</span>
-        <span>&yen;</span>
-        <span>不计运费和优惠</span>  
+    <section class="money-bar shopping-bar">
+      <div class='cart-left'>
+        <input type='button' class='goods-choosen' id='cart-all'>
+        <span>全选</span>
       </div>
+      <ul class='cart-mid' id="cart-mid">
+        <li class='price'>金额￥<span id='total'></span></li>
+        <li class='mail-info'>不计运费和优惠</li>
+      </ul>
       <div class='money-bar-right'>
-        <button id="checkout">结算</button>
+        <button id="checkout"></button>
       </div>
     </section>
     <!-- <div class="empty-cart">
