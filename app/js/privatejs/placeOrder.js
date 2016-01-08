@@ -25,21 +25,9 @@ $(function(){
         order = data['order']
         goods = order['goods']
         expressCost = order['express']
+      $('.tips').text(order['tip'])
       $('.order-serial-num').text("订单编号: " + order['order_no'])
       $('.order-time').text("下单时间" + order['date'])
-
-      var 
-        orderState = "代付款"
-        s = order['state']
-      if (s == 2) {
-        orderState = "代发货"
-      } else if (s == 3) {
-        orderState = "代收货"
-      } else if (s == 4) {
-        orderState = "交易结束"
-      }
-      $('.pay-state').text(orderState)
-
       for(var i = 0, l = goods.length; i < l; i++) {
         var
           currentGoodsCost = parseFloat(goods[i]['price'])*parseFloat(goods[i]['quantity'])
@@ -47,11 +35,51 @@ $(function(){
         insertDOM(goods[i])
       }
 
-      $('.total-cost').text("总额:￥"+totalCost)
-      $('.express-cost').text("运费:￥" + expressCost)
+      $('.total-cost').text(totalCost)
     } else if (data['state'] == 0) {
+
     }
     
+    (function setOrderState(data) {
+      var 
+        orderState = "待付款"
+        s = data['state']
+        add = data['receipt']
+      if (s == 1) {
+        /*
+        * 代付款状态
+        * 
+        */
+        domWaitPay(add)
+      }else if (s == 2) {
+        orderState = "待发货"
+        domWaitSent()
+      } else if (s == 3) {
+        orderState = "待收货"
+        domWaitReceive()
+      } else if (s == 4) {
+        orderState = "交易结束"
+        domCloseOrder()
+      }
+      $('.pay-state').text(orderState)
+    })(data);
+
+    function domWaitPay(add) {
+      //判断order 中用户收获信息是否存在
+      if (add['name'] == '') {
+        //用户第一次下单
+        
+      }
+    }
+    function domWaitSent() {
+
+    }
+    function domWaitReceive(){
+
+    }
+    function domCloseOrder() {
+
+    }
     function insertDOM(good) {
       var 
         $item = $("<li data-id='"+good['id']+"'>"
@@ -68,18 +96,20 @@ $(function(){
     }
   }
 
-  var $pay = $("input:radio[name=pay]")
-  if ($pay.is(':checked') === false) {
-    $pay.filter('[data-m=wx_pub]').prop('checked',true)
-  }
-
   function failedGetOrder(data) {
 
   }
 
   $('.pay-radio').click(function(event) {
-    $(':radio:checked').prop('checked', 'false')
-    $(this).prop('checked', 'true')
+    var 
+      preCheckedEl = $("[data-c='t']")
+
+      preBgUrl = $(preCheckedEl).css('backgroundImage')
+      $(preCheckedEl).css('backgroundImage', app.methods.setBgImage(preBgUrl))
+    $(preCheckedEl).attr('data-c', 'nt')
+
+    $(this).css('backgroundImage', preBgUrl)
+    $(this).attr('data-c', 't')
   });
 
   function collectUserInputInfo(){

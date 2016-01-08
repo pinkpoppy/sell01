@@ -1,11 +1,17 @@
 
 var app = (function(){
+  /*
+  * 0 全部订单
+  * 1 代付款
+  * 2 代发货
+  * 3 代收货
+  */
   var configUrlMap = {
     //APIBase : "http://www.yaerku.com/pjapi/"
     //APIBase:"../app/json/home.json"
     //APIBase : "http://www.yaerku.com/pjapi/"
-    APIBase : "http://t.snapwine.net:7784/pjapi/"
-    //APIBase : "http://192.168.1.7:7784/pjapi/"
+    //APIBase : "http://t.snapwine.net:7784/pjapi/"
+    APIBase : "http://192.168.1.7:7784/pjapi/"
   }
 
   var 
