@@ -44,56 +44,61 @@ $(function(){
       var 
         orderState = "待付款"
         s = data['state']
-        add = data['receipt']
+        order = data['order']
       if (s == 1) {
-        /*
-        * 代付款状态
-        * 
-        */
-        domWaitPay(add)
-      }else if (s == 2) {
-        orderState = "待发货"
-        domWaitSent()
-      } else if (s == 3) {
-        orderState = "待收货"
-        domWaitReceive()
-      } else if (s == 4) {
-        orderState = "交易结束"
-        domCloseOrder()
+        domWaitPay(order)
+      } else {
+        injectAddress(order)
+        if (s == 2) {
+          orderState = "待发货"
+          domWaitSent(order)
+        } else if (s == 3) {
+          orderState = "待收货"
+          domWaitReceive(order)
+        } else if (s == 4) {
+          orderState = "交易结束"
+          domCloseOrder(order)
+        }
       }
       $('.pay-state').text(orderState)
     })(data);
 
-    function domWaitPay(add) {
+    function domWaitPay(order) {
+      var name = order['receipt']['name']
+      $('#po-ask').remove()
+      var goodsCnt = $("<span>"+"共"+order['count']+"件</span>")
+      $('.goods-header').append(goodsCnt)
       //判断order 中用户收获信息是否存在
-      if (add['name'] == '') {
+      if (name == '') {
         //用户第一次下单情况
 
       } else {
 
       }
     }
-    function domWaitSent() {
+    function domWaitSent(order) {
+      
+    }
+    function domWaitReceive(order){
 
     }
-    function domWaitReceive(){
-
+    function domCloseOrder(order) {
     }
-    function domCloseOrder() {
 
-    }
-    function hasAddress(addInfo){
+    function injectAddress(order){//订单数据自带地址信息，直接填入 
+      addInfo = order['receipt']
       $('.pl-or-arrow').remove()
       var infoLeft = $('.info-left')
-      $(infoLeft).css('widt', '100%')
+      $(infoLeft).css('width', '100%')
       
       $('#add-person').text(addInfo['name'])
+      $('#add-tel').text(addInfo['mp'])
       var completeAdd = "地址: " 
                         + addInfo['addr_p'] 
                         + addInfo['addr_c'] 
                         + addInfo['addr_d']
                         + addInfo['address']
-      $('#')
+      $('#add-add').text(completeAdd)
     }
     function insertDOM(good) {
       var 
