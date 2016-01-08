@@ -1017,27 +1017,110 @@ height 100%,
 .each-page {
   margin-top: 50px;
 }
+.po-bg-color {
+  background: #fff;
+  padding: 10px 15px;
+}
+.order-header {
+  padding: 0px 15px;
+  display: flex;
+  font-size: 0.8em;
+  justify-content: space-between;
+  height: 27px;
+  line-height: 27px;
+  vertical-align: middle;
+  margin-bottom: 1px;
+}
 .order-header div {
   display: inline-block;
 }
-.order-header .order-serial-num {
-  width: 40%;
-}
-.order-header .order-time {
-  width: 40%;
-}
 .order-header .pay-state {
+  margin-bottom: 1px;
+}
+.tips {
+  display: block;
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  padding: 0px 15px;
+  margin-bottom: 7px;
+}
+.tips .order-serial-num {
+  width: 40%;
+}
+.tips .order-time {
+  width: 40%;
+}
+.tips .pay-state {
   width: 15%;
   text-align: right;
 }
 .person-info {
-  margin-top: 40px;
+  height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+.info-left {
+  min-width: 90%;
+}
+.pl-or-arrow {
+  background: #f00;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+.nm-tel-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.goods-header {
+  height: 33px;
+  display: flex;
+  justify-content: space-between;
 }
 .goods-info {
-  margin-top: 40px;
+  margin-bottom: 7px;
 }
-dd div {
+.order-listview {
+  width: 100%;
+}
+.order-listview ul li {
+  height: 72px;
+  border-bottom: 1px solid #f7f7f7;
+}
+.order-listview ul li a {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.po-pic-wrap {
+  max-width: 80%;
   display: inline-block;
+}
+.po-pic-wrap .price {
+  margin-right: 10px;
+}
+.po-wine-pic {
+  width: 72px;
+  height: 72px;
+  vertical-align: middle;
+}
+.po-title {
+  height: 48px;
+  line-height: 24px;
+}
+#po-ask {
+  height: 29px;
+  line-height: 25px;
+  vertical-align: middle;
+  border: 1px solid #005aff;
+  background: #fff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font-size: 15px;
 }
 body {
   font: 1em Helvetica, Arial, sans-serif;

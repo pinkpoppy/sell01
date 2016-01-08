@@ -21,47 +21,40 @@
 
 <body>
   <div class="wrap" data-role="page">
-    <section class="order-header">
+    <section class="order-header po-bg-color">
       <div class="order-serial-num"></div>
       <div class="order-time"></div>
       <div class="pay-state"></div>
     </section>
-    
-    <section class="person-info">
-      <div info-left>
+    <div class="tips po-bg-color">请尽快付款</div>
+    <section class="person-info po-bg-color">
+      <div class="info-left">
         <header>收货信息</header>
-        <div class="name">
-          <img src="">
-          <span>祝莎莎</span>
-        </div>
-        <div class="tel">
-          <img src="">
-          <span>18516764069</span>
+        <div class="nm-tel-wrap">
+          <div class="name">
+            <img src="">
+            <span>祝莎莎</span>
+          </div>
+          <div class="tel">
+           <img src="">
+            <span>18516764069</span>
+          </div>  
         </div>
         <div class="addr">上海市杨浦区大学路170号602室</div>
       </div>
-      <img src="">
+      <!-- <img src=""> -->
+      <span class="pl-or-arrow"></span>
     </section>
 
-    <section class="goods-info">
+    <section class="goods-info po-bg-color">
       <header class="goods-header">
         <span>商品信息</span>
-        <span class="goods-num"></span>
+        <button class="po-ask" id="po-ask">联系客服</button>
       </header>
-      <div class="order-listview">
-<!--         <div class="goods-row">
-          <div class="cell cell-input"><input type="radio"></div>
-          <div class="cell cell-img"><img src="https://gw.alicdn.com/bao/uploaded/i1/TB1ePLiKFXXXXb_XVXXXXXXXXXX_!!0-item_pic.jpg_200x200q50s150.jpg_.webp"></div>
-          <div class="cell cell-cont">
-            <div class="title">uiuuiubublnnjknk</div>
-            <span>knk</span>
-            <span>9</span>
-          </div>
-        </div> -->
-      </div>
+      <div class="order-listview"><ul></ul></div>
     </section>
 
-    <section class="pay-section">
+    <section class="pay-section po-bg-color">
       <div class="privilege">
         <span>优惠</span>
         <span>未使用优惠券</span>
@@ -88,7 +81,7 @@
       </div>
     </section>
 
-    <section class="total-pay">
+    <section class="total-pay po-bg-color">
       <span class="total-cost"></span>
       <span class="express-cost"></span>
       <button id="pay">支付</button>
