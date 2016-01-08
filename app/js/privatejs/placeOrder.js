@@ -67,8 +67,10 @@ $(function(){
     function domWaitPay(add) {
       //判断order 中用户收获信息是否存在
       if (add['name'] == '') {
-        //用户第一次下单
-        
+        //用户第一次下单情况
+
+      } else {
+
       }
     }
     function domWaitSent() {
@@ -79,6 +81,19 @@ $(function(){
     }
     function domCloseOrder() {
 
+    }
+    function hasAddress(addInfo){
+      $('.pl-or-arrow').remove()
+      var infoLeft = $('.info-left')
+      $(infoLeft).css('widt', '100%')
+      
+      $('#add-person').text(addInfo['name'])
+      var completeAdd = "地址: " 
+                        + addInfo['addr_p'] 
+                        + addInfo['addr_c'] 
+                        + addInfo['addr_d']
+                        + addInfo['address']
+      $('#')
     }
     function insertDOM(good) {
       var 

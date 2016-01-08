@@ -35,18 +35,25 @@
 
 .person-info
   height 74px
-  display flex
-  justify-content space-between
-  align-items center
   margin-bottom 7px
-
+  a 
+    display flex
+    width 100%
+    justify-content space-between
+    align-items center
+    text-decoration none
+    color #333
+  .add-person-info
+    font-size 0.8em
 .info-left
   min-width 90%
 .pl-or-arrow
-  background red
-  width 24px
-  height 24px
   display inline-block
+  width 14px
+  height 14px
+  background url('../app/resources/icon/arrow.png') 
+  background-size 14px 14px
+  background-repeat no-repeat
 .nm-tel-wrap
   display flex
   justify-content space-between
@@ -96,6 +103,11 @@
   margin-bottom 0px
   display flex
   justify-content space-between
+  width 100%
+  position fixed
+  bottom 0px
+  left 0px
+  z-index 2
   div
     display inline-block
     height 30px
@@ -152,6 +164,7 @@
   height 30px
 .pay-section
   background #fff
+  margin-bottom 50px
   hr
     margin-left 35px
     border 1px solid #f7f7f7
@@ -173,3 +186,10 @@
   background-image url('../app/resources/icon/ch_blur.png')
 .un-ra
   background-image url('../app/resources/icon/ch_blur.png')
+  
+.avatar-i
+  height 14px
+  width 10px
+.tel-i 
+  height 14px
+  width 8px
