@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 /* normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -1036,14 +1039,17 @@ height 100%,
 }
 .order-header .pay-state {
   margin-bottom: 1px;
+  color: #ff2600;
 }
 .tips {
   display: block;
   width: 100%;
-  height: 36px;
-  line-height: 36px;
   padding: 0px 15px;
   margin-bottom: 7px;
+  box-sizing: border-box;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 0.9em;
 }
 .tips .order-serial-num {
   width: 40%;
@@ -1121,6 +1127,115 @@ height 100%,
   -moz-border-radius: 2px;
   border-radius: 2px;
   font-size: 15px;
+}
+.margin-bottom7px {
+  margin-bottom: 7px;
+}
+.total-pay {
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: space-between;
+}
+.total-pay div {
+  display: inline-block;
+  height: 30px;
+  vertical-align: middle;
+  line-height: 30px;
+}
+.total-pay div span {
+  height: 100%;
+  display: inline-block;
+}
+.total-pay #pay {
+  background: #e83030;
+  width: 8em;
+  min-height: 30px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: none;
+  font-size: 0.8em;
+  color: #fff;
+}
+.total-pay .price-red {
+  color: #ef483e;
+  font-size: 1.2em;
+}
+.total-pay .sum-money {
+  font-size: 0.8em;
+}
+.list {
+  display: flex;
+  justify-content: space-between;
+}
+.other-info-wrap {
+  background: #fff;
+}
+.other-info-wrap hr {
+  border: 1px solid #f7f7f7;
+}
+.pay-item-wrap {
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+.pay-item-wrap .pay-name {
+  margin-left: 35px;
+  display: inline-block;
+  width: 100px;
+}
+.pay-bg-icon {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background-repeat: no-repeat;
+  background-size: 26px 26px;
+}
+.wx-icon {
+  background-image: url("../app/resources/icon/wx.png");
+}
+.ali-icon {
+  background-image: url("../app/resources/icon/ali.png");
+}
+.un-icon {
+  background-image: url("../app/resources/icon/un.png");
+}
+.pay-m-wrap {
+  width: 30px;
+  height: 30px;
+}
+.pay-section {
+  background: #fff;
+}
+.pay-section hr {
+  margin-left: 35px;
+  border: 1px solid #f7f7f7;
+}
+.blow-header-hr {
+  border: 1px solid #f7f7f7;
+}
+.padding-left15 {
+  padding: 0px 15px;
+}
+.pay-radio {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  outline: none;
+}
+.wx-ra {
+  background-image: url("../app/resources/icon/ch_focus.png");
+}
+.ali-ra {
+  background-image: url("../app/resources/icon/ch_blur.png");
+}
+.un-ra {
+  background-image: url("../app/resources/icon/ch_blur.png");
 }
 body {
   font: 1em Helvetica, Arial, sans-serif;
