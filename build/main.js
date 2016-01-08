@@ -2235,20 +2235,28 @@ var app = (function(){
   * 2 代发货
   * 3 代收货
   */
-  var configUrlMap = {
-    //APIBase : "http://www.yaerku.com/pjapi/"
-    //APIBase:"../app/json/home.json"
-    //APIBase : "http://www.yaerku.com/pjapi/"
-    //APIBase : "http://t.snapwine.net:7784/pjapi/"
-    APIBase : "http://192.168.1.7:7784/pjapi/"
-  }
-
   var 
+    configUrlMap = {
+      //APIBase : "http://www.yaerku.com/pjapi/"
+      //APIBase:"../app/json/home.json"
+      //APIBase : "http://www.yaerku.com/pjapi/"
+      //APIBase : "http://t.snapwine.net:7784/pjapi/"
+      APIBase : "http://192.168.1.7:7784/pjapi/"
+    }
     config = {
       Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
       userId :"oUeq9t-m7cPT5sAb7V7nPTfxbnpU",
       userType : "12"
     }
+
+    localArr = [
+      'name',
+      'tel',
+      'pro',
+      'city',
+      'dis',
+      'detail'
+    ]
 
     browser = {
       versions : function(){
@@ -2355,6 +2363,20 @@ var app = (function(){
     return newPathName
   }
 
+  function storageAvailable(type,arr) {
+    try {
+      var
+        storage = window[type]
+        x = '__storage_test__'
+      arr.forEach(function(val){
+        storage.setItem(val.key) = val.value
+      })
+      return true
+    }
+    catch(e) {
+      return false
+    }
+  }
   function AES(plainText,timestamp) {
 
     pkcs7 = function(str) {
@@ -2463,7 +2485,9 @@ var app = (function(){
       appAjax : appAjax,
       browser : browserInfo,
       pathInfo : pathInfo,
-      setBgImage :setBgImage
+      setBgImage :setBgImage,
+      storageAvailable,storageAvailable,
+      localArr:localArr
     }
   }
 
