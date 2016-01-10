@@ -19,14 +19,14 @@
           <tr>
             <td>收货人姓名</td>
             <td class="cont">
-              <input type="text">
+              <input type="text" id="fill-name">
             </td>
           </tr>
 
           <tr>
             <td>联系电话</td>
             <td class="cont">
-              <input type="text">
+              <input type="text" id="fill-tel">
             </td>
           </tr>
 
@@ -34,15 +34,15 @@
             <td>区域选择</td>
             <td class="cont">
               <div id="element_id">
-                <select class="province">
-                  <option value="上海" selected>上海</option>
+                <select class="province" id="fill-p" data-value="">
+                  <!-- <option value="上海" selected>上海</option> -->
                 </select>
-                <select class="city">
-                  <option value="上海市" selected>上海市</option>
+                <select class="city" id="fill-c" data-value="">
+                  <!-- <option value="上海市" selected >上海市</option> -->
                 </select>
 
-                <select class="area">
-                  <option value="上海市" selected>浦东新区</option>
+                <select class="area" id="fill-d" data-value="">
+                  <!-- <option value="上海市" selected>浦东新区</option> -->
                 </select>
               </div>
             </td>
@@ -51,7 +51,7 @@
           <tr>
             <td>详细地址</td>
             <td class="cont">
-              <input placehold="请输出详细地址，方便寄送">
+              <input placehold="请输出详细地址，方便寄送" id="fill-de">
             </td>
           </tr>
         </tbody>
@@ -59,7 +59,7 @@
       <div class='footer'>
         <div class='tips'>仅限中国大陆地区,因为天气原因以下地方暂不发货,黑龙江 内蒙古 辽宁 吉林</div>
         <div class='save'>
-          <button>保存</button>
+          <button id="add-save">保存</button>
         </div>
       </div>
     </form>
