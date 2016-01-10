@@ -1,4 +1,5 @@
 jQuery(document).ready(function($) {
+  app.methods.setModalMask($('.modal-wrap'))
   var 
     userData = function jointUserinfo() {
       var userinfo = app.methods.getBasicUserinfo()
@@ -75,6 +76,13 @@ jQuery(document).ready(function($) {
               // $(".listview > li[data-id='3']").remove()
               $("li[data-id='"+gid+"']").remove()
               alert("删除成功")
+              //检查如果该用户购物车没有商品时，那么取消全选
+              if($('.cont-right').length == 0) {
+                var 
+                  preBgUrl = $('#cart-all').css("backgroundImage")
+                  newBgUrl = preBgUrl.replace('focus','blur')
+                $('#cart-all').css("backgroundImage",newBgUrl)
+              }
             }
           }
           function deleteFailed(data){
@@ -106,7 +114,7 @@ jQuery(document).ready(function($) {
                               cachedGoods[gid] = parseInt(cachedGoods[gid]) - 1
 
                               -- totalGoodsCnt //-1成功后,去结算按钮上数量-1
-                              $('#checkout').val('去结算('+totalGoodsCnt+')')
+                              $('#checkout').text('去结算('+totalGoodsCnt+')')
                             },
                             function(){
                               alert("减少数量失败,请重试")
@@ -137,7 +145,7 @@ jQuery(document).ready(function($) {
                               $('#total').text(price + prevTotal)
                               cachedGoods[gid] = parseInt(cachedGoods[gid]) + 1
                               ++totalGoodsCnt//+1成功后,去结算按钮上数量+1
-                              $('#checkout').val('去结算('+totalGoodsCnt+')')
+                              $('#checkout').text('去结算('+totalGoodsCnt+')')
                             }
                           },
                           function(data){
@@ -221,7 +229,8 @@ jQuery(document).ready(function($) {
   //结算
   $('#checkout').click(function(){
     /* 检查三个点
-      * (1)如果一个商品都没选择，选择商品后再提交
+      * (1)每个上品数量是否<=库存数量
+      * (2)如果一个商品都没选择，弹出警告框让用户至少选择一个上品才可以提交 选择商品后再提交
       * (2)检查是否绑定了手机号，如果没有，要求绑定，不绑定的话不允许提交
       * (3)
     */
