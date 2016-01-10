@@ -2285,7 +2285,9 @@ var app = (function(){
   function calScreenWidth(){
     return screen.width
   }
-
+  function calScreenHeight(){
+    return screen.height
+  }
   function getSearchArgFromUrl(){
     var searchString = window.location.search
     var res = {}
@@ -2478,7 +2480,8 @@ var app = (function(){
       pathInfo : pathInfo,
       setBgImage :setBgImage,
       initStorage,initStorage,
-      localArr:localArr
+      localArr:localArr,
+      setModalMask:setModalMask
     }
   }
 
@@ -2614,4 +2617,14 @@ var app = (function(){
   }
   // 432 / 720 = 0.6
   //下面是最后的});
+  //设置模态对话框遮罩层宽高
+  function setModalMask(ele) {
+    var 
+      screenW = calScreenWidth()
+      screenH = calScreenHeight()
+    $(ele).css('width',screenW+'px')
+    $(ele).css('height',screenH+'px')
+    $(ele).children('.modal-body').css('width',parseInt(screenW / 2) + 'px')
+    $(ele).children('.modal-body').css('height',parseInt(screenH / 2) + 'px')
+  }
 })();
