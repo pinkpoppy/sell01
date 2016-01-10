@@ -43,8 +43,8 @@ $(function(){
     (function setOrderState(data) {
       var 
         orderState = "待付款"
-        s = data['state']
         order = data['order']
+        s = order['state']
       if (s == 1) {
         domWaitPay(order)
       } else {
@@ -64,14 +64,42 @@ $(function(){
     })(data);
 
     function domWaitPay(order) {
-      var name = order['receipt']['name']
       $('#po-ask').remove()
       var goodsCnt = $("<span>"+"共"+order['count']+"件</span>")
       $('.goods-header').append(goodsCnt)
       //判断order 中用户收获信息是否存在
+      var 
+        name = order['receipt']['name']
+        name = ""
       if (name == '') {
         //用户第一次下单情况
-
+        var 
+          sType = app.appState.storageType
+          storage = window[sType]
+          keyArr = app.appState.storageArr
+        if (storage.length==6) {
+          $('#add-person').text(storage.getItem(keyArr[0]))
+          $('#add-tel').text(storage.getItem(keyArr[1]))
+          var 
+            address = "地址:"
+            p = storage.getItem(keyArr[2])
+            c = storage.getItem(keyArr[3])
+            d = storage.getItem(keyArr[4])
+            de = storage.getItem(keyArr[5])
+          if ( p && p!= "undefined") {
+            address += p
+          }
+          if ( c && c!= "undefined") {
+            address += c
+          }
+          if ( d && d!= "undefined") {
+            address += d
+          }
+          if (de && de!= "undefined") {
+            address += de
+          }
+          $('#add-add').text(address)
+        }
       } else {
 
       }

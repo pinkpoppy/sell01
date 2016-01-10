@@ -1,4 +1,3 @@
-
 var app = (function(){
   /*
   * 0 全部订单
@@ -20,14 +19,7 @@ var app = (function(){
       userType : "12"
     }
 
-    localArr = [
-      'name',
-      'tel',
-      'pro',
-      'city',
-      'dis',
-      'detail'
-    ]
+    localArr = ['n','t','p','c','d','de']
 
     browser = {
       versions : function(){
@@ -57,7 +49,9 @@ var app = (function(){
 
   var appState = {
       module:moduleId,
-      page:pageId
+      page:pageId,
+      storageType:"localStorage",
+      storageArr:localArr
   }
   function calScreenWidth(){
     return screen.width
@@ -134,17 +128,14 @@ var app = (function(){
     return newPathName
   }
 
-  function storageAvailable(type,arr) {
+  function initStorage(type) {
     try {
-      var
+      var 
         storage = window[type]
-        x = '__storage_test__'
-      arr.forEach(function(val){
-        storage.setItem(val.key) = val.value
-      })
       return true
     }
     catch(e) {
+      alert("错误类型: " + e.name)
       return false
     }
   }
@@ -257,7 +248,7 @@ var app = (function(){
       browser : browserInfo,
       pathInfo : pathInfo,
       setBgImage :setBgImage,
-      storageAvailable,storageAvailable,
+      initStorage,initStorage,
       localArr:localArr
     }
   }
