@@ -415,7 +415,10 @@ var app = (function(){
     if (isInputEmpty(str)) {
       return "EMPTY"
     } else {
-      mpReg.test(str) ? return true : return false 
+      if (mpReg.test(str)) {
+        return true
+      }
+      return false
     }
   }
 

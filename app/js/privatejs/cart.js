@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-  // app.methods.setModalMask($('.modal-wrap'))
+  app.methods.setModalMask($('.modal-wrap'))
   var 
     userData = function jointUserinfo() {
       var userinfo = app.methods.getBasicUserinfo()
@@ -30,8 +30,6 @@ jQuery(document).ready(function($) {
   function insertDom(data){
     var 
       $wrap = $('.swipe-delete')
-      
-
     for (var i= 0, l = data.length; i < l; i++) {
       cachedGoods[data[i]['id']] = data[i]['quantity']
       totalGoodsCnt += data[i]['quantity']
@@ -154,7 +152,6 @@ jQuery(document).ready(function($) {
                           })
         }
     });
-
     //取消or 选中某个商品
     $('.goods-choosen').on('click',function(event) {
       event.preventDefault();
@@ -250,7 +247,6 @@ jQuery(document).ready(function($) {
       alert("请至少选择一件商品")
       return 
     }
-
     var isInWx = app.methods.browser()
     if (isInWx == "weixin") {
 
@@ -288,10 +284,27 @@ jQuery(document).ready(function($) {
       }  
     } else if (data['state'] == 1) {
       //库存没有问题.
-      //页面跳转
-      (function(order){
+      //在这里假设有一个 isBind 字段,用来判断用户是否绑定了手机号
+      //if in wx -> 绑定
+      //not in wx 在 click checkout 判断完库存后弹出输入手机号页面
+      var isBind = false
+      if (isBind) { //用户已经绑定了手机号,直接跳转,生成订单
+        (function(order){
         location.href = "placeOrder.html?order=" + order['order_no']
-      })(data['order'])
+        })(data['order'])
+      } else {
+        //弹出相应绑定页面
+        //modal-wrap 
+        //start: top:2000px 
+        //end: top:0px
+        $('.modal-wrap').show()
+        $('.modal-wrap').animate({
+          top:0
+        },100,function() {
+
+        })
+      }
+
     }
   } 
 });
