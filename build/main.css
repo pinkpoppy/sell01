@@ -411,6 +411,24 @@ ul
   vertical-align: middle;
   display: inline-block;
 }
+.common {
+  background-color: #fff;
+  position: absolute;
+  top: 27%;
+  bottom: 27%;
+  left: 8%;
+  border-radius: 5px;
+  padding: 2em 3em;
+}
+.common header {
+  textalign: center;
+}
+.common .neck-div {
+  display: inline-block;
+}
+.common #wx-send-code {
+  display: inline-block;
+}
 .coupon-header {
   heigth: 50px;
   background: #f00;
@@ -1288,13 +1306,17 @@ body {
   bottom: 0;
   display: none;
 }
-.modal-wrap .common {
-  background-color: #fff;
+.modal-close {
   position: absolute;
-  top: 27%;
-  bottom: 27%;
-  left: 8%;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  width: 3em;
+  height: 3em;
+  font-size: 1em;
+  top: 0px;
+  right: 0px;
+  background: transparent;
+  border: none;
+  z-index: 3;
+}
+h3 {
+  margin: 0;
 }

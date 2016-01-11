@@ -2239,8 +2239,8 @@ var app = (function(){
       //APIBase : "http://www.yaerku.com/pjapi/"
       //APIBase:"../app/json/home.json"
       //APIBase : "http://www.yaerku.com/pjapi/"
-      //APIBase : "http://t.snapwine.net:7784/pjapi/"
-      APIBase : "http://192.168.1.7:7784/pjapi/"
+      APIBase : "http://t.snapwine.net:7784/pjapi/"
+      //APIBase : "http://192.168.1.7:7784/pjapi/"
     }
     config = {
       Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
@@ -2415,8 +2415,7 @@ var app = (function(){
                    requestType,
                    userData,
                    timestamp,
-                   succeedCallback,
-                   failedCallback
+                   succeedCallback
                    ) {
     var 
       path = configUrlMap['APIBase']
@@ -2434,7 +2433,7 @@ var app = (function(){
       succeedCallback(data)
     })
     .fail(function(data) {
-      failedCallback(data)
+      //failedCallback(data)
       ajaxLog(path,des,'failed')
     })
     .always(function(data) {
