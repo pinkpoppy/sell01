@@ -252,7 +252,8 @@ var app = (function(){
       setBgImage :setBgImage,
       initStorage,initStorage,
       localArr:localArr,
-      setModalMask:setModalMask
+      setModalMask:setModalMask,
+      isLegalMobilePhone : isLegalMobilePhone
     }
   }
 
@@ -400,4 +401,22 @@ var app = (function(){
     $(ele).children('.modal-body').css('width',boxW + 'px')
     $(ele).children('.modal-body').css('height',boxH + 'px')
   }
+
+  //表单验证
+  function isInputEmpty(str){
+    if (str.length == 0) {
+      return true
+    }
+  }
+
+  function isLegalMobilePhone(str) {
+    var
+      mpReg = /1[^0126][0-9]{9}/
+    if (isInputEmpty(str)) {
+      return "EMPTY"
+    } else {
+      mpReg.test(str) ? return true : return false 
+    }
+  }
+
 })();
