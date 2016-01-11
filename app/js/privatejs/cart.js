@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-  app.methods.setModalMask($('.modal-wrap'))
+  // app.methods.setModalMask($('.modal-wrap'))
   var 
     userData = function jointUserinfo() {
       var userinfo = app.methods.getBasicUserinfo()
@@ -229,11 +229,34 @@ jQuery(document).ready(function($) {
   //结算
   $('#checkout').click(function(){
     /* 检查三个点
-      * (1)每个上品数量是否<=库存数量
-      * (2)如果一个商品都没选择，弹出警告框让用户至少选择一个上品才可以提交 选择商品后再提交
+      * (1)如果一个商品都没选择，弹出警告框让用户至少选择一个商品,静默处理(留在购物车页面)
+      * (2)与Server 交互一次,确认选择数量 <= 库存数量
       * (2)检查是否绑定了手机号，如果没有，要求绑定，不绑定的话不允许提交
       * (3)
     */
+
+    var hasChoosenGoods = (function(){
+      var choosed = false
+      $.each($('.goods-choosen'),function(index, el) {
+        var imgBgUrl = $(el).css('backgroundImage')
+        if (imgBgUrl.search('focus') != -1) {
+          choosed = true
+          return
+        }
+      })
+      return choosed
+    })()
+    if (!hasChoosenGoods) {
+      alert("请至少选择一件商品")
+      return 
+    }
+
+    var isInWx = app.methods.browser()
+    if (isInWx == "weixin") {
+
+    } else {
+
+    }
     app.methods.appAjax('结算请求',
                         'placeOrder',
                         'POST',
@@ -250,19 +273,21 @@ jQuery(document).ready(function($) {
   });
   
   function afterPay(data) {
-    if (data['msg']=="库存不足" || data['state']=="0") {
-      var shortageGoods = data['goods']
-      for (var i=0,l = shortageGoods.length; i<l; i++) {
-        $(".listview").filter(function(index,ele) {
-          if ($(this).attr('id') == shortageGoods[i]['id']) {
-            $(this).attr('id', shortageGoods[i]['id'])
-          }
-          return
-        })
-      }
-      alert("库存不足，请重新选择数量")
+    if (data['state']=="0") {
+      if (data['msg']=="库存不足") {
+        var shortageGoods = data['goods']
+        for (var i=0,l = shortageGoods.length; i<l; i++) {
+          $(".listview").filter(function(index,ele) {
+            if ($(this).attr('id') == shortageGoods[i]['id']) {
+              $(this).attr('id', shortageGoods[i]['id'])
+            }
+            return
+          })
+        }
+        alert("库存不足，请重新选择商品数量")
+      }  
     } else if (data['state'] == 1) {
-      //库存没有问题.可以提交订单,服务器返回订单编号,到下一个页面再用订单编号去获取订单详情
+      //库存没有问题.
       //页面跳转
       (function(order){
         location.href = "placeOrder.html?order=" + order['order_no']

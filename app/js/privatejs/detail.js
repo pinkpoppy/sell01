@@ -4,6 +4,10 @@ jQuery(document).ready(function() {
     gId = app.methods.getSearchArgFromUrl()['id']
     userData = function jointUserinfo() {
       var userinfo = app.methods.getBasicUserinfo()
+      if (arguments.length == 0) {
+        //获取用户购物车中商品的数量
+        return JSON.stringify(userinfo) 
+      }
       if (isLegalGoodsId(gId) ) {
         userinfo['gid'] = arguments[0]
       }
@@ -42,6 +46,20 @@ jQuery(document).ready(function() {
       $('.banner').unslider({autoplay:true,arrows:false})
     })(data.goods.pics);
 
+  app.methods.appAjax("获取用户购物车列表",
+                      "getCartCount",
+                      "POST",
+                      userData(),
+                      app.methods.timestamp(),
+                      function(data){
+                        if (data['state'] == 1) {
+                         var gooodsInCart = 0
+                         gooodsInCart = data['count']
+                         $('#goods-num').text(gooodsInCart)
+                        } else {
+                          alert("服务器繁忙,请刷新页面再试")
+                        }
+                      })
     // 轮播图
     $('.unslider').unslider({
       animation: 'fade',

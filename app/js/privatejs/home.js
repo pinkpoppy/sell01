@@ -23,6 +23,8 @@
   app.methods.appAjax(des,methodName,requestType,userData(),timestamp,callBack)
 
   function callBack(response) {
+    var r = response
+    x = r.state
     if (response.msg=="成功") {
       var 
         imgArr = response.banner.items,//获取轮播图
@@ -117,9 +119,7 @@
           parent.append($moduleItem)
          }
        if (i > 0) {
-          console.log("$moduleItem.css('height') =" + $moduleItem.css('height'))
           prevModuleItemStart += Math.ceil(parseInt($moduleItem.css('height')))
-          console.log("prevModuleItemStart = " + prevModuleItemStart )
         }
         $moduleItem.css({
           top: prevModuleItemStart,
@@ -129,10 +129,6 @@
       $(".wine-detail").click(function(event) {
         event.stopPropagation()
       });
-      
-      // var
-      //   prevHpsrHeight = parseInt($('.home-special-sell-wrap').css('height'))
-      // $('.home-special-sell-wrap').css('height',prevHpsrHeight+=$moduleItem.css('height'))
     }
   }
 });
