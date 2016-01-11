@@ -1272,7 +1272,6 @@ body {
   background-color: #f7f0f0;
   line-height: 1.5;
   color: #333;
-  position: relative;
 }
 .wrap ul {
   -webkit-margin-after: 0em;
@@ -1291,7 +1290,10 @@ body {
 .modal-wrap .common {
   background-color: #fff;
   position: absolute;
-  top: 25%;
-  bottom: 25%;
-  left: 25%;
+  top: 27%;
+  bottom: 27%;
+  left: 8%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }

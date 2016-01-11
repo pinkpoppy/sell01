@@ -2239,8 +2239,8 @@ var app = (function(){
       //APIBase : "http://www.yaerku.com/pjapi/"
       //APIBase:"../app/json/home.json"
       //APIBase : "http://www.yaerku.com/pjapi/"
-      APIBase : "http://t.snapwine.net:7784/pjapi/"
-      // APIBase : "http://192.168.1.7:7784/pjapi/"
+      //APIBase : "http://t.snapwine.net:7784/pjapi/"
+      APIBase : "http://192.168.1.7:7784/pjapi/"
     }
     config = {
       Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
@@ -2620,11 +2620,13 @@ var app = (function(){
   //设置模态对话框遮罩层宽高
   function setModalMask(ele) {
     var 
-      screenW = calScreenWidth()
-      screenH = calScreenHeight()
+      screenW = parseFloat(calScreenWidth())
+      screenH = parseFloat(calScreenHeight())
+      boxW = Math.ceil(parseFloat(screenW * 0.84))
+      boxH = Math.ceil(parseFloat(screenH * 0.46))
     $(ele).css('width',screenW+'px')
     $(ele).css('height',screenH+'px')
-    $(ele).children('.modal-body').css('width',parseInt(screenW / 2) + 'px')
-    $(ele).children('.modal-body').css('height',parseInt(screenH / 2) + 'px')
+    $(ele).children('.modal-body').css('width',boxW + 'px')
+    $(ele).children('.modal-body').css('height',boxH + 'px')
   }
 })();
