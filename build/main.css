@@ -297,7 +297,7 @@ select {
   display: inline-block;
   width: 18px;
   height: 18px;
-  background: url("../app/resources/icon/ch_focus.png") no-repeat;
+  background: url("icon/ch_focus.png") no-repeat;
   background-size: 18px 18px;
   display: inline-block;
 }
@@ -364,7 +364,7 @@ ul
 #cart-all {
   width: 18px;
   height: 18px;
-  background: url("../app/resources/icon/ch_focus.png") no-repeat;
+  background: url("icon/ch_focus.png") no-repeat;
   background-size: 18px 18px;
   display: inline-block;
 }
@@ -418,16 +418,64 @@ ul
   bottom: 27%;
   left: 8%;
   border-radius: 5px;
-  padding: 2em 3em;
+  padding: 2em 1em;
 }
 .common header {
-  textalign: center;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.common header span {
+  font-size: 0.9em;
 }
 .common .neck-div {
-  display: inline-block;
+  display: flex;
+  margin-bottom: 13px;
+  height: 38px;
+}
+.common .neck-div div {
+  background: #efefef;
+  display: flex;
+  margin-right: 10px;
+}
+.common .neck-div div div span {
+  margin-right: 10px;
+  border: 1px solid;
+}
+.common .neck-div div div input {
+  height: 38px;
+}
+.common .input-wrap {
+  border: 1px solid #d9d9d9;
+  background: #efefef;
+  margin-bottom: 13px;
+}
+.common .input-wrap span {
+  width: 80px;
+  height: 100%;
+  vertical-align: middle;
+}
+.common .lebel {
+  padding-left: 5px;
+  width: 100px;
+  line-height: 38px;
+  vertical-align: middle;
 }
 .common #wx-send-code {
   display: inline-block;
+  height: 100%;
+  width: 140px;
+  border: 1px solid #e53935;
+  background: #fff;
+}
+.common #wx-confirm-binding {
+  display: block;
+  width: 100%;
+  height: 38px;
+  background: #e53935;
+  color: #fff;
+}
+#wx-err-msg {
+  margin-top: 20px;
 }
 .coupon-header {
   heigth: 50px;
@@ -553,7 +601,7 @@ ul
   width: 100%;
 }
 .detail-wine-info .in-activity a:after {
-  content: url("../app/resources/icon/arrow.png");
+  content: url("icon/arrow.png");
   float: right;
   vertical-align: middle;
   display: inline-block;
@@ -626,7 +674,7 @@ ul
 .detail-wine-intro .intro-header div span {
   width: 24px;
   height: 24px;
-  background: url("../app/resources/icon/ask.png") no-repeat;
+  background: url("icon/ask.png") no-repeat;
   background-size: 24px 24px;
   display: inline-block;
   vertical-align: middle;
@@ -648,7 +696,7 @@ ul
   -moz-border-radius: 50%;
   border-radius: 50%;
   bottom: 67px;
-  background: #fff url("../app/resources/icon/cart.png") no-repeat center;
+  background: #fff url("icon/cart.png") no-repeat center;
   background-position: center;
   background-size: 24px 24px;
   right: 20px;
@@ -1107,7 +1155,7 @@ height 100%,
   display: inline-block;
   width: 14px;
   height: 14px;
-  background: url("../app/resources/icon/arrow.png");
+  background: url("icon/arrow.png");
   background-size: 14px 14px;
   background-repeat: no-repeat;
 }
@@ -1231,13 +1279,13 @@ height 100%,
   background-size: 26px 26px;
 }
 .wx-icon {
-  background-image: url("../app/resources/icon/wx.png");
+  background-image: url("icon/wx.png");
 }
 .ali-icon {
-  background-image: url("../app/resources/icon/ali.png");
+  background-image: url("icon/ali.png");
 }
 .un-icon {
-  background-image: url("../app/resources/icon/un.png");
+  background-image: url("icon/un.png");
 }
 .pay-m-wrap {
   width: 30px;
@@ -1269,13 +1317,13 @@ height 100%,
   outline: none;
 }
 .wx-ra {
-  background-image: url("../app/resources/icon/ch_focus.png");
+  background-image: url("icon/ch_focus.png");
 }
 .ali-ra {
-  background-image: url("../app/resources/icon/ch_blur.png");
+  background-image: url("icon/ch_blur.png");
 }
 .un-ra {
-  background-image: url("../app/resources/icon/ch_blur.png");
+  background-image: url("icon/ch_blur.png");
 }
 .avatar-i {
   height: 14px;
@@ -1305,6 +1353,20 @@ body {
   top: 2000px;
   bottom: 0;
   display: none;
+  margin-bottom: 13px;
+}
+.modal-wrap .input-wrap {
+  height: 38px;
+  display: flex;
+}
+.modal-wrap input {
+  background: transparent;
+  outline: none;
+}
+.modal-wrap .bd-r {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 .modal-close {
   position: absolute;
