@@ -1,16 +1,30 @@
 jQuery(document).ready(function($) {
   app.methods.setModalMask($('.modal-wrap'))
+  var
+    loginConfig = {
+      'EMPTY' : '手机号不能为空',
+      'telNotValid' : '请输入有效的手机号码'
+    }
   var 
     userData = function jointUserinfo() {
       var userinfo = app.methods.getBasicUserinfo()
       if (arguments.length == 1) {
         userinfo['goods'] = arguments[0]
 
-      } else if (arguments.length==2) {//调用updateCart接口
+      } else if (arguments.length==2) {
+
+        //调用updateCart接口
         userinfo['gid'] = arguments[0]
         userinfo['quantity'] = arguments[1]
       } else if (arguments.length == 3) { //删除酒款
         userinfo['gid'] = arguments[0]
+      } else if (arguments.length == 4) {
+        userinfo['mp'] = arguments[0]
+        userinfo['type'] = arguments[1]
+      } else if (arguments.length == 5) {
+        //验证验证码
+        userinfo['mp'] = arguments[0]
+        userinfo['code'] = arguments[1]
       }
       console.log(JSON.stringify(userinfo))
       return JSON.stringify(userinfo) 
@@ -137,7 +151,6 @@ jQuery(document).ready(function($) {
                               var 
                                 originalVal = parseInt($(self).text())
                                 prevTotal = parseFloat($('#total').text())//上一次总价钱
-
                               $(self).text(Math.min(++ originalVal,inventory))
                               var price = parseFloat($(self).prev().prev().attr('data-price'))
                               $('#total').text(price + prevTotal)
@@ -268,6 +281,10 @@ jQuery(document).ready(function($) {
                         })
   });
   
+  function placeOrder(order) {
+    console.log(order)
+    location.href = "placeOrder.html?order=" + order['order_no']
+  }
   function afterPay(data) {
     if (data['state']=="0") {
       if (data['msg']=="库存不足") {
@@ -289,9 +306,7 @@ jQuery(document).ready(function($) {
       //not in wx 在 click checkout 判断完库存后弹出输入手机号页面
       var isBind = false
       if (isBind) { //用户已经绑定了手机号,直接跳转,生成订单
-        (function(order){
-        location.href = "placeOrder.html?order=" + order['order_no']
-        })(data['order'])
+        placeOrder(data['order'])
       } else {
         //弹出相应绑定页面
         //modal-wrap 
@@ -303,8 +318,93 @@ jQuery(document).ready(function($) {
         },100,function() {
 
         })
+        var 
+          canSend = false
+          telStr = ""
+        $('#wx-tel-input').blur(function(event) { 
+          telStr = $(this).val()
+          var isLegal = app.methods.isLegalMobilePhone(telStr)
+          if (isLegal) {
+            if (isLegal == "EMPTY") {
+              $('#wx-err-msg').text(loginConfig['EMPTY'])
+              return
+            } else {
+              canSend = true
+            }
+          } else {
+            $('#wx-err-msg').text(loginConfig['telNotValid'])
+          } 
+        });
       }
 
+      $('#wx-send-code').click(function(event) {
+        //向服务器请求验证码
+        app.methods.appAjax('获取手机验证码',
+                            'getCode',
+                            'POST',
+                            userData(telStr,'2','pl1','pl2'),
+                            app.methods.timestamp(),
+                            function(data){
+                              if (data['state'] == 1) {
+                                //服务器成功响应,客户顿开始倒计时
+                                var 
+                                  s = 60
+                                  i = setInterval(function(){
+                                        $('#wx-send-code').text(--s + 's')
+                                      },1000)
+                                  setTimeout(function(){
+                                    clearInterval(i)
+                                    $('#wx-send-code').text("重新发送")
+                                  },60000)
+                              }
+                            })
+      });
+
+      $('#wx-confirm-binding').click(function(event) {
+        //提交验证码
+        var code = $('#bind-code-input').val()
+        if (canSend) {
+          if (code.length == 6) {
+            app.methods.appAjax('提交验证码,绑定微信号',
+                                'validCode',
+                                'POST',
+                                userData(telStr,code,'pl1','pl2','pl3'),
+                                app.methods.timestamp(),
+                                function(data){
+                                  console.log(data)
+                                  if (data['state'] == '1'){
+                                    $('#wx-confirm-binding').text("绑定成功!正在生成订单...")
+                                        app.methods.appAjax('结算请求',
+                                                        'placeOrder',
+                                                        'POST',
+                                                        userData(cachedGoods),
+                                                      app.methods.timestamp(),
+                                                function(data){
+                                                  //TODO 请求成功，跳转到订单页面
+                                                  if (data['state'] == 1) {
+                                                    placeOrder(data['order'])
+                                                  }
+                                                  //TODO 其他失败情况
+                                                  afterPay(data)
+                                                })
+                                    setTimeout(function(){
+                                      placeOrder(data['order'])
+                                    },2000)
+                                  } else if (data['state'] == '3') {
+                                    $('#wx-err-msg').text("验证码错误,请检查")
+                                  }
+                                })
+          }
+        }
+      })
+
+      $('#wx-modal-close').click(function(event) {
+        $('.modal-wrap').animate({
+          top: 2000},
+          300, function() {
+          $('.modal-wrap').hide()
+        })
+      })
     }
   } 
 });
