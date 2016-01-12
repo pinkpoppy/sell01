@@ -26,13 +26,24 @@ gulp.task('scripts',function(){
             'app/js/*.js'])
       .pipe(concat('main.js'))
       // .pipe(uglify())
-      // .pipe(minify())
+      //.pipe(minify())
       .pipe(gulp.dest('build/'));
 });
 
-gulp.task('watch:all',['styles','scripts'],function(){
+gulp.task('privateScripts',function(){
+  gulp.src(['app/js/privatejs/*.js'])
+    //.pipe(uglify())
+    //.pipe(minify())
+    .pipe(gulp.dest('build/privatejs/'))
+});
+
+gulp.task('watch:all',['styles','scripts','privateScripts'],function(){
   gulp.watch(['app/js/*.js','vendor/*.js'],function(){
     gulp.start('scripts');
+  });
+
+  gulp.watch(['app/js/privatejs/*.js'],function(){
+    gulp.start('privateScripts')
   });
 
   gulp.watch(['app/plugin-css/*.css','app/styl/*.styl'],function(){
