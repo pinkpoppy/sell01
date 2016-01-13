@@ -57,7 +57,7 @@ jQuery(document).ready(function() {
                          gooodsInCart = data['count']
                          $('#goods-num').text(gooodsInCart)
                         } else {
-                          alert("服务器繁忙,请刷新页面再试")
+                          //alert("服务器繁忙,请刷新页面再试")
                         }
                       })
     // 轮播图
@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
     })(data.goods);
 
     //set shopping cart's href
-    var href = app.methods.pathInfo("cart.html?id=")
+    var href = app.methods.pathInfo("cart.php?id=")
     
     $("#detail-basket").click(function(event) {
       event.stopPropagation()
@@ -122,7 +122,7 @@ jQuery(document).ready(function() {
                         function(data){
                           if (data['state'] == 1 
                             && data['msg'] == "成功") {
-                              var addPath = "cart.html?id="
+                              var addPath = "cart.php?id="
                             window.location.href = app.methods.pathInfo(addPath) + gId
                           }
                         })

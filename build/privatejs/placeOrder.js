@@ -195,11 +195,7 @@ $(function(){
 
       if (data['state'] == 1 && data['msg'] == "成功") {
         var 
-          scheme = "http://t.snapwine.net:7784/test.html"
-          // params = {
-          //   charge:charge,
-          //   scheme:scheme
-          // }
+          scheme = "http://t.snapwine.net:7784/test.php"
           pingpp.createPayment(charge, function(result, err) {
 
               alert(result + " " +err['msg'] + " " + err['extra'])

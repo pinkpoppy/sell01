@@ -2242,10 +2242,19 @@ var app = (function(){
       APIBase : "http://t.snapwine.net:7784/pjapi/"
       //APIBase : "http://192.168.1.7:7784/pjapi/"
     }
+    //oUeq9t-m7cPT5sAb7V7nPTfxbnpU
     config = {
       Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
       userId :"oUeq9t-m7cPT5sAb7V7nPTfxbnpU",
-      userType : "12"
+      userType : "12",
+      headPic:'',
+      nickname:'',
+      sex:'',
+      intro:'',
+      country:'',
+      pro:'',
+      city:'',
+      dis:'',
     }
 
     localArr = ['n','t','p','c','d','de']
@@ -2449,6 +2458,10 @@ var app = (function(){
     var u = {}
     u.userId = config.userId
     u.userType = config.userType
+    u.headPic = config.headPic
+    u.nickname = config.nickname
+    u.sex = config.sex
+    u.intro = config.intro
     u.version = appVersion()
     u.deviceMode = deviceInfo()
     return u
@@ -2467,6 +2480,7 @@ var app = (function(){
     urls:configUrlMap,
     screenSize:calScreenWidth,
     appState:appState,
+    config:config,
     methods:{
       produceSeperateWineHtml : produceSeperateWineHtml,
       getSearchArgFromUrl :     getSearchArgFromUrl,
@@ -2520,7 +2534,7 @@ var app = (function(){
     $divBottom = $("<div class='div-bottom'></div>") //酒款下部
 
     $awinePic = $("<a class='wine-detail' href='"
-                    +pathInfo("detail.html?id=")
+                    +pathInfo("detail.php?id=")
                     +currentWine['id']
                     +"'data-id='"
                     +currentWine['id']

@@ -1,3 +1,8 @@
+<?php
+	require_once('check.php');
+	require_once('auth.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,5 +66,9 @@
 		<!-- 底部 Tabbar 结束 -->
 
 	</div>
+	<script type="text/javascript">
+		userInfo = '<?php echo $userInfo; ?>'
+		alert("userInfo = " + userInfo)		
+	</script>
 </body>
 </html>
