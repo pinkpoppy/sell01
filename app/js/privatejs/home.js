@@ -1,7 +1,7 @@
 /**
  * Created by sszhu on 15/12/8.
  */
- jQuery(document).ready(function($){
+ jQuery(document).ready(function(){
   //如果是在微信浏览器中打开,那么移除特卖首页顶部banner
   if (app.methods.browser()=="weixin") {
     $(".header").remove()
@@ -72,7 +72,7 @@
         var 
           $moduleItem = $("<div class='module-item'></div>"),
           $moduleBar = $("<div class='module-bar'></div>"),
-          $a = $("<a class='module-clicked' href='list.html?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
+          $a = $("<a class='module-clicked' href='list.php?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
           $justifyLeftDiv = $("<div></div>"),
           $justifyRightDiv = $("<div class='checkout'></div>"),
           $img = $("<img src='"+currentModule['pic']+"'>"),

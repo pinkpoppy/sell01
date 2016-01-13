@@ -283,7 +283,7 @@ jQuery(document).ready(function($) {
   
   function placeOrder(order) {
     console.log(order)
-    location.href = "placeOrder.html?order=" + order['order_no']
+    location.href = "placeOrder.php?order=" + order['order_no']
   }
   function afterPay(data) {
     if (data['state']=="0") {
