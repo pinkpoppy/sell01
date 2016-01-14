@@ -57,7 +57,7 @@ jQuery(document).ready(function() {
                          gooodsInCart = data['count']
                          $('#goods-num').text(gooodsInCart)
                         } else {
-                          alert("服务器繁忙,请刷新页面再试")
+                          //alert("服务器繁忙,请刷新页面再试")
                         }
                       })
     // 轮播图

@@ -14,17 +14,30 @@ var app = (function(){
       //APIBase : "http://192.168.1.7:7784/pjapi/"
     }
     //oUeq9t-m7cPT5sAb7V7nPTfxbnpU
+    // config = {
+    //   Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
+    //   userId :"",
+    //   userType : "12",
+    //   headPic:'',
+    //   nickname:'',
+    //   sex:'',
+    //   intro:'',
+    //   country:'',
+    //   pro:'',
+    //   city:'',
+    //   dis:'',
+    // }
     config = {
       Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
-      userId :"",
+      userId :localStorage['userId'],
       userType : "12",
-      headPic:'',
-      nickname:'',
-      sex:'',
+      headPic:localStorage['headPic'],
+      nickname:localStorage['nickname'],
+      sex:localStorage['sex'],
       intro:'',
-      country:'',
-      pro:'',
-      city:'',
+      country:localStorage['country'],
+      pro:localStorage['province'],
+      city:localStorage['city'],
       dis:'',
     }
 
