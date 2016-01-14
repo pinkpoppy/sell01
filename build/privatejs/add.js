@@ -12,7 +12,7 @@ jQuery(document).ready(function($){
   	keyArr = app.appState.storageArr
   if (isStorageAvailable) {
   	s = window[storage]
-  	if (s.length == 6) {
+  	if (s.length >= 6) {
 	  	var 
 	  		nn = s.getItem(keyArr[0])
 	  		tt = s.getItem(keyArr[1])

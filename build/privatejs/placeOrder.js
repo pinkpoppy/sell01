@@ -13,7 +13,7 @@ $(function(){
           }
         }
       }
-      console.log(JSON.stringify(userinfo) )
+      console.log(JSON.stringify(userinfo))
       return JSON.stringify(userinfo) 
     }
     expressCost = 0

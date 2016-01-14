@@ -2245,7 +2245,7 @@ var app = (function(){
     //oUeq9t-m7cPT5sAb7V7nPTfxbnpU
     config = {
       Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
-      userId :"oUeq9t-m7cPT5sAb7V7nPTfxbnpU",
+      userId :"",
       userType : "12",
       headPic:'',
       nickname:'',
@@ -2464,6 +2464,7 @@ var app = (function(){
     u.intro = config.intro
     u.version = appVersion()
     u.deviceMode = deviceInfo()
+    console.log("u in getUserinfoData " + u.userId)
     return u
   }
 

@@ -16,9 +16,31 @@
 
 	<!-- 共有 css/js 开始 -->
 	<link rel="stylesheet" href="main.css">
+
 	<script src="main.js"></script>
 	<!-- 共有 css/js 结束 -->
 
+	<script>
+		var u = '<?php echo $userInfo;?>'
+		if (u) {
+			u = JSON.parse(u)
+			var sex = u['sex']
+			if (sex=='1') {
+				sex = '男'
+			} else if (sex=='2') {
+				sex = '女'
+			} else {
+				sex = '其他'
+			}
+			app.config.userId = u['openid']
+			app.config.headPic = u['headimgurl']
+			app.config.nickname = u['nickname']
+			app.config.sex = sex
+			app.config.country = u['country']
+			app.config.pro = u['province']
+			app.config.city['city']
+		}
+	</script>
 	<!-- 私有 js 开始 -->
 	<script src="privatejs/home.js"></script>
 	<!-- 私有 js 结束 -->
@@ -66,9 +88,5 @@
 		<!-- 底部 Tabbar 结束 -->
 
 	</div>
-	<script type="text/javascript">
-		userInfo = '<?php echo $userInfo; ?>'
-		alert("userInfo = " + userInfo)		
-	</script>
 </body>
 </html>
