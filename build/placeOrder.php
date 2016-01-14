@@ -31,7 +31,7 @@
     </section>
     <div class="tips po-bg-color">请尽快付款</div>
     <section class="person-info po-bg-color">
-      <a href="address.html" class="add-person-info">
+      <a href="address.php" class="add-person-info">
         <div class="info-left">
           <header>收货信息</header>
           <div class="nm-tel-wrap">

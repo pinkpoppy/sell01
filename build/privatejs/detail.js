@@ -17,7 +17,6 @@ jQuery(document).ready(function() {
         //gId and quantity,add wine to basket
         userinfo['quantity'] = arguments[1]
       }
-      console.log("JSON.stringify(userInfo)" + JSON.stringify(userinfo))
        return JSON.stringify(userinfo) 
     }
     des = '请求酒款详情'

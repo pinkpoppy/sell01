@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
       var userinfo = app.methods.getBasicUserinfo()
       if (arguments.length == 1) {
         userinfo['goods'] = arguments[0]
-
+        userinfo['form'] = "wxfwh"
       } else if (arguments.length==2) {
 
         //调用updateCart接口
@@ -251,7 +251,7 @@ jQuery(document).ready(function($) {
         var imgBgUrl = $(el).css('backgroundImage')
         if (imgBgUrl.search('focus') != -1) {
           choosed = true
-          return
+          return choosed
         }
       })
       return choosed
@@ -259,12 +259,6 @@ jQuery(document).ready(function($) {
     if (!hasChoosenGoods) {
       alert("请至少选择一件商品")
       return 
-    }
-    var isInWx = app.methods.browser()
-    if (isInWx == "weixin") {
-
-    } else {
-
     }
     app.methods.appAjax('结算请求',
                         'placeOrder',
@@ -285,8 +279,9 @@ jQuery(document).ready(function($) {
     console.log(order)
     location.href = "placeOrder.php?order=" + order['order_no']
   }
+
   function afterPay(data) {
-    if (data['state']=="0") {
+    if (data['state']=='0') {
       if (data['msg']=="库存不足") {
         var shortageGoods = data['goods']
         for (var i=0,l = shortageGoods.length; i<l; i++) {
@@ -299,112 +294,99 @@ jQuery(document).ready(function($) {
         }
         alert("库存不足，请重新选择商品数量")
       }  
-    } else if (data['state'] == 1) {
-      //库存没有问题.
-      //在这里假设有一个 isBind 字段,用来判断用户是否绑定了手机号
-      //if in wx -> 绑定
-      //not in wx 在 click checkout 判断完库存后弹出输入手机号页面
-      var isBind = false
-      if (isBind) { //用户已经绑定了手机号,直接跳转,生成订单
-        placeOrder(data['order'])
-      } else {
-        //弹出相应绑定页面
-        //modal-wrap 
-        //start: top:2000px 
-        //end: top:0px
-        $('.modal-wrap').show()
-        $('.modal-wrap').animate({
+    } else if (data['state'] == '1') {
+      placeOrder(data['order'])
+    } else if(data['state']=='2'){//弹出相应绑定页面 2000px
+      $('.modal-wrap').show()
+      $('.modal-wrap').animate({
           top:0
-        },100,function() {
-
-        })
-        var 
-          canSend = false
-          telStr = ""
-        $('#wx-tel-input').blur(function(event) { 
-          telStr = $(this).val()
-          var isLegal = app.methods.isLegalMobilePhone(telStr)
-          if (isLegal) {
-            if (isLegal == "EMPTY") {
-              $('#wx-err-msg').text(loginConfig['EMPTY'])
-              return
-            } else {
-              canSend = true
-            }
+      },100,function() {})
+      var 
+        canSend = false
+        telStr = ""
+      $('#wx-tel-input').blur(function(event) { 
+        telStr = $(this).val()
+        var isLegal = app.methods.isLegalMobilePhone(telStr)
+        if (isLegal) {
+          if (isLegal == "EMPTY") {
+            $('#wx-err-msg').text(loginConfig['EMPTY'])
+            return
           } else {
-            $('#wx-err-msg').text(loginConfig['telNotValid'])
-          } 
-        });
-      }
-
-      $('#wx-send-code').click(function(event) {
-        //向服务器请求验证码
-        app.methods.appAjax('获取手机验证码',
-                            'getCode',
-                            'POST',
-                            userData(telStr,'2','pl1','pl2'),
-                            app.methods.timestamp(),
-                            function(data){
-                              if (data['state'] == 1) {
-                                //服务器成功响应,客户顿开始倒计时
-                                var 
-                                  s = 60
-                                  i = setInterval(function(){
-                                        $('#wx-send-code').text(--s + 's')
-                                      },1000)
-                                  setTimeout(function(){
-                                    clearInterval(i)
-                                    $('#wx-send-code').text("重新发送")
-                                  },60000)
-                              }
-                            })
-      });
-
-      $('#wx-confirm-binding').click(function(event) {
-        //提交验证码
-        var code = $('#bind-code-input').val()
-        if (canSend) {
-          if (code.length == 6) {
-            app.methods.appAjax('提交验证码,绑定微信号',
-                                'validCode',
-                                'POST',
-                                userData(telStr,code,'pl1','pl2','pl3'),
-                                app.methods.timestamp(),
-                                function(data){
-                                  console.log(data)
-                                  if (data['state'] == '1'){
-                                    $('#wx-confirm-binding').text("绑定成功!正在生成订单...")
-                                        app.methods.appAjax('结算请求',
-                                                        'placeOrder',
-                                                        'POST',
-                                                        userData(cachedGoods),
-                                                      app.methods.timestamp(),
-                                                function(data){
-                                                  //TODO 请求成功，跳转到订单页面
-                                                  if (data['state'] == 1) {
-                                                    placeOrder(data['order'])
-                                                  }
-                                                  //TODO 其他失败情况
-                                                  afterPay(data)
-                                                })
-                                    setTimeout(function(){
-                                      placeOrder(data['order'])
-                                    },2000)
-                                  } else if (data['state'] == '3') {
-                                    $('#wx-err-msg').text("验证码错误,请检查")
-                                  }
-                                })
+            canSend = true
           }
-        }
-      })
-
-      $('#wx-modal-close').click(function(event) {
-        $('.modal-wrap').animate({
-          top: 2000},
-          300, function() {
-          $('.modal-wrap').hide()
-        })
-      })
+        } else {
+          $('#wx-err-msg').text(loginConfig['telNotValid'])
+        } 
+      });
     }
+    
+    $('#wx-send-code').click(function(event) {
+      //向服务器请求验证码
+      app.methods.appAjax('获取手机验证码',
+                          'getCode',
+                          'POST',
+                          userData(telStr,'2','pl1','pl2'),
+                          app.methods.timestamp(),
+                          function(data){
+                            if (data['state'] == 1) {
+                              //服务器成功响应,客户顿开始倒计时
+                              var 
+                                s = 60
+                                i = setInterval(function(){
+                                      $('#wx-send-code').text(--s + 's')
+                                    },1000)
+                                setTimeout(function(){
+                                  clearInterval(i)
+                                  $('#wx-send-code').text("重新发送")
+                                },60000)
+                            }
+                          })
+    })
+    $('#wx-confirm-binding').click(function(event) {
+      //提交验证码
+      var code = $('#bind-code-input').val()
+      if (canSend) {
+        if (code.length == 6) {
+          app.methods.appAjax('用户绑定手机号',
+                              'bindMp',
+                              'POST',
+                              userData(telStr,code,'pl1','pl2','pl3'),
+                              app.methods.timestamp(),
+                              function(data){
+                                console.log(data)
+                                if (data['state'] == '0') {
+                                  $('#wx-err-msg').text("参数错误")
+                                } else if (data['state'] == '1'){
+                                  $('#wx-confirm-binding').text("绑定成功!正在生成订单...")
+                                      app.methods.appAjax('结算请求',
+                                                      'placeOrder',
+                                                      'POST',
+                                                      userData(cachedGoods),
+                                                    app.methods.timestamp(),
+                                              function(data){
+                                                //TODO 请求成功，跳转到订单页面
+                                                if (data['state'] == 1) {
+                                                  placeOrder(data['order'])
+                                                }
+                                                //TODO 其他失败情况
+                                                afterPay(data)
+                                              })
+                                  setTimeout(function(){
+                                    placeOrder(data['order'])
+                                  },2000)
+                                } else if (data['state'] == '2') {
+                                  
+                                }
+                              })
+        }
+      }
+    })
+    $('#wx-modal-close').click(function(event) {
+      $('.modal-wrap').animate({
+        top: 2000},
+        300, function() {
+        $('.modal-wrap').hide()
+      })
+    })
   } 
 });
