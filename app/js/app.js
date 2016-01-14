@@ -328,8 +328,12 @@ var app = (function(){
     $spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>") //满200包邮 => 酒款上部
     $spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>") //仅剩6 => 酒款上部
     
-
-    $img = $("<img class='wine-img' src='"+currentWine['pics'][0]['pic']+"'>") //酒款图片 => 酒款上部
+    if (currentWine['pics']) {
+      $img = $("<img class='wine-img' src='"+currentWine['pics'][0]['pic']+"'>") //酒款图片 => 酒款上部
+    } else {
+      $img = $("<img class='wine-img' src=''>") //酒款图片 => 酒款上部
+    }
+    
     $img.css({
       width: imgWidth,
       height:imgHeight
