@@ -17,6 +17,7 @@ jQuery(document).ready(function() {
         //gId and quantity,add wine to basket
         userinfo['quantity'] = arguments[1]
       }
+      console.log("JSON.stringify(userInfo)" + JSON.stringify(userinfo))
        return JSON.stringify(userinfo) 
     }
     des = '请求酒款详情'
@@ -57,7 +58,7 @@ jQuery(document).ready(function() {
                          gooodsInCart = data['count']
                          $('#goods-num').text(gooodsInCart)
                         } else {
-                          alert("服务器繁忙,请刷新页面再试")
+                          //alert("服务器繁忙,请刷新页面再试")
                         }
                       })
     // 轮播图

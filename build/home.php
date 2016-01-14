@@ -16,10 +16,6 @@
 
 	<!-- 共有 css/js 开始 -->
 	<link rel="stylesheet" href="main.css">
-
-	<script src="main.js"></script>
-	<!-- 共有 css/js 结束 -->
-
 	<script>
 		var u = '<?php echo $userInfo;?>'
 		if (u) {
@@ -32,14 +28,27 @@
 			} else {
 				sex = '其他'
 			}
-			app.config.userId = u['openid']
-			app.config.headPic = u['headimgurl']
-			app.config.nickname = u['nickname']
-			app.config.sex = sex
-			app.config.country = u['country']
-			app.config.pro = u['province']
-			app.config.city['city']
+			localStorage.setItem('userId',u['openid'])
+			localStorage.setItem('headPic',u['headimgurl'])
+			localStorage.setItem('nickname',u['nickname'])
+			localStorage.setItem('sex',sex)
+			localStorage.setItem('country',u['country'])
+			localStorage.setItem('pro',u['province'])
+			localStorage.setItem('city',u['city'])
+
+			// app.config.userId = u['openid']
+			// app.config.headPic = u['headimgurl']
+			// app.config.nickname = u['nickname']
+			// app.config.sex = sex
+			// app.config.country = u['country']
+			// app.config.pro = u['province']
+			// app.config.city['city']
+			//TODO 立即将用户信息发送给服务器
 		}
+	</script>
+	<script src="main.js"></script>
+	<!-- 共有 css/js 结束 -->
+
 	</script>
 	<!-- 私有 js 开始 -->
 	<script src="privatejs/home.js"></script>
