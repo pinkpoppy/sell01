@@ -555,11 +555,11 @@ ul
   height: 45px;
 }
 .detail-wine-info .detail-headline-left {
-  width: 90%;
+  width: 78%;
   clear: right;
 }
 .detail-wine-info .price-right {
-  width: 10%;
+  width: 20%;
   float: right;
   text-align: right;
 }
@@ -627,6 +627,7 @@ ul
   display: inline-block;
   vertical-align: middle;
   line-height: 100%;
+  width: 100%;
 }
 .shopping-bar .op-wrap button {
   display: inline-block;
@@ -728,20 +729,20 @@ ul
 }
 #add-goods {
   background: #fff;
-  margin-right: 0.5em;
+  margin-right: 0em;
   border: 1px solid #cecece;
 }
 #minus {
-  margin-right: 1.5em;
+  margin-right: 0em;
 }
 #show-number {
-  margin-right: 1em;
+  margin-right: 0em;
   border: none;
   background: #fff;
   box-shadow: none;
 }
 #plus {
-  margin-right: 1.5em;
+  margin-right: 1em;
 }
 .intro-wrap img {
   width: 100%;
@@ -789,6 +790,7 @@ ul
 }
 .notify {
   padding: 0px 8px;
+  height: 24px;
 }
 .module-clicked {
   width: 100%;
@@ -1339,7 +1341,10 @@ body {
   line-height: 1.5;
   color: #333;
 }
-.wrap ul {
+.wrap {
+  overflow-x: hidden;
+}
+ul {
   -webkit-margin-after: 0em;
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;

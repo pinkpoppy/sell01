@@ -1,4 +1,4 @@
-$(function(){
+$(function($){
   var 
     orderId = app.methods.getSearchArgFromUrl()['order']
     userData = function jointUserinfo(arg) {

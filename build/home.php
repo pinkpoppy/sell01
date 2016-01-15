@@ -17,7 +17,7 @@
 	<!-- 共有 css/js 开始 -->
 	<link rel="stylesheet" href="main.css">
 	<script>
-		var u = '<?php echo $userInfo;?>'
+		 var u = '<?php echo $userInfo;?>'
 		if (u) {
 			u = JSON.parse(u)
 			var sex = u['sex']
@@ -74,28 +74,6 @@
 		<section class="home-special-sell-wrap">
 		</section>
 		<!-- 特卖模块 结束 -->
-
-
-		<!-- 底部 Tabbar 开始 -->
-<!-- 		<section class="bottom">
-			<a href="#" class="option">
-				<span class="">
-				</span>
-				<p>首页</p>
-			</a>
-			<a href="#" class="option">
-				<span class="">
-				</span>
-				<p>购物车</p>
-			</a>
-			<a href="#" class="option">
-				<span class="">
-				</span>
-				<p>我的订单</p>
-			</a>
-		</section> -->
-		<!-- 底部 Tabbar 结束 -->
-
 	</div>
 </body>
 </html>

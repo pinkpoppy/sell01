@@ -22,7 +22,7 @@
   <!-- 私有 js 结束 -->
 </head>
 <body>
-  <div class="wrap" data-role="page">
+  <div class="wrap">
 
     <!-- 轮播图 开始 -->
 <!--     <div class="unslider">

@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+jQuery(function($) {
   app.methods.setModalMask($('.modal-wrap'))
   var
     loginConfig = {
