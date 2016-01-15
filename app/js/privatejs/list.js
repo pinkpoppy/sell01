@@ -1,5 +1,5 @@
 
-jQuery(document).ready(function($) {
+jQuery(function($) {
   var 
     arg = app.appState,
     sortId = 0, //默认的 sortID

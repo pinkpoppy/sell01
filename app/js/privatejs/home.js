@@ -1,7 +1,7 @@
 /**
  * Created by sszhu on 15/12/8.
  */
- jQuery(document).ready(function(){
+ jQuery(function($){
   //如果是在微信浏览器中打开,那么移除特卖首页顶部banner
   if (app.methods.browser()=="weixin") {
     $(".header").remove()
@@ -13,14 +13,13 @@
     userData = function jointUserinfo() {
       var basicUserinfo = app.methods.getBasicUserinfo()
       return JSON.stringify(basicUserinfo)
-    },
-
-    des = '请求特卖首页'
-    methodName = 'getMall',
-    requestType = 'POST',
-    timestamp = app.methods.timestamp()
-
-  app.methods.appAjax(des,methodName,requestType,userData(),timestamp,callBack)
+    }
+  app.methods.appAjax("请求特卖首页",
+                        "getMall",
+                        "POST",
+                        userData(),
+                        app.methods.timestamp(),
+                        callBack)
 
   function callBack(response) {
     var r = response
@@ -99,7 +98,7 @@
         var 
           screenWidth = app.screenSize()
           imgWidth = liWidth = parseInt(parseInt((screenWidth - 26) / 2))
-          ratio = 0.6 //图片原始的高宽比:432 / 720 = 0.6
+          ratio = 1.0 //图片原始的高宽比:432 / 720 = 0.6
           imgHeight = Math.ceil(imgWidth * ratio)
           liBottomHeight = 70
           liHeight = imgHeight + liBottomHeight + 15

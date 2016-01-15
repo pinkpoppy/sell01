@@ -1,4 +1,4 @@
-jQuery(document).ready(function($){
+jQuery(function($){
   $.cxSelect.defaults.url = 'cityData.json'
   $.cxSelect.defaults.nodata = 'none'
 

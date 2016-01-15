@@ -7,9 +7,6 @@ var app = (function(){
   */
   var 
     configUrlMap = {
-      //APIBase : "http://www.yaerku.com/pjapi/"
-      //APIBase:"../app/json/home.json"
-      //APIBase : "http://www.yaerku.com/pjapi/"
       APIBase : "http://t.snapwine.net:7784/pjapi/"
       //APIBase : "http://192.168.1.7:7784/pjapi/"
     }
@@ -41,7 +38,7 @@ var app = (function(){
       dis:'',
     }
 
-    localArr = ['n','t','p','c','d','de']
+    localArr = ['n','t','p','c','d','de'],
 
     browser = {
       versions : function(){
@@ -63,7 +60,6 @@ var app = (function(){
       }(),
       language:(navigator.browserLanguage || navigator.language).toLowerCase()
     }
-
 
 
   var moduleId = 1,//起始酒款模块 id, 默认值1
@@ -308,7 +304,7 @@ var app = (function(){
       screenWidth = app.screenSize()
       //imgWidth = liWidth = screenWidth * 0.425
       imgWidth = liWidth = parseInt(parseInt((screenWidth - 26) / 2))
-      ratio = 0.6 //图片原始的高宽比:432 / 720 = 0.6
+      ratio = 1.0 //图片原始的高宽比:432 / 720 = 0.6
       imgHeight = Math.ceil(imgWidth * ratio)
       liBottomHeight = 70
       liHeight = imgHeight + liBottomHeight
@@ -328,7 +324,7 @@ var app = (function(){
     $spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>") //满200包邮 => 酒款上部
     $spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>") //仅剩6 => 酒款上部
     
-    if (currentWine['pics']) {
+    if (currentWine['pics'].length!=0) {
       $img = $("<img class='wine-img' src='"+currentWine['pics'][0]['pic']+"'>") //酒款图片 => 酒款上部
     } else {
       $img = $("<img class='wine-img' src=''>") //酒款图片 => 酒款上部
