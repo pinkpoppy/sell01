@@ -1,29 +1,11 @@
 var app = (function(){
   /*
-  * 0 全部订单
-  * 1 代付款
-  * 2 代发货
-  * 3 代收货
+  * 0 全部订单 1 代付款 2 代发货 3 代收货
   */
   var 
     configUrlMap = {
       APIBase : "http://t.snapwine.net:7784/pjapi/"
-      //APIBase : "http://192.168.1.7:7784/pjapi/"
-    }
-    //oUeq9t-m7cPT5sAb7V7nPTfxbnpU
-    // config = {
-    //   Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
-    //   userId :"",
-    //   userType : "12",
-    //   headPic:'',
-    //   nickname:'',
-    //   sex:'',
-    //   intro:'',
-    //   country:'',
-    //   pro:'',
-    //   city:'',
-    //   dis:'',
-    // }
+    },
     config = {
       Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
       userId :localStorage['userId'],
@@ -36,15 +18,15 @@ var app = (function(){
       pro:localStorage['province'],
       city:localStorage['city'],
       dis:'',
-    }
+    },
 
     localArr = ['n','t','p','c','d','de'],
 
     browser = {
       versions : function(){
         var 
-          u = navigator.userAgent
-          app = navigator.appVersion
+          u = window.navigator.userAgent,
+          app = window.navigator.appVersion;
         return {
           trident: u.indexOf('Trident') > -1, //IE内核
           presto: u.indexOf('Presto') > -1, //opera内核
@@ -59,24 +41,28 @@ var app = (function(){
         }
       }(),
       language:(navigator.browserLanguage || navigator.language).toLowerCase()
-    }
+    };
 
+  var 
+    moduleId = 1,
+    pageId = 1; 
 
-  var moduleId = 1,//起始酒款模块 id, 默认值1
-      pageId = 1; //酒款分页 id,默认为1
-
-  var appState = {
+  var 
+    appState = {
       module:moduleId,
       page:pageId,
       storageType:"localStorage",
       storageArr:localArr
-  }
+    };
+
   function calScreenWidth(){
     return screen.width
   }
+
   function calScreenHeight(){
     return screen.height
   }
+  
   function getSearchArgFromUrl(){
     var searchString = window.location.search
     var res = {}
