@@ -13,14 +13,13 @@
     userData = function jointUserinfo() {
       var basicUserinfo = app.methods.getBasicUserinfo()
       return JSON.stringify(basicUserinfo)
-    },
-
-    des = '请求特卖首页'
-    methodName = 'getMall',
-    requestType = 'POST',
-    timestamp = app.methods.timestamp()
-
-  app.methods.appAjax(des,methodName,requestType,userData(),timestamp,callBack)
+    }
+  app.methods.appAjax("请求特卖首页",
+                        "getMall",
+                        "POST",
+                        userData(),
+                        app.methods.timestamp(),
+                        callBack)
 
   function callBack(response) {
     var r = response

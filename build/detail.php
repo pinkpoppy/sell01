@@ -7,19 +7,11 @@
   <meta charset="UTF-8">
   <title>商品详情</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5 maximum-scale=-1.0,user-scalable=no">
-
-  <!-- 引入 jquery 开始 -->
-  <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-  <!-- 引入 jquery 结束 -->
-
-  <!-- 共有 css/js 开始 -->
   <link rel="stylesheet" href="main.css">
-  <script src="main.js"></script>
-  <!-- 共有 css/js 结束 -->
-
-  <!-- 私有 js 开始 -->
+  <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="vendor.js"></script>
+  <script type="text/javascript" src="app.js"></script>
   <script src="privatejs/detail.js"></script>
-  <!-- 私有 js 结束 -->
 </head>
 <body>
   <div class="wrap">
