@@ -9,37 +9,14 @@ var minify = require('gulp-minify');
 
 gulp.task('default',['watch:all']);
 
-gulp.task('styles', function () {
-  gulp.src(['app/main.styl'])
-      .pipe(stylus({'include css':true}))
-      .pipe(gulp.dest('build/'));
-});
+gulp.task('watch:all',['styles','venderjs','appjs','privateScripts'],function(){
 
-gulp.task('scripts',function(){
-  gulp.src(['vendor/core.js',
-            'vendor/clipher-core.js',
-            'vendor/enc-base64.js',
-            'vendor/aes.js',
-            'vendor/unslider.js',
-            'vendor/pingpp.js',
-            'vendor/jquery.cxselect.min.js',//vendor directory load end
-            'app/js/*.js'])
-      .pipe(concat('main.js'))
-      // .pipe(uglify())
-      //.pipe(minify())
-      .pipe(gulp.dest('build/'));
-});
+  gulp.watch(['vendor/*.js'],function(){
+    gulp.start('venderjs');
+  });
 
-gulp.task('privateScripts',function(){
-  gulp.src(['app/js/privatejs/*.js'])
-    //.pipe(uglify())
-    //.pipe(minify())
-    .pipe(gulp.dest('build/privatejs/'))
-});
-
-gulp.task('watch:all',['styles','scripts','privateScripts'],function(){
-  gulp.watch(['app/js/*.js','vendor/*.js'],function(){
-    gulp.start('scripts');
+  gulp.watch(['app/js/app.js'],function(){
+    gulp.start('appjs');
   });
 
   gulp.watch(['app/js/privatejs/*.js'],function(){
@@ -50,6 +27,40 @@ gulp.task('watch:all',['styles','scripts','privateScripts'],function(){
     gulp.start('styles');
   });
 });
+
+gulp.task('styles', function () {
+  gulp.src(['app/main.styl'])
+      .pipe(stylus({'include css':true}))
+      .pipe(gulp.dest('build/'));
+});
+
+gulp.task('venderjs',function(){
+  gulp.src(['vendor/core.js',
+            'vendor/clipher-core.js',
+            'vendor/enc-base64.js',
+            'vendor/aes.js',
+            'vendor/unslider.js',
+            'vendor/pingpp.js',
+            'vendor/jquery.cxselect.min.js'])
+      .pipe(concat('vendor.js'))
+      // .pipe(uglify())
+      //.pipe(minify())
+      .pipe(gulp.dest('build/'));
+});
+
+gulp.task('appjs',function(){
+  gulp.src(['app/js/app.js'])
+    .pipe(gulp.dest('build/'))
+});
+
+gulp.task('privateScripts',function(){
+  gulp.src(['app/js/privatejs/*.js'])
+    //.pipe(uglify())
+    //.pipe(minify())
+    .pipe(gulp.dest('build/privatejs/'))
+});
+
+
 
 
 
