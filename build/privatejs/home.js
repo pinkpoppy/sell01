@@ -1,7 +1,7 @@
 /**
  * Created by sszhu on 15/12/8.
  */
- jQuery(function($){
+ jQuery(function(){
   //如果是在微信浏览器中打开,那么移除特卖首页顶部banner
   if (app.methods.browser()=="weixin") {
     $(".header").remove()

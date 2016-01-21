@@ -2,8 +2,9 @@
   
   $APPID = "wx9d7691ebcd3f48bc";
   $SECRET = "b4fe3e0a53db4affaf347d927563a4d7";
-  //$TESTREDIRECT_URI = "http://127.0.0.1/~sszhu/gitwork/sell01/build/home.php";
   $REDIRECT_URI = "http://t.snapwine.net:7784/wxsell/home.php";
+  //$REDIRECT_URI = "http://t.snapwine.net:7784/wxsell/auth.php";
+  $HOM_EPAG_URI = "http://t.snapwine.net:7784/wxsell/home.php";
   $SCOPE = "snsapi_userinfo";
   $STATE = "zhushasha";
 
@@ -27,6 +28,7 @@
       if ($openId) {
         $getOtherInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=".$accessToken."&openid=".$openId."&lang=zh_CN";
         $userInfo = file_get_contents($getOtherInfoUrl);
+        //$DIRECT_TO_URI = $HOM_EPAG_URI."?u=".$userinfo;
       }
 
   }

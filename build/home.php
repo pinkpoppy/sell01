@@ -12,9 +12,25 @@
 	
 	<link rel="stylesheet" href="main.css">
 	<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="vendor.js"></script>
+	<script type="text/javascript" defer src="vendor.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 	<script type="text/javascript">
+		// function getSearchArgFromUrl(){
+	 //    var searchString = window.location.search
+	 //    var res = {}
+	 //    if (searchString.length > 0) {
+	 //      var argArr = searchString.substr(1,searchString.length -1 ).split('&')
+	      
+	 //      for (var i = 0; i < argArr.length; i++) {
+	 //        var coupleArg = argArr[i].split('=')
+	 //        console.log(coupleArg)
+
+	 //        res[coupleArg[0]] = coupleArg[1]
+	 //      }
+	 //    }
+	 //    return res
+  // 	}
+
 		$(document).ready(function()
 			 var u = '<?php echo $userInfo;?>'
 			if (u) {
