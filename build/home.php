@@ -14,35 +14,38 @@
 	<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" src="vendor.js"></script>
 	<script type="text/javascript" src="app.js"></script>
-	<script>
-		 var u = '<?php echo $userInfo;?>'
-		if (u) {
-			u = JSON.parse(u)
-			var sex = u['sex']
-			if (sex=='1') {
-				sex = '男'
-			} else if (sex=='2') {
-				sex = '女'
-			} else {
-				sex = '其他'
-			}
-			localStorage.setItem('userId',u['openid'])
-			localStorage.setItem('headPic',u['headimgurl'])
-			localStorage.setItem('nickname',u['nickname'])
-			localStorage.setItem('sex',sex)
-			localStorage.setItem('country',u['country'])
-			localStorage.setItem('pro',u['province'])
-			localStorage.setItem('city',u['city'])
+	<script type="text/javascript">
+		$(document).ready(function()
+			 var u = '<?php echo $userInfo;?>'
+			if (u) {
+				u = JSON.parse(u)
+				var sex = u['sex']
+				if (sex=='1') {
+					sex = '男'
+				} else if (sex=='2') {
+					sex = '女'
+				} else {
+					sex = '其他'
+				}
+				localStorage.setItem('userId',u['openid'])
+				localStorage.setItem('headPic',u['headimgurl'])
+				localStorage.setItem('nickname',u['nickname'])
+				localStorage.setItem('sex',sex)
+				localStorage.setItem('country',u['country'])
+				localStorage.setItem('pro',u['province'])
+				localStorage.setItem('city',u['city'])
 
-			// app.config.userId = u['openid']
-			// app.config.headPic = u['headimgurl']
-			// app.config.nickname = u['nickname']
-			// app.config.sex = sex
-			// app.config.country = u['country']
-			// app.config.pro = u['province']
-			// app.config.city['city']
-			//TODO 立即将用户信息发送给服务器
-		}
+				app.config.userId = u['openid']
+				app.config.headPic = u['headimgurl']
+				app.config.nickname = u['nickname']
+				app.config.sex = sex
+				app.config.country = u['country']
+				app.config.pro = u['province']
+				app.config.city['city']
+				//TODO 立即将用户信息发送给服务器
+			}
+		});
+		
 	</script>
 	<script src="privatejs/home.js"></script>
 </head>
