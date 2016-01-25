@@ -60,8 +60,8 @@
   function insertDOM(module) {
     var
       totalWine = 0,
-      parent = $('.home-special-sell-wrap') //特卖模块包裹层
-      prevModuleItemStart = 0
+      $parent = $('.home-special-sell-wrap'), //特卖模块包裹层
+      prevModuleItemStart = 0,
       prevHpsrHeight = 0
     for (var i = 0, l = module.length; i < l; i++) {
         var
@@ -69,43 +69,70 @@
           wineArr = currentModule['goods']
 
         var 
-          $moduleItem = $("<div class='module-item'></div>"),
-          $moduleBar = $("<div class='module-bar'></div>"),
-          $a = $("<a class='module-clicked' href='list.php?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
-          $justifyLeftDiv = $("<div></div>"),
-          $justifyRightDiv = $("<div class='checkout'></div>"),
-          $img = $("<img src='"+currentModule['pic']+"'>"),
-          $moduleName = $("<span class='moduleName'>"+currentModule['tag']+"</span>"),
-          $checkOut = $("<span>查看全部</span>")
+          barStr = "<div class='module-item'>"
+                  +"<div class='module-bar'>"
+                    +"<a class='module-clicked' href='list.php?id="
+                      +currentModule['id']
+                      +"'data-moduleId ='"
+                      +currentModule['id']+"'>"
+                      +"<div>"
+                        +"<img src='"+currentModule['pic']+"'>"
+                        +"<span class='moduleName'>"
+                          +currentModule['tag']
+                        +"</span>"
+                      +"</div>"
+                      +"<div class='checkout'><span>查看全部</span></div>"
+                    +"</a>"
+                  +"</div>"
+                +"</div>",
+          $barHtml = $(barStr),
+          $moduleItem = "";
+          $parent.append($barHtml)
+          $('.module-item').each(function(index, el) {
+            if (index == i) {
+              $moduleItem = $(el)
+              return
+            }
+          })
+          
 
-          $justifyLeftDiv.append($img)
-          $justifyLeftDiv.append($moduleName)
-          $justifyRightDiv.append($checkOut)
+          // $moduleItem = $("<div class='module-item'></div>"),
+          // $moduleBar = $("<div class='module-bar'></div>"),
+          // $a = $("<a class='module-clicked' href='list.php?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
+          // $justifyLeftDiv = $("<div></div>"),
+          // $justifyRightDiv = $("<div class='checkout'></div>"),
+          // $img = $("<img src='"+currentModule['pic']+"'>"),
+          // $moduleName = $("<span class='moduleName'>"+currentModule['tag']+"</span>"),
+          // $checkOut = $("<span>查看全部</span>")
 
-          // $a.append($img)
-          // $a.append($moduleName)
-          // $a.append($checkOut)
-          $a.append($justifyLeftDiv)
-          $a.append($justifyRightDiv)
-          $moduleBar.append($a)
-          $moduleItem.append($moduleBar)
+          // $justifyLeftDiv.append($img)
+          // $justifyLeftDiv.append($moduleName)
+          // $justifyRightDiv.append($checkOut)
+
+          // $a.append($justifyLeftDiv)
+          // $a.append($justifyRightDiv)
+          // $moduleBar.append($a)
+          // $moduleItem.append($moduleBar)
 
         var 
-          $moduleListWrap = $("<div class='module-list-wrap'></div>"),
+          $moduleListWrap = $("<div class='module-list-wrap'></div>")
           $ul = $("<ul></ul>")
           $moduleListWrap.append($ul)
 
         var 
-          screenWidth = app.screenSize()
-          imgWidth = liWidth = parseInt(parseInt((screenWidth - 26) / 2))
-          ratio = 1.0 //图片原始的高宽比:432 / 720 = 0.6
-          imgHeight = Math.ceil(imgWidth * ratio)
-          liBottomHeight = 70
-          liHeight = imgHeight + liBottomHeight + 15
-          wineNum = wineArr.length
-          UlOffsetY = Math.ceil(wineNum / 2) * liHeight - 15
+          screenWidth = app.screenSize(),
+          imgWidth = liWidth = parseInt(parseInt((screenWidth - 26) / 2)),
+          ratio = 1.0, //图片原始的高宽比:432 / 720 = 0.6
+          imgHeight = Math.ceil(imgWidth * ratio),
+          liBottomHeight = 70,
+          liHeight = imgHeight + liBottomHeight + 15,
+          wineNum = wineArr.length,
+          maxWineNum = Math.min(6,wineNum),
+          UlOffsetY = Math.ceil(maxWineNum / 2) * liHeight - 15;
+          
           $ul.css('height', UlOffsetY)
-        for (var j = 0; j < wineArr.length; j++) {
+          
+        for (var j = 0; j < maxWineNum; j++) {
           ++ totalWine
           app.methods.produceSeperateWineHtml(wineArr[j],
                                               $ul,
@@ -113,11 +140,12 @@
                                               i,
                                               module.length,
                                               wineArr.length,
-                                              currentModule['id'])    
+                                              currentModule['id']) 
+          
           $moduleItem.append($moduleListWrap)
-          parent.append($moduleItem)
+          
          }
-       if (i > 0) {
+        if (i > 0) {
           prevModuleItemStart += Math.ceil(parseInt($moduleItem.css('height')))
         }
         $moduleItem.css({
