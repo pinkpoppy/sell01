@@ -1,5 +1,4 @@
 var app = (function(){
-  alert("ENTER APP.JS")
   /*
   * 0 全部订单 1 代付款 2 代发货 3 代收货
   */
@@ -18,7 +17,7 @@ var app = (function(){
       country:localStorage['country'],
       pro:localStorage['province'],
       city:localStorage['city'],
-      dis:'',
+      dis:''
     },
 
     localArr = ['n','t','p','c','d','de'],
@@ -290,61 +289,99 @@ var app = (function(){
       imgHeight = Math.ceil(imgWidth * ratio),
       liBottomHeight = 70,
       liHeight = imgHeight + liBottomHeight,
+      winePic = "";
+      if (currentWine['pics'].length != 0) {
+        winePic = currentWine['pics'][0]['pic']
+      }
+    var $li = $("<li></li>")
+    $(wrap).append($li)
+    var str = "<div class='wine-wrap' style='width:"+liWidth+"'px;>"
+                +"<div class='div-up'>"
+                  +"<a class='wine-detail' href='"
+                  +pathInfo("detail.php?id=")
+                  +currentWine['id']
+                  +"'data-id='"
+                  +currentWine['id']
+                  +"' style='height:"+imgHeight+"px'>"
+                    +"<img class='wine-img' src='"
+                      +winePic
+                      +"' style='width:"+imgWidth+"px;height:"+imgHeight+"px'>"
+                  +"</a>"
+                  +"<span class='mail-info'>"
+                    +currentWine['discount']
+                  +"</span>"
+                  +"<span class='cnt-info'>"
+                    +currentWine['shortage']
+                  +"</span>"
+                  +"<span class='subtitle'>"
+                    +currentWine['subtitle']
+                  +"</span>"
+                +"</div>"
+                +"<div class='div-bottom' style='height:"+liBottomHeight+"px'>"
+                  +"<div>"+currentWine['title']+"</div>"
+                  +"<span class='market'>"
+                    +'&yen;'+currentWine['market']
+                  +"</span>"
+                  +"<del>"+currentWine['price']+"</del>"
+                  +"<span>"+currentWine['limit']+"</span>"
+                +"</div>"
+                +"</div>"
+    $li.append($(str))
 
-    $li = $("<li></li>"),
-    $wineWrap = $("<div class='wine-wrap'></div>"), //包住酒款
-    $divUp = $("<div class='div-up'></div>"), //酒款上部
-    $divBottom = $("<div class='div-bottom'></div>"), //酒款下部
+    //$li = $("<li></li>"),
+    //$wineWrap = $("<div class='wine-wrap'></div>"), //包住酒款
+    //$divUp = $("<div class='div-up'></div>"), //酒款上部
+    //$divBottom = $("<div class='div-bottom'></div>"), //酒款下部
 
-    $awinePic = $("<a class='wine-detail' href='"
-                    +pathInfo("detail.php?id=")
-                    +currentWine['id']
-                    +"'data-id='"
-                    +currentWine['id']
-                    +"'></a>"),
+    // $awinePic = $("<a class='wine-detail' href='"
+    //                 +pathInfo("detail.php?id=")
+    //                 +currentWine['id']
+    //                 +"'data-id='"
+    //                 +currentWine['id']
+    //                 +"'></a>"),
 
-    $spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>"), //满200包邮 => 酒款上部
-    $spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>"); //仅剩6 => 酒款上部
+    //$spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>"), //满200包邮 => 酒款上部
+    //$spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>"); //仅剩6 => 酒款上部
     
-    if (currentWine['pics'].length!=0) {
-      $img = $("<img class='wine-img' src='"+currentWine['pics'][0]['pic']+"'>") //酒款图片 => 酒款上部
-    } else {
-      $img = $("<img class='wine-img' src=''>") //酒款图片 => 酒款上部
-    }
+    // if (currentWine['pics'].length!=0) {
+    //   $img = $("<img class='wine-img' src='"+currentWine['pics'][0]['pic']+"'>") //酒款图片 => 酒款上部
+    // } else {
+    //   $img = $("<img class='wine-img' src=''>") //酒款图片 => 酒款上部
+    // }
     
-    $img.css({
-      width: imgWidth,
-      height:imgHeight
-    })
+    // $img.css({
+    //   width: imgWidth,
+    //   height:imgHeight
+    // })
 
-  var 
-    $spanSubtitle = $("<span class='subtitle'>"+currentWine['subtitle']+"</span>"), //副标题 => 酒款上部
+  //var 
+    //$spanSubtitle = $("<span class='subtitle'>"+currentWine['subtitle']+"</span>"), //副标题 => 酒款上部
 
-    $divHeadline = $("<div>"+currentWine['title']+"</div>"), //主描述 => 酒款底部
-    $spanCurrentPrice = $("<span class='market'>"+'&yen;'+currentWine['market']+"</span>"),//现价 => 酒款底部
-    $spanOriginalPrice = $("<del>"+currentWine['price']+"</del>"),//原价 or 其他标注 => 酒款底部
-    $spanRecom = $("<span>"+currentWine['limit']+"</span>");//主描述 => 提示
+    //$divHeadline = $("<div>"+currentWine['title']+"</div>"), //主描述 => 酒款底部
+    //$spanCurrentPrice = $("<span class='market'>"+'&yen;'+currentWine['market']+"</span>"),//现价 => 酒款底部
+    //$spanOriginalPrice = $("<del>"+currentWine['price']+"</del>"),//原价 or 其他标注 => 酒款底部
+    //$spanRecom = $("<span>"+currentWine['limit']+"</span>");//主描述 => 提示
     
-    $awinePic.append($img),
-    $divUp.append($awinePic),
-    $divUp.append($spanMailInfo),
-    $divUp.append($spanCntInfo),
-    $divUp.append($spanSubtitle),
+    //$awinePic.append($img),
+    // $divUp.append($awinePic),
+    // $divUp.append($spanMailInfo),
+    // $divUp.append($spanCntInfo),
+    // $divUp.append($spanSubtitle),
 
 
-    $divBottom.append($divHeadline),
-    $divBottom.append($spanCurrentPrice),
-    $divBottom.append($spanOriginalPrice),
-    $divBottom.append($spanRecom),
+    //$divBottom.append($divHeadline),
+    //$divBottom.append($spanCurrentPrice),
+    //$divBottom.append($spanOriginalPrice),
+    //$divBottom.append($spanRecom),
 
     // 设置 divUp 以及 divBottom 的高度
-    $divUp.css('height', imgHeight),
-    $divBottom.css('height', liBottomHeight),
-    $awinePic.css('height', imgHeight),
+    // $divUp.css('height', imgHeight),
+    //$divBottom.css('height', liBottomHeight),
+    //$awinePic.css('height', imgHeight),
 
-    $wineWrap.append($divUp),
-    $wineWrap.append($divBottom),
-    $li.append($wineWrap);
+    //$wineWrap.append($divUp),
+    //$wineWrap.append($divBottom),
+    //$li.append($wineWrap);
 
 
     var 
@@ -378,9 +415,11 @@ var app = (function(){
     }
 
   
-    $wineWrap.css('width', liWidth)
+    //$wineWrap.css('width', liWidth)
     
-    $(wrap).append($li)
+    //$(wrap).append($li)
+    
+
     itemHeight = Math.ceil(parseFloat($li.css('height')))
 
     if (arguments.length == 7){
@@ -395,7 +434,6 @@ var app = (function(){
         $li.addClass('last-wine-item')
       }
     }
-
     return itemHeight
   }
   // 432 / 720 = 0.6
