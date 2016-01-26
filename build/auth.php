@@ -1,7 +1,7 @@
 <?php
   
-  $APPID = "wx9d7691ebcd3f48bc";
-  $SECRET = "b4fe3e0a53db4affaf347d927563a4d7";
+  $APPID = "wxeb681a427246a6c2";
+  $SECRET = "df8799df884e21bb80e284975e7d4b5e";
   $REDIRECT_URI = "http://t.snapwine.net:7784/wxsell/home.php";
   //$REDIRECT_URI = "http://t.snapwine.net:7784/wxsell/auth.php";
   $HOM_EPAG_URI = "http://t.snapwine.net:7784/wxsell/home.php";
