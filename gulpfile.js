@@ -61,6 +61,17 @@ gulp.task('venderjs',function(){
       // .pipe(uglify())
       //.pipe(minify())
       .pipe(gulp.dest('build/'));
+  gulp.src(['vendor/core.js',
+            'vendor/clipher-core.js',
+            'vendor/enc-base64.js',
+            'vendor/aes.js',
+            'vendor/unslider.js',
+            'vendor/pingpp.js',
+            'vendor/jquery.cxselect.min.js'])
+      .pipe(concat('vendor.js'))
+      // .pipe(uglify())
+      //.pipe(minify())
+      .pipe(gulp.dest('build/'));
 });
 
 gulp.task('appjs',function(){
@@ -68,17 +79,27 @@ gulp.task('appjs',function(){
             'app/js/utilities.js'])
     .pipe(jsmin())
     .pipe(rename({suffix:'.min'}))
-    .pipe(gulp.dest('build/'))
+    .pipe(gulp.dest('build/'));
+
+  gulp.src(['app/js/app.js',
+            'app/js/utilities.js'])
+    .pipe(gulp.dest('build/'));
 
 });
 
 gulp.task('privateScripts',function(){
+
   gulp.src(['app/js/privatejs/*.js'])
     //.pipe(uglify())
     //.pipe(minify())
     .pipe(jsmin())
     .pipe(rename({suffix:'.min'}))
-    .pipe(gulp.dest('build/privatejs/'))
+    .pipe(gulp.dest('build/privatejs/'));
+
+  gulp.src(['app/js/privatejs/*.js'])
+    //.pipe(uglify())
+    //.pipe(minify())
+    .pipe(gulp.dest('build/privatejs/'));
 });
 
 
@@ -105,6 +126,19 @@ gulp.task('venderjs-nocache',function(){
       // .pipe(uglify())
       //.pipe(minify())
       .pipe(gulp.dest('build-nocache/'));
+
+  gulp.src(['vendor/core.js',
+            'vendor/clipher-core.js',
+            'vendor/enc-base64.js',
+            'vendor/aes.js',
+            'vendor/unslider.js',
+            'vendor/pingpp.js',
+            'vendor/jquery.cxselect.min.js'])
+      .pipe(concat('vendor.js'))
+      // .pipe(uglify())
+      //.pipe(minify())
+      .pipe(gulp.dest('build-nocache/'));
+
 });
 
 gulp.task('appjs-nocache',function(){
@@ -112,6 +146,10 @@ gulp.task('appjs-nocache',function(){
             'app/js/utilities.js'])
     .pipe(jsmin())
     .pipe(rename({suffix:'.min'}))
+    .pipe(gulp.dest('build-nocache/'))
+
+  gulp.src(['app/js/app.js',
+            'app/js/utilities.js'])
     .pipe(gulp.dest('build-nocache/'))
 });
 
@@ -121,6 +159,11 @@ gulp.task('privateScripts-nocache',function(){
     //.pipe(minify())
     .pipe(jsmin())
     .pipe(rename({suffix:'.min'}))
+    .pipe(gulp.dest('build-nocache/privatejs/'));
+
+  gulp.src(['app/js/privatejs/*.js'])
+    //.pipe(uglify())
+    //.pipe(minify())
     .pipe(gulp.dest('build-nocache/privatejs/'))
 });
 
