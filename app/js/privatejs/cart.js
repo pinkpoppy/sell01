@@ -52,10 +52,14 @@ jQuery(function($) {
       var
         currentGoodsCost = parseInt(data[i]['quantity']) * parseFloat(data[i]['price'])
         defaultTotalCost += currentGoodsCost
+        wineSrc = ""
+        if (data[i]['pics'].length != 0) {
+          wineSrc = data[i]['pics'][0]['pic']
+        }
         $list = $("<li data-id='"+data[i]['id']+"'>"
                     +"<div>"
                       +"<input type='button' class='goods-choosen'>"
-                      +"<img src='"+data[i]['pics'][0]['pic']+"' class='cart-wine-pic'>"
+                      +"<img src='"+wineSrc+"' class='cart-wine-pic'>"
                       +"<div class='cont-right'>"
                         +"<div class='list-wine-title'>"+data[i]['title']+"</div><br>"
                         +"<span>库存</span><span class='list-wine-inventory'>"+data[i]['inventory']+"</span><br>"
