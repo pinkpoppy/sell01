@@ -6,9 +6,6 @@
   if (app.methods.browser()=="weixin") {
     $(".header").remove()
   }
-
-  // $('.banner').unslider()
-
   var
     userData = function jointUserinfo() {
       var basicUserinfo = app.methods.getBasicUserinfo()
@@ -39,7 +36,6 @@
       // 轮播图和通知 开始
       for(var i = 0, len = imgArr.length; i < len; i++) {
         var 
-          // li = $("<li class='unslider-active' data-url="+imgArr[i]['url']+"></li>"),
           li = $("<li data-url="+imgArr[i]['url']+"></li>"),
           img = $("<img src='"+imgArr[i]['pic']+"'>")
           li.append(img)
@@ -94,26 +90,6 @@
               return
             }
           })
-          
-
-          // $moduleItem = $("<div class='module-item'></div>"),
-          // $moduleBar = $("<div class='module-bar'></div>"),
-          // $a = $("<a class='module-clicked' href='list.php?id="+currentModule['id']+"'data-moduleId ='"+currentModule['id']+"'></a>"),
-          // $justifyLeftDiv = $("<div></div>"),
-          // $justifyRightDiv = $("<div class='checkout'></div>"),
-          // $img = $("<img src='"+currentModule['pic']+"'>"),
-          // $moduleName = $("<span class='moduleName'>"+currentModule['tag']+"</span>"),
-          // $checkOut = $("<span>查看全部</span>")
-
-          // $justifyLeftDiv.append($img)
-          // $justifyLeftDiv.append($moduleName)
-          // $justifyRightDiv.append($checkOut)
-
-          // $a.append($justifyLeftDiv)
-          // $a.append($justifyRightDiv)
-          // $moduleBar.append($a)
-          // $moduleItem.append($moduleBar)
-
         var 
           $moduleListWrap = $("<div class='module-list-wrap'></div>")
           $ul = $("<ul></ul>")
