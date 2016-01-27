@@ -26,14 +26,11 @@
         imgArr = response.banner.items,//获取轮播图
         notification = response.notice,//获取通知
         moduleArr = response.tags//获取模块
-
       var 
-        wrap = $("<div class='banner' id='home-banner'></div>") 
-        ul = $("<ul></ul>")
-        wrap.append(ul)
+        wrap = $("<div class='banner' id='home-banner'></div>"), 
+        ul = $("<ul></ul>"),
         notify = $('.notify')
-
-      // 轮播图和通知 开始
+        wrap.append(ul)
       for(var i = 0, len = imgArr.length; i < len; i++) {
         var 
           li = $("<li data-url="+imgArr[i]['url']+"></li>"),
@@ -42,14 +39,15 @@
           ul.append(li)
       }
       $(wrap).insertBefore('.notify')
-
       $('.banner').unslider({autoplay:true,arrows:false})
-      notify.text(notification)
-      // 轮播图和通知 结束
-
-      // 特卖主体 开始
+      if (notification=='' || notification==undefined) {
+        notify.remove()
+        console.log("notify remove")
+      } else {
+        notify.text(notification)
+        console.log("notify have content")
+      }
       insertDOM(response.tags)
-      // 特卖主体 结束
     }
   }
 
