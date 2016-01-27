@@ -17,20 +17,15 @@
   <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
   <!-- 引入 jquery 结束 -->
 
-  <!-- 引入 jquery mobile js 开始 -->
-  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-  <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
-  <!-- 引入 jquery mobile js 开始 -->
-
   <!-- 共有 css/js 开始 -->
   <link rel="stylesheet" href="main.css">
   <script src="main.js"></script>
   <!-- 共有 css/js 结束 -->
 
   <!-- 私有 js 开始 -->
-  <script src="../app/js/privatejs/orders.js"></script>
+  <script src="../app/js/privatejs/orders.min.js"></script>
   <!-- 私有 js 结束 -->
-  <script type="text/javascript" defer src="utilities.js"></script>
+  <script type="text/javascript" defer src="utilities.min.js"></script>
 </head>
 
 <body>

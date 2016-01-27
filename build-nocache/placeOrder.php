@@ -14,11 +14,11 @@
 
   <!-- 共有 css/js 开始 -->
   <link rel="stylesheet" href="main.css">
-  <script src="main.js"></script>
+  <script src="main.min.js"></script>
   <!-- 共有 css/js 结束 -->
 
   <!-- 私有 js 开始 -->
-  <script src="privatejs/placeOrder.js"></script>
+  <script src="privatejs/placeOrder.min.js"></script>
   <!-- 私有 js 结束 -->
 </head>
 

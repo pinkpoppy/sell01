@@ -10,8 +10,8 @@
   <style rel="stylesheet" src="main.css"></style>
 
   <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-  <script src="main.js"></script>
-  <script type="text/javascript" defer src="utilities.js"></script>
+  <script src="main.min.js"></script>
+  <script type="text/javascript" defer src="utilities.min.js"></script>
   <link rel="stylesheet" href="main.css">
 </head>
 <body>

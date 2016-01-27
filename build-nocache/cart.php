@@ -17,13 +17,14 @@
 
   <!-- 共有 css/js 开始 -->
   <link rel="stylesheet" href="main.css">
-  <script src="main.js"></script>
+  <script type="text/javascript" src="vendor.min.js"></script>
+  <script type="text/javascript" src="app.min.js"></script>
   <!-- 共有 css/js 结束 -->
 
   <!-- 私有 js 开始 -->
-  <script src="privatejs/cart.js"></script>
+  <script src="privatejs/cart.min.js"></script>
   <!-- 私有 js 结束 -->
-  <script type="text/javascript" defer src="utilities.js"></script>
+  <script type="text/javascript" defer src="utilities.min.js"></script>
 </head>
 
 <body>

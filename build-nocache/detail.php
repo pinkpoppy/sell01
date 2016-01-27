@@ -9,10 +9,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.5 maximum-scale=-1.0,user-scalable=no">
   <link rel="stylesheet" href="main.css">
   <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-  <script type="text/javascript" src="vendor.js"></script>
-  <script type="text/javascript" src="app.js"></script>
-  <script src="privatejs/detail.js"></script>
-  <script type="text/javascript" defer src="utilities.js"></script>
+  <script type="text/javascript" src="vendor.min.js"></script>
+  <script type="text/javascript" src="app.min.js"></script>
+  <script src="privatejs/detail.min.js"></script>
+  <script type="text/javascript" defer src="utilities.min.js"></script>
 </head>
 <body>
   <div class="wrap">
