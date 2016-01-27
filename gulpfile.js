@@ -25,18 +25,22 @@ gulp.task('watch:all',['styles',
 
   gulp.watch(['vendor/*.js'],function(){
     gulp.start('venderjs');
+    gulp.start('venderjs-nocache');
   });
 
   gulp.watch(['app/js/app.js'],function(){
     gulp.start('appjs');
+    gulp.start('appjs-nocache');
   });
 
   gulp.watch(['app/js/privatejs/*.js'],function(){
-    gulp.start('privateScripts')
+    gulp.start('privateScripts');
+    gulp.start('privateScripts-nocache');
   });
 
   gulp.watch(['app/plugin-css/*.css','app/styl/*.styl'],function(){
     gulp.start('styles');
+    gulp.start('styles-nocache');
   });
 });
 
