@@ -284,19 +284,30 @@ var app = (function(){
     }
     var 
       screenWidth = app.screenSize(),
+      //padding-left 8 + padding-right 8 + margin + 10
       imgWidth = liWidth = parseInt(parseInt((screenWidth - 26) / 2)),
       ratio = 1.0, //图片原始的高宽比:432 / 720 = 0.6
       imgHeight = Math.ceil(imgWidth * ratio),
       liBottomHeight = 70,
       liHeight = imgHeight + liBottomHeight,
-      winePic = "";
+      remaining = currentWine['shortage'],
+      remainingStr = '',
+      winePic = ""
+      if (remaining!==''&&remaining!==undefined) {
+          remainingStr = "<div class='cnt-info'>"
+                          +"<div>"
+                            +"<div>仅剩</div>"
+                            +"<span>"+currentWine['shortage']+"</span>"
+                          +"</div>"
+                        +"</div>"
+      }
       if (currentWine['pics'].length != 0) {
         winePic = currentWine['pics'][0]['pic']
       }
     var $li = $("<li></li>")
     $(wrap).append($li)
-    var str = "<div class='wine-wrap' style='width:"+liWidth+"'px;>"
-                +"<div class='div-up'>"
+    var str = "<div class='wine-wrap' style='width:"+imgWidth+"'px;>"
+                +"<div class='div-up' style='width:'"+imgWidth+"px;>"
                   +"<a class='wine-detail' href='"
                   +pathInfo("detail.php?id=")
                   +currentWine['id']
@@ -310,20 +321,20 @@ var app = (function(){
                   +"<span class='mail-info'>"
                     +currentWine['discount']
                   +"</span>"
-                  +"<span class='cnt-info'>"
-                    +currentWine['shortage']
-                  +"</span>"
+                  +remainingStr
                   +"<span class='subtitle'>"
                     +currentWine['subtitle']
                   +"</span>"
                 +"</div>"
-                +"<div class='div-bottom' style='height:"+liBottomHeight+"px'>"
+                +"<div class='div-bottom' style='height:"+liBottomHeight+"px;width:"+imgWidth+"px;'>"
                   +"<div>"+currentWine['title']+"</div>"
-                  +"<span class='market'>"
-                    +'&yen;'+currentWine['market']
-                  +"</span>"
-                  +"<del>"+currentWine['price']+"</del>"
-                  +"<span>"+currentWine['limit']+"</span>"
+                  +"<div class='sell-info'>"
+                    +"<span class='market'>"
+                      +'&yen;'+currentWine['market']
+                    +"</span>"
+                    +"<del>"+currentWine['price']+"</del>"
+                    +"<span class='limit-goods'>"+currentWine['limit']+"</span>"
+                  +"</div>"
                 +"</div>"
                 +"</div>"
     $li.append($(str))
