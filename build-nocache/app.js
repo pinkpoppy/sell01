@@ -5,7 +5,7 @@ var app = (function(){
   var 
     configUrlMap = {
       //APIBase : "http://t.snapwine.net:7784/pjapi/"
-      APIBase : "http://192.168.1.7/pjapi/"
+      APIBase : "http://192.168.1.7:7784/pjapi/"
     },
     //config = {
     //  Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
