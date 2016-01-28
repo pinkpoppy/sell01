@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 
 var stylus = require('gulp-stylus');
-
+var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var minify = require('gulp-minify');
@@ -111,9 +111,16 @@ gulp.task('privateScripts',function(){
 //Build-no-cache-version
 gulp.task('styles-nocache', function () {
   gulp.src(['app/main.styl'])
+      .pipe(sourcemaps.init())
+      .pipe(stylus({'include css':true}))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('build-nocache'));
+
+  gulp.src(['app/main.styl'])
       .pipe(stylus({'include css':true}))
       .pipe(minifyCSS({keepSpecialComments:1}))
       .pipe(gulp.dest('build-nocache/'));
+
 });
 
 gulp.task('venderjs-nocache',function(){

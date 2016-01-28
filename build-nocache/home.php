@@ -1,6 +1,6 @@
 <?php
-	require_once('check.php');
-	require_once('auth.php');
+	//require_once('check.php');
+	//require_once('auth.php');
 ?>
 
 <!DOCTYPE html>
@@ -16,60 +16,35 @@
 	<script type="text/javascript" src="app.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			// var utilities = function(){}
-			// utilities.randomQueryString = function(){
-			//   function random(){
-			//     var bound = 10000
-			//     return parseInt(Math.random() * bound)
-			//   }
 
-			//   var 
-			//     scripts = document.getElementsByTagName('scripts'),
-			//     queryID = random()
-			//     console.log(scripts.length)
-			//   for (var i = 0,l = scripts.length; i < l; i++) {
-			//     var src = scripts[i].getAttribute('src')
-			//     if (src) {
-			//       console.log(src)
-			//       if (src.search('?v=') !== -1) {
-			//         src.replace('?v=','?v='+queryID)
-			//         scripts[i].setAttribute(src)
-			//       } else {
-			//         scripts[i].setAttribute(src + "?v=" + queryID)
-			//         console.log(scripts[i].getAttribute('src'))
-			//       }
-			//     }
-			//   }
-			// }
-			// utilities.randomQueryString()
-			var u = '<?php echo $userInfo;?>';
-			if (u) {
-				u = JSON.parse(u)
-				var sex = u['sex']
-				if (sex=='1') {
-					sex = '男'
-				} else if (sex=='2') {
-					sex = '女'
-				} else {
-					sex = '其他'
-				}
-				localStorage.setItem('userId',u['openid'])
-				localStorage.setItem('headPic',u['headimgurl'])
-				localStorage.setItem('nickname',u['nickname'])
-				localStorage.setItem('sex',sex)
-				localStorage.setItem('country',u['country'])
-				localStorage.setItem('pro',u['province'])
-				localStorage.setItem('city',u['city'])
+			/*var u = '<?php echo $userInfo;?>';*/
+			//if (u) {
+			//	u = JSON.parse(u)
+			//	var sex = u['sex']
+			//	if (sex=='1') {
+			//		sex = '男'
+			//	} else if (sex=='2') {
+			//		sex = '女'
+			//	} else {
+			//		sex = '其他'
+			//	}
+			//	localStorage.setItem('userId',u['openid'])
+			//	localStorage.setItem('headPic',u['headimgurl'])
+			//	localStorage.setItem('nickname',u['nickname'])
+			//	localStorage.setItem('sex',sex)
+			//	localStorage.setItem('country',u['country'])
+			//	localStorage.setItem('pro',u['province'])
+			//	localStorage.setItem('city',u['city'])
 
-				app.config.userId = u['openid']
-				app.config.headPic = u['headimgurl']
-				app.config.nickname = u['nickname']
-				app.config.sex = sex
-				app.config.country = u['country']
-				app.config.pro = u['province']
-				app.config.city['city']
+			//	app.config.userId = u['openid']
+			//	app.config.headPic = u['headimgurl']
+			//	app.config.nickname = u['nickname']
+			//	app.config.sex = sex
+			//	app.config.country = u['country']
+			//	app.config.pro = u['province']
+			//	app.config.city['city']
 				//TODO 立即将用户信息发送给服务器
-			}
+			//}
 		});
 		
 	</script>

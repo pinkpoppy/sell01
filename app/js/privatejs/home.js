@@ -71,11 +71,14 @@
                       +currentModule['id']+"'>"
                       +"<div>"
                         +"<img src='"+currentModule['pic']+"'>"
-                        +"<span class='moduleName'>"
-                          +currentModule['tag']
-                        +"</span>"
+                        +"<div class='mo-ba-fl-wr'>"
+                          +"<span class='moduleName'>"
+                            +currentModule['tag']
+                          +"</span>"
+                          +"<span>查看全部</span>"
+                        +"</div>"
                       +"</div>"
-                      +"<div class='checkout'><span>查看全部</span></div>"
+                      //+"<div class='checkout'><span>查看全部</span></div>"
                     +"</a>"
                   +"</div>"
                 +"</div>",

@@ -4,22 +4,35 @@ var app = (function(){
   */
   var 
     configUrlMap = {
-      APIBase : "http://t.snapwine.net:7784/pjapi/"
+      //APIBase : "http://t.snapwine.net:7784/pjapi/"
+      APIBase : "http://192.168.1.7/pjapi/"
     },
-    config = {
-      Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
-      userId :localStorage['userId'],
-      userType : "12",
-      headPic:localStorage['headPic'],
-      nickname:localStorage['nickname'],
-      sex:localStorage['sex'],
-      intro:'',
-      country:localStorage['country'],
-      pro:localStorage['province'],
-      city:localStorage['city'],
-      dis:''
-    },
-
+    //config = {
+    //  Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
+    //  userId :localStorage['userId'],
+    //  userType : "12",
+    //  headPic:localStorage['headPic'],
+    //  nickname:localStorage['nickname'],
+    //  sex:localStorage['sex'],
+    //  intro:'',
+    //  country:localStorage['country'],
+    //  pro:localStorage['province'],
+    //  city:localStorage['city'],
+    //  dis:''
+    //},
+      config = {
+        Base64Key:"RkVB2p5ida3ywUDJf7IgXcoGrm8TjOEAb",
+        userId :'oUeq9t-m7cPT5sAb7V7nPTfxbnpU',
+        userType : "12",
+        headPic:'',
+        nickname:'',
+        sex:'',
+        intro:'',
+        country:'',
+        pro:'',
+        city:'',
+        dis:''
+      },
     localArr = ['n','t','p','c','d','de'],
 
     browser = {
@@ -297,7 +310,7 @@ var app = (function(){
           remainingStr = "<div class='cnt-info'>"
                           +"<div>"
                             +"<div>仅剩</div>"
-                            +"<span>"+currentWine['shortage']+"</span>"
+                            +"<span>"+currentWine['inventory']+"</span>"
                           +"</div>"
                         +"</div>"
       }
@@ -327,7 +340,7 @@ var app = (function(){
                   +"</span>"
                 +"</div>"
                 +"<div class='div-bottom' style='height:"+liBottomHeight+"px;width:"+imgWidth+"px;'>"
-                  +"<div>"+currentWine['title']+"</div>"
+                  +"<div class='headline'>"+currentWine['title']+"</div>"
                   +"<div class='sell-info'>"
                     +"<span class='market'>"
                       +'&yen;'+currentWine['market']

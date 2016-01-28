@@ -51,6 +51,8 @@
     width 100%
     height $module-bar
     background transparent
+    color $module-bar-color
+    font-size 1.2em
     a
       display inline-block
       line-height $module-bar
@@ -58,7 +60,6 @@
       height $module-bar
       width 100%
       text-align justify
-      color $module-bar-color
       div
         display inline-block
         line-height 42px
@@ -115,10 +116,25 @@
               background #000
               opacity 0.8
               width 100%
-              color #fff
-              font-size 0.8em
+              color $subtitle
+              font-size 1em
             .wine-img
-              display block   
+              display block
+          .div-bottom
+            .headline
+              color #4f4f4f
+              font-size 1.2em
+            .sell-info
+              .market
+                font-size 1.1em
+                color $market-price
+              del,limit-goods
+                font-size 0.8em
+              del
+                color $old-price
+              .limit-goods
+                color $limit-goods
+
 
 .last-wine-item
   margin-bottom $bottom-height
