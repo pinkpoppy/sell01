@@ -258,7 +258,8 @@ var app = (function(){
     appState:appState,
     config:config,
     methods:{
-      produceSeperateWineHtml : produceSeperateWineHtml,
+      produceWineList:produceWineList,
+      //produceSeperateWineHtml : produceSeperateWineHtml,
       getSearchArgFromUrl :     getSearchArgFromUrl,
       deviceInfo : deviceInfo,
       appVersion : appVersion,
@@ -283,184 +284,91 @@ var app = (function(){
     }
     return str
   }
-  
-  function produceSeperateWineHtml(currentWine,wrap,wineIndex,moduleIndex,moduleLength,wineLength,moduleId) 
-  {
-    var itemHeight = 0;
-    //console.log("arguments.length = " + arguments.length)
-    if (arguments.length==5) {
-      currentWine = arguments[0],
-      wrap = arguments[1],
-      wineIndex = arguments[2],
-      wineLength = arguments[3],
-      moduleId = arguments[4];
-    }
-    var 
-      screenWidth = app.screenSize(),
-      //padding-left 8 + padding-right 8 + margin + 10
-      imgWidth = liWidth = parseInt(parseInt((screenWidth - 26) / 2)),
-      ratio = 1.0, //图片原始的高宽比:432 / 720 = 0.6
-      imgHeight = Math.ceil(imgWidth * ratio),
-      liBottomHeight = 70,
-      liHeight = imgHeight + liBottomHeight,
-      remaining = currentWine['shortage'],
-      remainingStr = '',
-      winePic = ""
+
+  function produceWineList(wineArr,wineNum,$wrap) {
+    var $moduleListWrap = $("<div class='module-list-wrap'></div>")
+    var $ul = $("<ul></ul>")
+    $moduleListWrap.append($ul)
+    $wrap.append($moduleListWrap)
+
+    var screenWidth = app.screenSize()
+    var imgWidth = parseInt(parseInt((screenWidth - 26) / 2))
+    var liWidth = imgWidth
+    var ratio = 1.0 //图片原始的高宽比:432 / 720 = 0.6
+    var imgHeight = Math.ceil(imgWidth * ratio)
+    var liBottomHeight = 70
+    var liHeight = imgHeight + liBottomHeight + 15
+    var UlOffsetY = Math.ceil(wineNum / 2) * liHeight - 15
+    $ul.css('height', UlOffsetY)
+
+    for (var i = 0; i < wineNum; i++) {
+      var remaining = wineArr[i]['shortage']
+      var remainingStr = ''
+      var winePic = ''
+
       if (remaining!==''&&remaining!==undefined) {
-          remainingStr = "<div class='cnt-info'>"
-                          +"<div>"
-                            +"<div>仅剩</div>"
-                            +"<span>"+currentWine['inventory']+"</span>"
-                          +"</div>"
+        remainingStr = "<div class='cnt-info'>"
+                        +"<div>"
+                          +"<div>仅剩</div>"
+                          +"<span>"+wineArr[i]['inventory']+"</span>"
                         +"</div>"
+                      +"</div>"
       }
-      if (currentWine['pics'].length != 0) {
-        winePic = currentWine['pics'][0]['pic']
+      if (wineArr[i]['pics'].length !==0) {
+        winePic = wineArr[i]['pics'][0]['pic']
       }
-    var $li = $("<li></li>")
-    $(wrap).append($li)
-    var str = "<div class='wine-wrap' style='width:"+imgWidth+"'px;>"
-                +"<div class='div-up' style='width:'"+imgWidth+"px;>"
-                  +"<a class='wine-detail' href='"
-                  +pathInfo("detail.php?id=")
-                  +currentWine['id']
-                  +"'data-id='"
-                  +currentWine['id']
-                  +"' style='height:"+imgHeight+"px'>"
-                    +"<img class='wine-img' src='"
-                      +winePic
-                      +"' style='width:"+imgWidth+"px;height:"+imgHeight+"px'>"
-                  +"</a>"
-                  +"<span class='mail-info'>"
-                    +currentWine['discount']
-                  +"</span>"
-                  +remainingStr
-                  +"<span class='subtitle'>"
-                    +currentWine['subtitle']
-                  +"</span>"
-                +"</div>"
-                +"<div class='div-bottom' style='height:"+liBottomHeight+"px;width:"+imgWidth+"px;'>"
-                  +"<div class='headline'>"+currentWine['title']+"</div>"
-                  +"<div class='sell-info'>"
-                    +"<span class='market'>"
-                      +'&yen;'+currentWine['market']
-                    +"</span>"
-                    +"<del>"+currentWine['price']+"</del>"
-                    +"<span class='limit-goods'>"+currentWine['limit']+"</span>"
-                  +"</div>"
-                +"</div>"
-                +"</div>"
-    $li.append($(str))
-
-    //$li = $("<li></li>"),
-    //$wineWrap = $("<div class='wine-wrap'></div>"), //包住酒款
-    //$divUp = $("<div class='div-up'></div>"), //酒款上部
-    //$divBottom = $("<div class='div-bottom'></div>"), //酒款下部
-
-    // $awinePic = $("<a class='wine-detail' href='"
-    //                 +pathInfo("detail.php?id=")
-    //                 +currentWine['id']
-    //                 +"'data-id='"
-    //                 +currentWine['id']
-    //                 +"'></a>"),
-
-    //$spanMailInfo = $("<span class='mail-info'>"+currentWine['discount']+"</span>"), //满200包邮 => 酒款上部
-    //$spanCntInfo = $("<span class='cnt-info'>"+currentWine['shortage']+"</span>"); //仅剩6 => 酒款上部
-    
-    // if (currentWine['pics'].length!=0) {
-    //   $img = $("<img class='wine-img' src='"+currentWine['pics'][0]['pic']+"'>") //酒款图片 => 酒款上部
-    // } else {
-    //   $img = $("<img class='wine-img' src=''>") //酒款图片 => 酒款上部
-    // }
-    
-    // $img.css({
-    //   width: imgWidth,
-    //   height:imgHeight
-    // })
-
-  //var 
-    //$spanSubtitle = $("<span class='subtitle'>"+currentWine['subtitle']+"</span>"), //副标题 => 酒款上部
-
-    //$divHeadline = $("<div>"+currentWine['title']+"</div>"), //主描述 => 酒款底部
-    //$spanCurrentPrice = $("<span class='market'>"+'&yen;'+currentWine['market']+"</span>"),//现价 => 酒款底部
-    //$spanOriginalPrice = $("<del>"+currentWine['price']+"</del>"),//原价 or 其他标注 => 酒款底部
-    //$spanRecom = $("<span>"+currentWine['limit']+"</span>");//主描述 => 提示
-    
-    //$awinePic.append($img),
-    // $divUp.append($awinePic),
-    // $divUp.append($spanMailInfo),
-    // $divUp.append($spanCntInfo),
-    // $divUp.append($spanSubtitle),
-
-
-    //$divBottom.append($divHeadline),
-    //$divBottom.append($spanCurrentPrice),
-    //$divBottom.append($spanOriginalPrice),
-    //$divBottom.append($spanRecom),
-
-    // 设置 divUp 以及 divBottom 的高度
-    // $divUp.css('height', imgHeight),
-    //$divBottom.css('height', liBottomHeight),
-    //$awinePic.css('height', imgHeight),
-
-    //$wineWrap.append($divUp),
-    //$wineWrap.append($divBottom),
-    //$li.append($wineWrap);
-
-
-    var 
-      y = parseInt(wineIndex / 2) * liHeight,
-      base = 42,
-      liMargin = 15,
-      rightColumnStart = 8 + liWidth + 10;
-    if (wineIndex == 0) {
-      $li.css({
-        left: '8',
-        top:y + base
-      });
-    } else if (wineIndex % 2 == 0 && wineIndex !== 0) {
-      $li.css({
-        left: '8',
-        top:y + base + liMargin * parseInt(wineIndex / 2)
-      });
-    } else if (wineIndex % 2 == 1) {
-      if (wineIndex == 1) {
+      var $li = $("<li></li>")
+      var str = "<div class='wine-wrap' style='width:"+imgWidth+"'px;>"
+          +"<div class='div-up' style='width:'"+imgWidth+"px;>"
+          +"<a class='wine-detail' href='"
+          +pathInfo("detail.php?id=")
+          +wineArr[i]['id']
+          +"'data-id='"
+          +wineArr[i]['id']
+          +"' style='height:"+imgHeight+"px'>"
+          +"<img class='wine-img' src='"
+          +winePic
+          +"' style='width:"+imgWidth+"px;height:"+imgHeight+"px'>"
+          +"</a>"
+          +"<span class='mail-info'>"
+          +wineArr[i]['discount']
+          +"</span>"
+          +remainingStr
+          +"<span class='subtitle padding-row-5'>"
+          +wineArr[i]['subtitle']
+          +"</span>"
+          +"</div>"
+          +"<div class='div-bottom padding-row-5 padding-col-5' style='height:"+liBottomHeight+"px;width:"+imgWidth+"px;'>"
+          +"<div class='headline'>"+wineArr[i]['title']+"</div>"
+          +"<div class='sell-info'>"
+          +"<span class='market'>"+'&yen;'+wineArr[i]['market'] +"</span>"
+          +"<del>"+wineArr[i]['price']+"</del>"
+          +"<span class='limit-goods'>"+wineArr[i]['limit']+"</span>"
+          +"</div>"
+          +"</div>"
+          +"</div>"
+      $li.append($(str))
+      $ul.append($li)
+      var wineIndex = i
+      var column = wineIndex % 2
+      var top = parseInt(wineIndex / 2) * liHeight
+      var base = 42
+      var liMargin = 15
+      var rightColumnStart = 8 + liWidth + 10
+      if (column == 0) {
         $li.css({
-          left: rightColumnStart,
-          top: y + base
-        });
-      } else{
+          left:'8'
+        })
+      }else if (column == 1) {
         $li.css({
-          left: rightColumnStart,
-          top: y + base + liMargin * parseInt(wineIndex / 2)
+          left:rightColumnStart
         })
       }
-      
+      $li.css({
+          top:base + top
+      })
     }
-
-  
-    //$wineWrap.css('width', liWidth)
-    
-    //$(wrap).append($li)
-    
-
-    itemHeight = Math.ceil(parseFloat($li.css('height')))
-
-    if (arguments.length == 7){
-      // if i === 最后一行 && j === 最后一行 添加 margin
-      if (moduleIndex == moduleLength - 1 && 
-          ((wineIndex == wineLength - 1) || (wineIndex == wineLength - 2))) {
-          $li.addClass('last-wine-item')
-        }
-    } else if (arguments.length == 6) {
-      console.log("arguments.length: "+arguments.length)
-      if (wineIndex == wineLength-1 || wineIndex == wineLength - 2) {
-        $li.addClass('last-wine-item')
-      }
-    }
-    return itemHeight
   }
-  // 432 / 720 = 0.6
   //下面是最后的});
   //设置模态对话框遮罩层宽高
   function setModalMask(ele) {

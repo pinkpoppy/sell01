@@ -53,24 +53,14 @@
 </head>
 <body>
 	<div class="wrap">
-		<!-- 头部 开始 -->
-		<section class="header"></section>
-		<!-- 头部 结束 -->
-
-
-		<!-- 轮播图 开始 -->
-<!-- 		<div class="unslider">
-			<ul class="unslider-wrap">
-			</ul>
-		</div> -->
+		<section class="header">
+		</section>
 		<section class="notify"></section>
-		<!-- 轮播图 结束 -->
-
-
-		<!-- 特卖模块 开始 -->
 		<section class="home-special-sell-wrap">
 		</section>
-		<!-- 特卖模块 结束 -->
+		<a id="detail-basket">
+    	<span id="goods-num">0</span>
+    </a>
 	</div>
 </body>
 </html>
